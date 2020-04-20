@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -16,7 +15,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'public',
+        'slug',
     ];
 
     /**
@@ -25,7 +28,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'email',
+        'email_verified_at',
+        'password',
+        'public',
+        'remember_token',
     ];
 
     /**
@@ -36,4 +43,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getPersonalPageLink()
+    {
+        if ($this->slug) {
+            $link = $this->id . '-' . $this->slug;
+        } else {
+            $link = $this->id;
+        }
+        return route('user.profile', $link);
+    }
 }

@@ -12,10 +12,11 @@
 */
 
 Route::get('/', function () {
-    $users = \App\Models\User::all();
-    return view('welcome', compact('users'));
+    return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/u/{profile}', 'Web\UserController@show')->name('user.profile');
