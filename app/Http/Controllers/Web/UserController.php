@@ -51,15 +51,20 @@ class UserController extends Controller
      */
     public function show(string $profile)
     {
-        $id = explode('-', $profile)[0];
-        $userObserved = User::findOrFail($id);
+        $profileExploded = explode('-', $profile, 2);
+        $userObserved = User::findOrFail($profileExploded[0]);
         $currentUser = request()->user();
-
 
         // If profile is not public or not their own profile
         // then return 404
         if (!$userObserved->public && !($currentUser && ($currentUser->id === $userObserved->id))) {
             return abort(Response::HTTP_NOT_FOUND);
+        }
+
+        // Redirect if slug is not provided or incorrect
+        // Must be run later so the would be no redirect when profile is private
+        if (!isset($profileExploded[1], $userObserved->slug) || ($profileExploded[1] !== $userObserved->slug)) {
+            return redirect($userObserved->getPersonalPageLink());
         }
 
         return [

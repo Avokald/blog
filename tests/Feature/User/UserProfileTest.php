@@ -3,9 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class UserProfileTest extends TestCase
@@ -76,6 +75,23 @@ class UserProfileTest extends TestCase
             ->get($user->getPersonalPageLink());
 
         $response->assertStatus(Response::HTTP_NOT_FOUND);
+    }
+
+    public function testUserProfileRedirectsIfOnlyIdProvidedOrSlugIncorrect()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->get(route('user.profile', $user->id));
+
+        $response->assertStatus(Response::HTTP_FOUND);
+
+        $response = $this->get(route('user.profile', $user->id . '-'));
+
+        $response->assertStatus(Response::HTTP_FOUND);
+
+        $response = $this->get(route('user.profile', $user->id . '-' . $user->slug . random_int(0, 100)));
+
+        $response->assertStatus(Response::HTTP_FOUND);
     }
 
     public function assertCommonData($response, $user) {
