@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Controllers\Web\UserController;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,6 +11,7 @@ use Tests\TestCase;
 class UserProfileTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * User can view their own profile no matter of public settings
      */
@@ -81,15 +83,16 @@ class UserProfileTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->get(route('user.profile', $user->id));
+        $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->id));
 
         $response->assertStatus(Response::HTTP_FOUND);
 
-        $response = $this->get(route('user.profile', $user->id . '-'));
+        $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->id . '-'));
 
         $response->assertStatus(Response::HTTP_FOUND);
 
-        $response = $this->get(route('user.profile', $user->id . '-' . $user->slug . random_int(0, 100)));
+        $response = $this->get(route(UserController::SHOW_PATH_NAME,
+            $user->id . '-' . $user->slug . random_int(0, 100)));
 
         $response->assertStatus(Response::HTTP_FOUND);
     }

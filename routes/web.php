@@ -19,4 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/u/{profile}', 'Web\UserController@show')->name('user.profile');
+Route::get('/u/{profile}', 'Web\UserController@show')->name(\App\Http\Controllers\Web\UserController::SHOW_PATH_NAME);
+
+Route::get('/a/{article}',
+    'Web\ArticleController@show')->name(\App\Http\Controllers\Web\ArticleController::SHOW_PATH_NAME);

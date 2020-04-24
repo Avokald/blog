@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace App\Http\Controllers\Web;
 
@@ -49,6 +47,7 @@ class UserController extends Controller
      * @param  string $profile
      * @return \Illuminate\Http\Response
      */
+    const SHOW_PATH_NAME = 'users.profile';
     public function show(string $profile)
     {
         $profileExploded = explode('-', $profile, 2);

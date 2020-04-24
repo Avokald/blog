@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Web\UserController;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -68,6 +69,6 @@ class User extends Authenticatable
         } else {
             $link = $this->id;
         }
-        return route('user.profile', $link);
+        return route(UserController::SHOW_PATH_NAME, $link);
     }
 }
