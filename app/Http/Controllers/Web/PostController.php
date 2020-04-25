@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Article;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ArticleController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +29,7 @@ class ArticleController extends Controller
 
     public function newArticles()
     {
-        $articles = Article::published()->orderBy('created_at', 'desc')->get();
+        $articles = Post::published()->orderBy('created_at', 'desc')->get();
 
         return $articles;
     }
@@ -76,7 +76,7 @@ class ArticleController extends Controller
             }
         }
 
-        $articles = Article::published()
+        $articles = Post::published()
             ->$timeframeScope()
             ->orderBy('rating', 'desc')
             ->get();
@@ -108,20 +108,20 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Article $article
+     * @param  \App\Models\Post $article
      * @return \Illuminate\Http\Response
      */
     const SHOW_PATH_NAME = 'articles.show';
     public function show(string $articlePath)
     {
         $articlePathExploded = explode('-', $articlePath, 2);
-        $article = Article::findOrFail($articlePathExploded[0]);
+        $article = Post::findOrFail($articlePathExploded[0]);
         $userObserver = request()->user();
 //        echo $article . ' | ';
 
         // If the status is not published and the current user is not the author
         // then return 404
-        if (($article->status !== Article::STATUS_PUBLISHED)
+        if (($article->status !== Post::STATUS_PUBLISHED)
             && !($userObserver && ($userObserver->id === $article->user_id))) {
             return abort(Response::HTTP_NOT_FOUND);
         }
@@ -140,10 +140,10 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Article $article
+     * @param  \App\Models\Post $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit(Post $article)
     {
         //
     }
@@ -152,10 +152,10 @@ class ArticleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Models\Article $article
+     * @param  \App\Models\Post $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, Post $article)
     {
         //
     }
@@ -163,10 +163,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Article $article
+     * @param  \App\Models\Post $article
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Article $article)
+    public function destroy(Post $article)
     {
         //
     }

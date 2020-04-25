@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\Web\ArticleController;
+use App\Http\Controllers\Web\PostController;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class Post extends Model
 {
     use Sluggable;
 
@@ -49,7 +49,7 @@ class Article extends Model
 
     public function scopePublished(Builder $query)
     {
-        return $query->where('status', Article::STATUS_PUBLISHED);
+        return $query->where('status', Post::STATUS_PUBLISHED);
     }
 
     public function scopeLast24Hours(Builder $query)
@@ -84,6 +84,6 @@ class Article extends Model
         } else {
             $link = $this->id;
         }
-        return route(ArticleController::SHOW_PATH_NAME, $link);
+        return route(PostController::SHOW_PATH_NAME, $link);
     }
 }

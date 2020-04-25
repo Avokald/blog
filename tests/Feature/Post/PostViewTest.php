@@ -2,21 +2,21 @@
 
 namespace Tests\Feature;
 
-use App\Http\Controllers\Web\ArticleController;
-use App\Models\Article;
+use App\Http\Controllers\Web\PostController;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class ArticleViewTest extends TestCase
+class PostViewTest extends TestCase
 {
     use RefreshDatabase;
 
     public function testArticleCanBeViewedIfPublished()
     {
-        $article = factory(Article::class)->create([
-            'status' => Article::STATUS_PUBLISHED,
+        $article = factory(Post::class)->create([
+            'status' => Post::STATUS_PUBLISHED,
         ]);
 
         $user = factory(User::class)->create();
@@ -32,8 +32,8 @@ class ArticleViewTest extends TestCase
     {
         $authorUser = factory(User::class)->create();
 
-        $article = factory(Article::class)->create([
-            'status' => Article::STATUS_DRAFT,
+        $article = factory(Post::class)->create([
+            'status' => Post::STATUS_DRAFT,
             'user_id' => $authorUser->id,
         ]);
 
@@ -59,19 +59,19 @@ class ArticleViewTest extends TestCase
 
     public function testUserArticleRedirectsIfOnlyIdProvidedOrSlugIncorrect()
     {
-        $article = factory(Article::class)->create([
-            'status' => Article::STATUS_PUBLISHED,
+        $article = factory(Post::class)->create([
+            'status' => Post::STATUS_PUBLISHED,
         ]);
 
-        $response = $this->get(route(ArticleController::SHOW_PATH_NAME, $article->id));
+        $response = $this->get(route(PostController::SHOW_PATH_NAME, $article->id));
 
         $response->assertStatus(Response::HTTP_FOUND);
 
-        $response = $this->get(route(ArticleController::SHOW_PATH_NAME, $article->id . '-'));
+        $response = $this->get(route(PostController::SHOW_PATH_NAME, $article->id . '-'));
 
         $response->assertStatus(Response::HTTP_FOUND);
 
-        $response = $this->get(route(ArticleController::SHOW_PATH_NAME,
+        $response = $this->get(route(PostController::SHOW_PATH_NAME,
             $article->id . '-' . $article->slug . random_int(0, 100)));
 
         $response->assertStatus(Response::HTTP_FOUND);

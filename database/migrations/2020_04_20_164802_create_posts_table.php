@@ -1,11 +1,11 @@
 <?php
 
-use App\Models\Article;
+use App\Models\Post;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateArticlesTable extends Migration
+class CreatePostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,14 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('slug')->nullable();
             $table->text('content')->nullable();
             $table->json('json_content')->nullable();
 
-            $table->unsignedSmallInteger('status')->default(Article::STATUS_DRAFT);
+            $table->unsignedSmallInteger('status')->default(Post::STATUS_DRAFT);
             $table->bigInteger('rating')->default(0);
 
             $table->bigInteger('user_id');
@@ -39,6 +39,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::dropIfExists('posts');
     }
 }
