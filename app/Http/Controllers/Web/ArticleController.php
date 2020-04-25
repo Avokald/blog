@@ -14,11 +14,74 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    const INDEX_PATH_NAME = 'article.index';
-
+    const INDEX_PATH_NAME = 'articles.index';
     public function index()
     {
         //
+    }
+
+    /**
+     * Display a listing of the sorted by creation date.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    const NEW_PATH_NAME = 'articles.new';
+
+    public function newArticles()
+    {
+        $articles = Article::published()->orderBy('created_at', 'desc')->get();
+
+        return $articles;
+    }
+
+    /**
+     * Display a listing of sorted articles by rating
+     *
+     */
+    const TOP_PATH_NAME = 'articles.top';
+    const TOP_PATH_DAY_STRING = 'day';
+    const TOP_PATH_WEEK_STRING = 'week';
+    const TOP_PATH_MONTH_STRING = 'month';
+    const TOP_PATH_YEAR_STRING = 'year';
+    const TOP_PATH_ALL_TIME_STRING = 'all';
+
+    public function topArticles(string $timeframe)
+    {
+        if (is_null($timeframe)
+            || ($timeframe === self::TOP_PATH_DAY_STRING)) {
+            $timeframeScope = 'last24Hours';
+
+        } else {
+            if ($timeframe === self::TOP_PATH_WEEK_STRING) {
+                $timeframeScope = 'last7Days';
+
+            } else {
+                if ($timeframe === self::TOP_PATH_MONTH_STRING) {
+                    $timeframeScope = 'last30Days';
+
+                } else {
+                    if ($timeframe === self::TOP_PATH_YEAR_STRING) {
+                        $timeframeScope = 'last365Days';
+
+                    } else {
+                        if ($timeframe === self::TOP_PATH_ALL_TIME_STRING) {
+                            $timeframeScope = 'noScope';
+
+                        } else {
+                            return redirect(route($this::TOP_PATH_NAME));
+
+                        }
+                    }
+                }
+            }
+        }
+
+        $articles = Article::published()
+            ->$timeframeScope()
+            ->orderBy('rating', 'desc')
+            ->get();
+
+        return $articles;
     }
 
     /**
@@ -49,7 +112,6 @@ class ArticleController extends Controller
      * @return \Illuminate\Http\Response
      */
     const SHOW_PATH_NAME = 'articles.show';
-
     public function show(string $articlePath)
     {
         $articlePathExploded = explode('-', $articlePath, 2);

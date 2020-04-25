@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
             $table->json('json_content')->nullable();
 
             $table->unsignedSmallInteger('status')->default(Article::STATUS_DRAFT);
+            $table->bigInteger('rating')->default(0);
 
             $table->bigInteger('user_id');
             $table->bigInteger('category_id')->nullable();

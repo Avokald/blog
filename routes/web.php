@@ -23,3 +23,9 @@ Route::get('/u/{profile}', 'Web\UserController@show')->name(\App\Http\Controller
 
 Route::get('/a/{article}',
     'Web\ArticleController@show')->name(\App\Http\Controllers\Web\ArticleController::SHOW_PATH_NAME);
+
+Route::get('/new',
+    'Web\ArticleController@newArticles')->name(\App\Http\Controllers\Web\ArticleController::NEW_PATH_NAME);
+
+Route::get('/top/{timeframe?}/',
+    'Web\ArticleController@topArticles')->name(\App\Http\Controllers\Web\ArticleController::TOP_PATH_NAME);
