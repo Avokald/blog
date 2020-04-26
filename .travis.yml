@@ -21,5 +21,8 @@ before_install:
 script:
   - vendor/bin/phpunit
 
+services:
+  - mysql
+
 notifications:
   email: false
