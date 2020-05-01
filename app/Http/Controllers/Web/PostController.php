@@ -51,29 +51,21 @@ class PostController extends Controller
             || ($timeframe === self::TOP_PATH_DAY_STRING)) {
             $timeframeScope = 'last24Hours';
 
+        } else if ($timeframe === self::TOP_PATH_WEEK_STRING) {
+            $timeframeScope = 'last7Days';
+
+        } else if ($timeframe === self::TOP_PATH_MONTH_STRING) {
+            $timeframeScope = 'last30Days';
+
+        }  else if ($timeframe === self::TOP_PATH_YEAR_STRING) {
+            $timeframeScope = 'last365Days';
+
+        } else if ($timeframe === self::TOP_PATH_ALL_TIME_STRING) {
+            $timeframeScope = 'noScope';
+
         } else {
-            if ($timeframe === self::TOP_PATH_WEEK_STRING) {
-                $timeframeScope = 'last7Days';
+            return redirect(route($this::TOP_PATH_NAME));
 
-            } else {
-                if ($timeframe === self::TOP_PATH_MONTH_STRING) {
-                    $timeframeScope = 'last30Days';
-
-                } else {
-                    if ($timeframe === self::TOP_PATH_YEAR_STRING) {
-                        $timeframeScope = 'last365Days';
-
-                    } else {
-                        if ($timeframe === self::TOP_PATH_ALL_TIME_STRING) {
-                            $timeframeScope = 'noScope';
-
-                        } else {
-                            return redirect(route($this::TOP_PATH_NAME));
-
-                        }
-                    }
-                }
-            }
         }
 
         $articles = Post::published()
