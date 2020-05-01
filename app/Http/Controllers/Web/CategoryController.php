@@ -25,10 +25,9 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     const SHOW_PATH_NAME = 'categories.show';
-
     public function show(string $categorySlug)
     {
-        $category = Category::with('posts')->where('slug', $categorySlug)->first();
+        $category = Category::withPostsOrderedBy('created_at', 'DESC')->where('slug', $categorySlug)->first();
 
         return $category;
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Controllers\Web\CategoryController;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -50,6 +51,14 @@ class Category extends Model
         return $this->hasMany(Post::class, 'category_id', 'id')->published();
     }
 
+    public function scopeWithPostsOrderedBy(Builder $query, $order, $direction)
+    {
+        return $query->with([
+            'posts' => function($subquery) use ($order, $direction) {
+                return $subquery->orderBy($order, $direction);
+            }
+        ]);
+    }
 
     public function getLinkAttribute()
     {
