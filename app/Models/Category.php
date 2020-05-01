@@ -17,6 +17,10 @@ class Category extends Model
         'image',
     ];
 
+    protected $appends = [
+        'link',
+    ];
+
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -46,7 +50,7 @@ class Category extends Model
         return $this->hasMany(Post::class, 'category_id', 'id');
     }
 
-    public function getShowLink()
+    public function getLinkAttribute()
     {
         return route(CategoryController::SHOW_PATH_NAME, $this->slug);
     }

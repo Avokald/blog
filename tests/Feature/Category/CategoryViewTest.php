@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Category;
-use App\Models\Post;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
@@ -12,29 +11,16 @@ class CategoryViewTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testCategoryPageDisplaysInformation()
+    public function test_category_page_displays_information()
     {
         $category = factory(Category::class)->create();
 
-        $postsData = [
-            'titles' => [],
-            'created_ats' => [],
-        ];
-        for ($i = 0; $i < 10; $i++) {
-            $post = factory(Post::class)->create([
-                'category_id' => $category->id,
-            ]);
-            $postsData['titles'][] = $post->title;
-            $postsData['created_ats'][] = $post->created_at;
-        }
-
-        $response = $this->get($category->getShowlink());
+        $response = $this->get($category->link);
 
         $response->assertStatus(Response::HTTP_OK);
         $response->assertSeeText($category->title);
         $response->assertSeeText($category->description);
-
-        $response->assertSeeTextInOrder($postsData['titles']);
-        $response->assertSeeTextInOrder($postsData['created_ats']);
+        $response->assertSeeText(addcslashes($category->link, '/'));
     }
+
 }
