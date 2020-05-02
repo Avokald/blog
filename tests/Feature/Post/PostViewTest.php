@@ -77,6 +77,21 @@ class PostViewTest extends TestCase
         $response->assertStatus(Response::HTTP_FOUND);
     }
 
+    public function test_post_contains_category_data()
+    {
+        $category = factory(\App\Models\Category::class)->create();
+
+        $post = factory(Post::class)->create([
+            'category_id' => $category->id,
+        ]);
+
+        $response = $this->get($post->getShowLink());
+
+        $response->assertSeeText($category->title);
+        $response->assertSeeText(addcslashes($category->link, '/'));
+        $response->assertSeeText(addcslashes($category->image, '/'));
+    }
+
     public function assertArticleData($response, $article)
     {
         $response

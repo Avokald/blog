@@ -107,9 +107,8 @@ class PostController extends Controller
     public function show(string $articlePath)
     {
         $articlePathExploded = explode('-', $articlePath, 2);
-        $article = Post::findOrFail($articlePathExploded[0]);
+        $article = Post::with('category')->findOrFail($articlePathExploded[0]);
         $userObserver = request()->user();
-//        echo $article . ' | ';
 
         // If the status is not published and the current user is not the author
         // then return 404
