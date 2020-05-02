@@ -15,7 +15,7 @@ class UserProfileTest extends TestCase
     /**
      * User can view their own profile no matter of public settings
      */
-    public function testUserCanViewTheirProfile()
+    public function test_user_can_view_their_profile()
     {
         $privateUser = factory(User::class)->create([
             'public' => false,
@@ -40,7 +40,7 @@ class UserProfileTest extends TestCase
     }
 
 
-    public function testUserProfileCanBeViewedIfPublic() {
+    public function test_user_profile_can_be_viewed_if_public() {
         $user = factory(User::class)->create([
             'public' => true,
         ]);
@@ -60,7 +60,7 @@ class UserProfileTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
     }
 
-    public function testUserProfileCanNotBeViewedIfPrivate() {
+    public function test_user_profile_can_not_be_viewed_if_private() {
         $user = factory(User::class)->create([
             'public' => false,
         ]);
@@ -79,7 +79,7 @@ class UserProfileTest extends TestCase
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
-    public function testUserProfileRedirectsIfOnlyIdProvidedOrSlugIncorrect()
+    public function test_user_profile_redirects_if_only_id_provided_or_slug_incorrect()
     {
         $user = factory(User::class)->create();
 

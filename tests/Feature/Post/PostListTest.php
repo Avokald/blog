@@ -74,7 +74,7 @@ class PostListTest extends TestCase
     }
 
 
-    public function testPostsNewIsSortedInOrderByCreationTime()
+    public function test_posts_new_is_sorted_in_order_by_creation_time()
     {
         $this->seed(\PostSeeder::class);
 
@@ -93,7 +93,7 @@ class PostListTest extends TestCase
         $this->assertSeeTextInOrderForCommonData($response, $postsData);
     }
 
-    public function testPostsTopIsSortedInOrderByScore()
+    public function test_posts_top_is_sorted_in_order_by_score()
     {
         $this->seed(\PostSeeder::class);
 
@@ -112,7 +112,7 @@ class PostListTest extends TestCase
         $this->assertSeeTextInOrderForCommonData($response, $postsData);
     }
 
-    public function testPostsTopByDayInOrderByScoreAndDoesNotContainPreviousPosts()
+    public function test_posts_top_by_day_in_order_by_score_and_does_not_contain_previous_posts()
     {
         $postsData = $this->initializeCommonData();
 
@@ -147,7 +147,7 @@ class PostListTest extends TestCase
         $this->assertSeeTextInOrderForCommonData($response, $postsData);
     }
 
-    public function testPostsTopByWeekInOrderByScoreAndDoesNotContainPreviousPosts()
+    public function test_posts_top_by_week_in_order_by_score_and_does_not_contain_previous_posts()
     {
         $postsData = $this->initializeCommonData();
 
@@ -182,7 +182,7 @@ class PostListTest extends TestCase
         $this->assertSeeTextInOrderForCommonData($response, $postsData);
     }
 
-    public function testPostsTopByMonthInOrderByScoreAndDoesNotContainPreviousPosts()
+    public function test_posts_top_by_month_in_order_by_score_and_does_not_contain_previous_posts()
     {
         $postsData = $this->initializeCommonData();
 
@@ -217,7 +217,7 @@ class PostListTest extends TestCase
         $this->assertSeeTextInOrderForCommonData($response, $postsData);
     }
 
-    public function testPostsTopByYearInOrderByScoreAndDoesNotContainPreviousPosts()
+    public function test_posts_top_by_year_in_order_by_score_and_does_not_contain_previous_posts()
     {
         $postsData = $this->initializeCommonData();
 
@@ -252,7 +252,7 @@ class PostListTest extends TestCase
         $this->assertSeeTextInOrderForCommonData($response, $postsData);
     }
 
-    public function testPostsTopByAllTimeInOrderByScoreAndContainsAllPosts()
+    public function test_posts_top_by_all_tome_in_order_by_score_and_contains_all_posts()
     {
         $postsData = $this->initializeCommonData();
 

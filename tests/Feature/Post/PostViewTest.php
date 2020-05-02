@@ -13,7 +13,7 @@ class PostViewTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testArticleCanBeViewedIfPublished()
+    public function test_article_can_be_viewed_if_published()
     {
         $article = factory(Post::class)->create([
             'status' => Post::STATUS_PUBLISHED,
@@ -28,7 +28,7 @@ class PostViewTest extends TestCase
         $this->assertArticleData($response, $article);
     }
 
-    public function testArticleInDraftIsHidden()
+    public function test_article_in_draft_is_hidden()
     {
         $authorUser = factory(User::class)->create();
 
@@ -57,7 +57,7 @@ class PostViewTest extends TestCase
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
-    public function testUserArticleRedirectsIfOnlyIdProvidedOrSlugIncorrect()
+    public function test_user_article_redirects_if_only_id_provided_or_slug_incorrect()
     {
         $article = factory(Post::class)->create([
             'status' => Post::STATUS_PUBLISHED,
