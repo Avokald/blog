@@ -13,65 +13,11 @@ class PostListTest extends TestCase
 {
     use RefreshDatabase, DatabaseMigrations;
 
-    /**
-     * Fields that would be saved, asserted and validated for existence / nonexistence
-     */
     const DATA_FIELDS_FOR_CHECK = [
         'title',
         'content',
         'created_at',
     ];
-
-    /**
-     * Creates array of data with specified field
-     * @return array
-     */
-    private function initializeCommonData()
-    {
-        $list = [];
-        foreach (self::DATA_FIELDS_FOR_CHECK as $field) {
-            $list[$field] = [];
-        }
-        return $list;
-    }
-
-    /**
-     * Saves data into array with pulling fields from the model
-     * @param $list container for saved values of previous fields
-     * @param $post model which contains specified fields
-     */
-    private function saveCommonData(&$list, $post)
-    {
-        foreach (self::DATA_FIELDS_FOR_CHECK as $field) {
-            $list[$field][] = $post->$field;
-        }
-    }
-
-    /**
-     * Asserts that response contains values in order from given list for each specified field
-     * @param $response
-     * @param $list container for previously saved field values
-     */
-    private function assertSeeTextInOrderForCommonData($response, $list)
-    {
-        foreach (self::DATA_FIELDS_FOR_CHECK as $field) {
-            $response->assertSeeTextInOrder($list[$field]);
-        }
-    }
-
-    /**
-     * Asserts that response does not contain values from given list
-     * @param $response
-     * @param $list container for previously saved field values
-     */
-    private function assertDontSeeTextInOrderForCommonData($response, $list)
-    {
-        for ($i = 0; $i < count($list[self::DATA_FIELDS_FOR_CHECK[0]]); $i++) {
-            foreach (self::DATA_FIELDS_FOR_CHECK as $field) {
-                $response->assertDontSeeText($list[$field][$i]);
-            }
-        }
-    }
 
 
     public function test_posts_new_is_sorted_in_order_by_creation_time()
