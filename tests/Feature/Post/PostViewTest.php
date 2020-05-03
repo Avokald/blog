@@ -13,66 +13,71 @@ class PostViewTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_article_can_be_viewed_if_published()
+    const DATA_FIELDS_FOR_CHECK = [
+        'title',
+        'content',
+        'created_at',
+    ];
+
+    public function test_post_can_be_viewed_if_published()
     {
-        $article = factory(Post::class)->create([
+        $post = factory(Post::class)->create([
             'status' => Post::STATUS_PUBLISHED,
         ]);
 
         $user = factory(User::class)->create();
 
-        $response = $this->get($article->getShowLink());
+        $response = $this->get($post->getShowLink());
 
         $response->assertStatus(Response::HTTP_OK);
 
-        $this->assertArticleData($response, $article);
+        $this->assertSeeTextForCommonDataFromModel($response, $post);
     }
 
-    public function test_article_in_draft_is_hidden()
+    public function test_post_in_draft_is_hidden()
     {
         $authorUser = factory(User::class)->create();
 
-        $article = factory(Post::class)->create([
+        $post = factory(Post::class)->create([
             'status' => Post::STATUS_DRAFT,
             'user_id' => $authorUser->id,
         ]);
 
         $response = $this
             ->actingAs($authorUser)
-            ->get($article->getShowLink());
+            ->get($post->getShowLink());
 
         $response
-            ->assertStatus(Response::HTTP_OK)
-            ->assertSeeText($article->title)
-            ->assertSeeText($article->content)
-            ->assertSeeText($article->created_at);
+            ->assertStatus(Response::HTTP_OK);
+
+        $this->assertSeeTextForCommonDataFromModel($response, $post);
 
 
         $userObserver = factory(User::class)->create();
 
         $response = $this
             ->actingAs($userObserver)
-            ->get($article->getShowLink());
+            ->get($post->getShowLink());
 
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
-    public function test_user_article_redirects_if_only_id_provided_or_slug_incorrect()
+    public function test_user_post_redirects_if_only_id_provided_or_slug_incorrect()
     {
-        $article = factory(Post::class)->create([
+        $post = factory(Post::class)->create([
             'status' => Post::STATUS_PUBLISHED,
         ]);
 
-        $response = $this->get(route(PostController::SHOW_PATH_NAME, $article->id));
+        $response = $this->get(route(PostController::SHOW_PATH_NAME, $post->id));
 
         $response->assertStatus(Response::HTTP_FOUND);
 
-        $response = $this->get(route(PostController::SHOW_PATH_NAME, $article->id . '-'));
+        $response = $this->get(route(PostController::SHOW_PATH_NAME, $post->id . '-'));
 
         $response->assertStatus(Response::HTTP_FOUND);
 
         $response = $this->get(route(PostController::SHOW_PATH_NAME,
-            $article->id . '-' . $article->slug . random_int(0, 100)));
+            $post->id . '-' . $post->slug . random_int(0, 100)));
 
         $response->assertStatus(Response::HTTP_FOUND);
     }
@@ -91,13 +96,4 @@ class PostViewTest extends TestCase
         $response->assertSeeText(addcslashes($category->link, '/'));
         $response->assertSeeText(addcslashes($category->image, '/'));
     }
-
-    public function assertArticleData($response, $article)
-    {
-        $response
-            ->assertSeeText($article->title)
-            ->assertSeeText($article->content)
-            ->assertSeeText($article->created_at);
-    }
-
 }

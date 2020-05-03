@@ -12,39 +12,41 @@ class CategoryViewTest extends TestCase
 {
     use RefreshDatabase;
 
+    const DATA_FIELDS_FOR_CHECK = [
+        'title',
+        'description',
+    ];
+
     public function test_category_page_displays_information()
     {
         $category = factory(Category::class)->create();
 
+
         $response = $this->get($category->link);
 
+
         $response->assertStatus(Response::HTTP_OK);
-        $response->assertSeeText($category->title);
-        $response->assertSeeText($category->description);
+
         $response->assertSeeText(addcslashes($category->link, '/'));
+        $this->assertSeeTextForCommonDataFromModel($response, $category);
     }
 
     public function test_category_page_displays_only_published_posts()
     {
         $category = factory(Category::class)->create();
 
-        $postsData = [
-            'titles' => [],
-            'created_ats' => [],
-        ];
+        $postCommonData = ['title', 'created_at'];
 
-        $notDisplayedData = [
-            'titles' => [],
-            'created_ats' => [],
-        ];
+        $postsData = $this->initializeCommonData($postCommonData);
+
+        $notDisplayedData = $this->initializeCommonData($postCommonData);
 
         for ($i = 5; $i > 0; $i--) {
             $post = factory(Post::class)->create([
                 'category_id' => $category->id,
                 'created_at' => time() + ($i * 10),
             ]);
-            $postsData['titles'][] = $post->title;
-            $postsData['created_ats'][] = $post->created_at;
+            $this->saveCommonData($postsData, $post, $postCommonData);
         }
 
         for ($i = 10; $i > 5; $i--) {
@@ -53,18 +55,13 @@ class CategoryViewTest extends TestCase
                 'category_id' => $category->id,
                 'created_at' => time() + ($i * 100),
             ]);
-            $notDisplayedData['titles'][] = $post->title;
-            $notDisplayedData['created_ats'][] = $post->created_at;
+            $this->saveCommonData($notDisplayedData, $post, $postCommonData);
         }
 
         $response = $this->get($category->link);
 
-        $response->assertSeeTextInOrder($postsData['titles']);
-        $response->assertSeeTextInOrder($postsData['created_ats']);
+        $this->assertSeeTextInOrderForCommonData($response, $postsData, $postCommonData);
 
-        for ($i = 0; $i < count($notDisplayedData['titles']); $i++) {
-            $response->assertDontSeeText($notDisplayedData['titles'][$i]);
-            $response->assertDontSeeText($notDisplayedData['created_ats'][$i]);
-        }
+        $this->assertDontSeeTextInOrderForCommonData($response, $notDisplayedData,$postCommonData);
     }
 }
