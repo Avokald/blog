@@ -31,5 +31,13 @@ Route::get('/new', 'Web\PostController@newArticles')
 Route::get('/top/{timeframe?}/', 'Web\PostController@topArticles')
     ->name(\App\Http\Controllers\Web\PostController::TOP_PATH_NAME);
 
+Route::get('/tag/{tag}/{timeframe?}', 'Web\TagController@show')
+    ->name(\App\Http\Controllers\Web\TagController::SHOW_PATH_NAME);
+
+
+
+
+
 Route::get('/{category}/{timeframe?}', 'Web\CategoryController@show')
     ->name(\App\Http\Controllers\Web\CategoryController::SHOW_PATH_NAME);
+
