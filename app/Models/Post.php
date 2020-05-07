@@ -36,7 +36,7 @@ class Post extends Model
     ];
 
     protected $with = [
-        'user',
+        'author',
     ];
 
     protected $withCount = [
@@ -67,7 +67,7 @@ class Post extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-    public function user()
+    public function author()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
