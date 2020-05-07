@@ -62,19 +62,24 @@
 - [ ] Creation date
 - [ ] Can create posts
 - [ ] Has list of previous posts
-- [ ] User can have pinned post
 - [ ] Has list of drafts
+- [ ] Has list of comments
+- [ ] Has list of bookmarks - posts
+- [ ] Has list of bookmarks - comments
+- [ ] User can have pinned post
 - [ ] Timeline for notification
 - [ ] Additional description
 - [ ] Different user can subscribe and receive 
 - [ ] If user is private, only their title is displayed and their 
 - [ ] If user is public 
+- [ ] Profile settings and user data
 - [ ] 
 - [ ] 
 
 ##### Maybe
 - [ ] QR code for mobile quick login
 - [ ] Write a message to someone
+- [ ] User can view on their own page list of notifications - with messages from subscribed comments
 - [ ] 
 - [ ] 
 
@@ -91,7 +96,7 @@
 - [ ] Subscriber count
 - [ ] Has posts that can be ordered by popularity and creation date
 - [ ] User can write a mini post from it when logged in
-- [ ] 
+- [ ] Users can be responsible for categories
 - [ ] 
 
 ##### Maybe
