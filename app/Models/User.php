@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Controllers\Web\UserController;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -62,11 +63,55 @@ class User extends Authenticatable
         ];
     }
 
+
+    /*
+     *******************************************************************************************************************
+     Relationships
+     *******************************************************************************************************************
+    */
     public function posts()
     {
         return $this->hasMany(Post::class, 'user_id', 'id')->published();
     }
 
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class, 'user_id', 'id');
+    }
+
+
+    /*
+     *******************************************************************************************************************
+     Custom attributes
+     *******************************************************************************************************************
+    */
+    public function getSluggedIdAttribute()
+    {
+        return $this->id . '-' . $this->slug;
+    }
+
+
+
+    /*
+     *******************************************************************************************************************
+     Scopes
+     *******************************************************************************************************************
+    */
+    public function scopeWithBookmarksOrderedBy(Builder $query, $order, $direction)
+    {
+        return $query->with([
+            'bookmarks' => function($subquery) use ($order, $direction) {
+                return $subquery->orderBy($order, $direction);
+            }
+        ]);
+    }
+
+
+    /*
+     *******************************************************************************************************************
+     Custom methods
+     *******************************************************************************************************************
+    */
     public function getPersonalPageLink()
     {
         if ($this->slug) {

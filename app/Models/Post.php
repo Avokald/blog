@@ -25,6 +25,7 @@ class Post extends Model
         'user_id',
         'category_id',
         'tags',
+        'created_at',
     ];
 
     protected $casts = [
@@ -36,6 +37,10 @@ class Post extends Model
 
     protected $with = [
         'user',
+    ];
+
+    protected $withCount = [
+        'bookmarks',
     ];
 
     /**
@@ -65,6 +70,11 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class, 'post_id', 'id');
     }
 
     /*

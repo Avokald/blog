@@ -5,7 +5,7 @@
 - [x] Author user data
 - [x] Creation date
 - [x] Excerpt
-- [ ] Number of bookmarks
+- [x] Number of bookmarks
 - [ ] Number of comments
 - [ ] Rating
 - [ ] Category (name, link, image) (**hidden on category page**)
@@ -65,7 +65,7 @@
 - [ ] Has list of previous posts
 - [ ] Has list of drafts
 - [ ] Has list of comments
-- [ ] Has list of bookmarks - posts
+- [x] Has list of bookmarks - posts
 - [ ] Has list of bookmarks - comments
 - [ ] User can have pinned post
 - [ ] Timeline for notification

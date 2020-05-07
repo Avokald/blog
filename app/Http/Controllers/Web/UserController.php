@@ -73,6 +73,37 @@ class UserController extends Controller
     }
 
     /**
+     * Display bookmarks of the resource.
+     *
+     * @param  string $profile
+     * @return \Illuminate\Http\Response
+     */
+    const BOOKMARKS_PATH_NAME = 'users.bookmarks';
+    public function bookmarks(string $profile)
+    {
+        $profileExploded = explode('-', $profile, 2);
+        $userObserved = User::withBookmarksOrderedBy('created_at', 'DESC')->findOrFail($profileExploded[0]);
+        $currentUser = request()->user();
+
+        // If profile is not public or not their own profile
+        // then return 404
+        if (!($currentUser && ($currentUser->id === $userObserved->id))) {
+            return abort(Response::HTTP_FORBIDDEN);
+        }
+
+        // Redirect if slug is not provided or incorrect
+        // Must be run later so the would be no redirect when profile is private
+        if (!isset($profileExploded[1], $userObserved->slug) || ($profileExploded[1] !== $userObserved->slug)) {
+            return redirect(route(UserController::BOOKMARKS_PATH_NAME, $userObserved->slugged_id));
+        }
+
+        return [
+            'user' => $userObserved,
+            'time' => microtime(true) - LARAVEL_START,
+        ];
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int $id
