@@ -50,7 +50,11 @@ class TagController extends Controller
     public function show(string $tagTitle)
     {
         $tag = Tag::where('title', $tagTitle)->firstOrFail();
-        $posts = Post::published()->where('content', 'LIKE', '%#' . $tagTitle. '%')->orderBy('created_at', 'desc')->get();
+        $posts = Post::with('category')
+            ->published()
+            ->where('content', 'LIKE', '%#' . $tagTitle. '%')
+            ->orderBy('created_at', 'desc')
+            ->get();
         return [$tag, $posts];
     }
 

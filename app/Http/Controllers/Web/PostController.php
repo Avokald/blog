@@ -29,7 +29,10 @@ class PostController extends Controller
 
     public function newArticles()
     {
-        $articles = Post::published()->orderBy('created_at', 'desc')->get();
+        $articles = Post::with('category')
+            ->published()
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return $articles;
     }
@@ -68,7 +71,8 @@ class PostController extends Controller
 
         }
 
-        $articles = Post::published()
+        $articles = Post::with('category')
+            ->published()
             ->$timeframeScope()
             ->orderBy('rating', 'desc')
             ->get();
