@@ -33,6 +33,10 @@ class Post extends Model
         'tags' => 'array',
     ];
 
+    protected $with = [
+        'user',
+    ];
+
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -57,6 +61,10 @@ class Post extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 
     /*
     ********************************************************************************************************************

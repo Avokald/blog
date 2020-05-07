@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Http\Controllers\Web\PostController;
 use App\Models\Post;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -37,6 +38,19 @@ class PostListTest extends TestCase
         $response = $this->get(route(PostController::NEW_PATH_NAME));
 
         $this->assertSeeTextInOrderForCommonData($response, $postsData);
+    }
+
+    public function test_posts_has_user_data()
+    {
+        $user = factory(User::class)->create();
+        $post = factory(Post::class)->create([
+            'user_id' => $user->id,
+        ]);
+
+        $response = $this->get(route(PostController::NEW_PATH_NAME));
+
+        $response->assertSeeText($user->name);
+        $response->assertSeeText($user->created_at);
     }
 
     public function test_posts_top_is_sorted_in_order_by_score()

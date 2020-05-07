@@ -1,8 +1,8 @@
 ## Post
 
 ##### In list
-- [ ] Title
-- [ ] Author user (name, link, image)
+- [x] Title
+- [x] Author user data
 - [ ] Creation date
 - [ ] **Excerpt** 
 - [ ] Number of bookmarks
@@ -90,11 +90,13 @@
 - [ ] Banner
 - [ ] Description
 - [ ] Additional description
-- [ ] User can subscribe to it and posts from this category will be displayed in their timeline
+- [ ] User can subscribe to it 
+- [ ] Subscribed user timeline will display posts from it
+- [ ] Subscriber count
 - [ ] User can unsubscribe from it
 - [ ] User can ignore it
-- [ ] Subscriber count
-- [ ] Has posts that can be ordered by popularity and creation date
+- [ ] Has posts 
+- [ ] Category posts can be ordered by popularity and creation date
 - [ ] User can write a mini post from it when logged in
 - [ ] Users can be responsible for categories
 - [ ] 
@@ -110,7 +112,8 @@
 ## Tag
 - [ ] Title
 - [ ] Logged in user can ignore it
-- [ ] Can be sorted by popularity or creation time
+- [ ] Has posts
+- [ ] Tag posts can be sorted by popularity or creation time
 - [ ] Created when user publishes new post with given tag
 - [ ] 
 - [ ] 
