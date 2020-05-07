@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('slug')->nullable();
+            $table->text('excerpt')->nullable(); // 350 max
             $table->text('content')->nullable();
             $table->json('json_content')->nullable();
 

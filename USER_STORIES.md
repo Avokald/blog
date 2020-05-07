@@ -3,8 +3,8 @@
 ##### In list
 - [x] Title
 - [x] Author user data
-- [ ] Creation date
-- [ ] **Excerpt** 
+- [x] Creation date
+- [x] Excerpt
 - [ ] Number of bookmarks
 - [ ] Number of comments
 - [ ] Rating
@@ -19,6 +19,7 @@
 
 ##### Full page
 - [ ] Title
+- [ ] Excerpt
 - [ ] **Content**
 - [ ] Author user (name, link, image, overall rating)
 - [ ] Creation date

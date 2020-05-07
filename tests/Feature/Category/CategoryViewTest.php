@@ -35,18 +35,16 @@ class CategoryViewTest extends TestCase
     {
         $category = factory(Category::class)->create();
 
-        $postCommonData = ['title', 'created_at'];
+        $postsData = $this->initializeCommonData(PostListTest::DATA_FIELDS_FOR_CHECK);
 
-        $postsData = $this->initializeCommonData($postCommonData);
-
-        $notDisplayedData = $this->initializeCommonData($postCommonData);
+        $notDisplayedData = $this->initializeCommonData(PostListTest::DATA_FIELDS_FOR_CHECK);
 
         for ($i = 5; $i > 0; $i--) {
             $post = factory(Post::class)->create([
                 'category_id' => $category->id,
                 'created_at' => time() + ($i * 10),
             ]);
-            $this->saveCommonData($postsData, $post, $postCommonData);
+            $this->saveCommonData($postsData, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
         }
 
         for ($i = 10; $i > 5; $i--) {
@@ -55,13 +53,13 @@ class CategoryViewTest extends TestCase
                 'category_id' => $category->id,
                 'created_at' => time() + ($i * 100),
             ]);
-            $this->saveCommonData($notDisplayedData, $post, $postCommonData);
+            $this->saveCommonData($notDisplayedData, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
         }
 
         $response = $this->get($category->link);
 
-        $this->assertSeeTextInOrderForCommonData($response, $postsData, $postCommonData);
+        $this->assertSeeTextInOrderForCommonData($response, $postsData, PostListTest::DATA_FIELDS_FOR_CHECK);
 
-        $this->assertDontSeeTextInOrderForCommonData($response, $notDisplayedData,$postCommonData);
+        $this->assertDontSeeTextInOrderForCommonData($response, $notDisplayedData,PostListTest::DATA_FIELDS_FOR_CHECK);
     }
 }

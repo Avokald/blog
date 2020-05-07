@@ -16,7 +16,7 @@ class PostListTest extends TestCase
 
     const DATA_FIELDS_FOR_CHECK = [
         'title',
-        'content',
+        'excerpt',
         'created_at',
     ];
 
