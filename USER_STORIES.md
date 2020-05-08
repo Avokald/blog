@@ -8,9 +8,10 @@
 - [x] Number of bookmarks
 - [ ] Number of comments
 - [ ] Rating
-- [ ] Category (name, link, image) (**hidden on category page**)
+- [x] Category (name, link, image) (**hidden on category page**)
 - [ ] User can report it
-- [ ] User can bookmark it
+- [x] User can bookmark it
+- [x] User can remove bookmark from it
 - [ ] User can upvote or downvote it
 - [ ] **User can ignore the author of it**
 - [ ] **User can hide it from timeline**
@@ -29,7 +30,8 @@
 - [ ] Rating
 - [ ] Category (name, link, image)
 - [ ] User can report it
-- [ ] User can bookmark it
+- [x] User can bookmark it
+- [x] User can remove bookmark from it
 - [ ] User can upvote or downvote it
 - [ ] **User can share it (vk, facebook, twitter, telegram, ok, email)**
 - [ ]

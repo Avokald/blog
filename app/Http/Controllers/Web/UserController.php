@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bookmark;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -101,6 +102,30 @@ class UserController extends Controller
             'user' => $userObserved,
             'time' => microtime(true) - LARAVEL_START,
         ];
+    }
+
+    const BOOKMARKS_CHANGE_PATH_NAME = 'bookmarks.change';
+    public function bookmarksChange()
+    {
+        $user = request()->user();
+        $postId = request()->post_id;
+        $state = intval(request()->state);
+
+        if (is_null($user)) {
+            return abort(Response::HTTP_FORBIDDEN);
+        }
+
+        $bookmark = $user->bookmarks()->where('post_id', $postId)->first();
+        if (is_null($bookmark) && $state === Bookmark::STATE_SAVE) {
+            Bookmark::create([
+                'user_id' => $user->id,
+                'post_id' => $postId,
+            ]);
+        } else if ($bookmark && $state === Bookmark::STATE_REMOVE) {
+            $bookmark->delete();
+        }
+        return Response::HTTP_OK;
+
     }
 
     /**

@@ -82,4 +82,65 @@ class UserBookmarksTest extends TestCase
 
         $this->assertSeeTextInOrderForCommonData($response, $data, PostListTest::DATA_FIELDS_FOR_CHECK);
     }
+
+    public function test_post_can_be_bookmarked()
+    {
+        $post = factory(Post::class)->create();
+        $user = factory(User::class)->create();
+
+        // Add post to user bookmarks
+        $response = $this->actingAs($user)
+            ->postJson(route(UserController::BOOKMARKS_CHANGE_PATH_NAME), [
+                'post_id' => $post->id,
+                'state' => Bookmark::STATE_SAVE,
+            ]);
+
+        $response->assertStatus(Response::HTTP_OK);
+
+        // Check if the post is displayed on user bookmarks page
+        $response = $this->actingAs($user)
+            ->get(route(UserController::BOOKMARKS_PATH_NAME, $user->slugged_id));
+
+        $this->assertSeeTextForCommonDataFromModel($response, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
+    }
+
+    public function test_post_cant_be_bookmarked_as_anonymous()
+    {
+        $post = factory(Post::class)->create();
+
+        // Add post to user bookmarks
+        $response = $this->postJson(route(UserController::BOOKMARKS_CHANGE_PATH_NAME), [
+                'post_id' => $post->id,
+                'state' => Bookmark::STATE_SAVE,
+            ]);
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+    }
+
+    public function test_post_can_be_removed_from_bookmarks()
+    {
+        $post = factory(Post::class)->create([
+            'created_at' => time() - 10000,
+        ]);
+        $user = factory(User::class)->create();
+
+        Bookmark::create([
+            'user_id' => $user->id,
+            'post_id' => $post->id,
+        ]);
+
+        $response = $this->actingAs($user)
+            ->postJson(route(UserController::BOOKMARKS_CHANGE_PATH_NAME), [
+                'post_id' => $post->id,
+                'state' => Bookmark::STATE_REMOVE,
+            ]);
+
+        $response->assertStatus(Response::HTTP_OK);
+
+        // Check if the post is displayed on user bookmarks page
+        $response = $this->actingAs($user)
+            ->get(route(UserController::BOOKMARKS_PATH_NAME, $user->slugged_id));
+
+        $this->assertDontSeeTextForCommonDataFromModel($response, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
+    }
 }

@@ -27,6 +27,9 @@ Route::get('/u/{profile}', 'Web\UserController@show')
 Route::get('/u/{profile}/bookmarks', 'Web\UserController@bookmarks')
     ->name(\App\Http\Controllers\Web\UserController::BOOKMARKS_PATH_NAME);
 
+Route::post('/bookmarks/change', 'Web\UserController@bookmarksChange')
+    ->name(\App\Http\Controllers\Web\UserController::BOOKMARKS_CHANGE_PATH_NAME);
+
 
 // Articles
 Route::get('/a/{article}', 'Web\PostController@show')
