@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\Web\PostController;
+use App\Models\Bookmark;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -95,5 +96,37 @@ class PostViewTest extends TestCase
         $response->assertSeeText($category->title);
         $response->assertSeeText(addcslashes($category->link, '/'));
         $response->assertSeeText(addcslashes($category->image, '/'));
+    }
+
+    public function test_post_has_bookmark_count()
+    {
+        $userCount = 5;
+        $post = factory(Post::class)->create();
+
+        $users = factory(User::class, $userCount)->create();
+
+        foreach ($users as $user) {
+            Bookmark::create([
+                'user_id' => $user->id,
+                'post_id' => $post->id,
+            ]);
+        }
+
+        $response = $this->get($post->getShowLink());
+
+        $response->assertSeeText($userCount);
+
+
+        $user2 = factory(User::class)->create();
+
+        Bookmark::create([
+            'user_id' => $user2->id,
+            'post_id' => $post->id,
+        ]);
+
+
+        $response = $this->get($post->getShowLink());
+
+        $response->assertSeeText($userCount + 1);
     }
 }
