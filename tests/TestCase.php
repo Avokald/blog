@@ -76,6 +76,26 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
+     * Asserts that the response don't have values set in model
+     * @param $response
+     * @param $model
+     * @param $customFields if DATA_FIELDS_FOR_CHECK are not suited
+     */
+    protected function assertDontSeeTextForCommonDataFromModel($response, $model, $customFields = null)
+    {
+        if (!is_null($customFields)) {
+           foreach ($customFields as $field) {
+                $response->assertDontSeeText($model->$field);
+           }
+        } else {
+            foreach ($this::DATA_FIELDS_FOR_CHECK as $field) {
+                $response->assertDontSeeText($model->$field);
+            }
+        }
+    }
+
+
+    /**
      * Asserts that response contains values in order from given list for each specified field
      * @param $response
      * @param $list container for previously saved field values
