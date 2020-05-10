@@ -24,11 +24,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/u/{profile}', 'Web\UserController@show')
     ->name(\App\Http\Controllers\Web\UserController::SHOW_PATH_NAME);
 
-Route::get('/u/{profile}/bookmarks', 'Web\UserController@bookmarks')
-    ->name(\App\Http\Controllers\Web\UserController::BOOKMARKS_PATH_NAME);
 
-Route::post('/bookmarks/change', 'Web\UserController@bookmarksChange')
-    ->name(\App\Http\Controllers\Web\UserController::BOOKMARKS_CHANGE_PATH_NAME);
+// Bookmarks
+Route::get('/u/{profile}/bookmarks', 'Web\BookmarksController@index')
+    ->name(\App\Http\Controllers\Web\BookmarksController::INDEX_PATH_NAME);
+
+Route::post('/bookmarks/store', 'Web\BookmarksController@store')
+    ->name(\App\Http\Controllers\Web\BookmarksController::STORE_PATH_NAME);
+
+Route::post('/bookmarks/destroy/', 'Web\BookmarksController@destroy')
+    ->name(\App\Http\Controllers\Web\BookmarksController::DESTROY_PATH_NAME);
 
 
 // Articles

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Bookmark;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,61 +70,6 @@ class UserController extends Controller
             'user' => $userObserved,
             'time' => microtime(true) - LARAVEL_START,
         ];
-    }
-
-    /**
-     * Display bookmarks of the resource.
-     *
-     * @param  string $profile
-     * @return \Illuminate\Http\Response
-     */
-    const BOOKMARKS_PATH_NAME = 'users.bookmarks';
-    public function bookmarks(string $profile)
-    {
-        $profileExploded = explode('-', $profile, 2);
-        $userObserved = User::withBookmarksOrderedBy('created_at', 'DESC')->findOrFail($profileExploded[0]);
-        $currentUser = request()->user();
-
-        // If profile is not public or not their own profile
-        // then return 404
-        if (!($currentUser && ($currentUser->id === $userObserved->id))) {
-            return abort(Response::HTTP_FORBIDDEN);
-        }
-
-        // Redirect if slug is not provided or incorrect
-        // Must be run later so the would be no redirect when profile is private
-        if (!isset($profileExploded[1], $userObserved->slug) || ($profileExploded[1] !== $userObserved->slug)) {
-            return redirect(route(UserController::BOOKMARKS_PATH_NAME, $userObserved->slugged_id));
-        }
-
-        return [
-            'user' => $userObserved,
-            'time' => microtime(true) - LARAVEL_START,
-        ];
-    }
-
-    const BOOKMARKS_CHANGE_PATH_NAME = 'bookmarks.change';
-    public function bookmarksChange()
-    {
-        $user = request()->user();
-        $postId = request()->post_id;
-        $state = intval(request()->state);
-
-        if (is_null($user)) {
-            return abort(Response::HTTP_FORBIDDEN);
-        }
-
-        $bookmark = $user->bookmarks()->where('post_id', $postId)->first();
-        if (is_null($bookmark) && $state === Bookmark::STATE_SAVE) {
-            Bookmark::create([
-                'user_id' => $user->id,
-                'post_id' => $postId,
-            ]);
-        } else if ($bookmark && $state === Bookmark::STATE_REMOVE) {
-            $bookmark->delete();
-        }
-        return Response::HTTP_OK;
-
     }
 
     /**
