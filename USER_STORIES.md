@@ -55,7 +55,21 @@
 - [ ]
 
 ## Comments
+- [ ] Author (Name, link, image)
+- [ ] Content
+- [ ] Creation date
+- [ ] Rating
+- [ ] Parent
 
+### User can:
+
+- [ ] Write it on post
+- [ ] Reply to it
+- [ ] Upvote it
+- [ ] Downvote it
+- [ ] Bookmark it
+- [ ] Report it
+- [ ] Ignore it, or author 
 
 ## User 
 - [ ] Name
