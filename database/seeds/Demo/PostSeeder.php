@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
@@ -11,6 +12,14 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Post::class, 5)->create();
+        factory(Post::class)->create([
+            'title' => 'mypost',
+            'excerpt' => 'myexcerpt',
+            'content' => 'mycontent #mytag ',
+            'status' => Post::STATUS_PUBLISHED,
+            'user_id' => 1,
+            'category_id' => 1,
+        ]);
+        factory(Post::class, 5)->create();
     }
 }

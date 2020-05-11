@@ -12,6 +12,11 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+        factory(Category::class)->create([
+            'title' => 'mycat',
+            'description' => 'mydesc',
+        ]);
+
         factory(Category::class, 5)
             ->create()
             ->each(function ($category) {

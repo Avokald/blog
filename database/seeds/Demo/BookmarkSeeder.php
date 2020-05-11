@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Bookmark;
 use Illuminate\Database\Seeder;
 
 class BookmarkSeeder extends Seeder
@@ -15,7 +16,7 @@ class BookmarkSeeder extends Seeder
         $posts = \App\Models\Post::all();
 
         foreach ($users as $user) {
-            \App\Models\Bookmark::create([
+            Bookmark::create([
                 'user_id' => $user->id,
                 'post_id' => $posts->random()->id,
             ]);
