@@ -51,7 +51,7 @@ class UserController extends Controller
     public function show(string $profile)
     {
         $profileExploded = explode('-', $profile, 2);
-        $userObserved = User::findOrFail($profileExploded[0]);
+        $userObserved = User::with('posts')->findOrFail($profileExploded[0]);
         $currentUser = request()->user();
 
         // If profile is not public or not their own profile

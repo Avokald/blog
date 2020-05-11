@@ -25,5 +25,7 @@ $factory->define(User::class, function (Faker $faker) {
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'public' => true,
         'remember_token' => Str::random(10),
+        'image' => $faker->imageUrl(120, 120),
+        'banner' => $faker->imageUrl(640, 160),
     ];
 });
