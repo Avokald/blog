@@ -24,6 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/u/{profile}', 'Web\UserController@show')
     ->name(\App\Http\Controllers\Web\UserController::SHOW_PATH_NAME);
 
+Route::get('/u/{profile}/drafts', 'Web\UserController@drafts')
+    ->name(\App\Http\Controllers\Web\UserController::DRAFTS_PATH_NAME);
+
 
 // Bookmarks
 Route::get('/u/{profile}/bookmarks', 'Web\BookmarksController@index')

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\Web\UserController;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
@@ -95,6 +96,78 @@ class UserProfileTest extends TestCase
             $user->id . '-' . $user->slug . random_int(0, 100)));
 
         $response->assertStatus(Response::HTTP_FOUND);
+    }
+
+    public function test_user_profile_displays_only_published_posts()
+    {
+        $user = factory(User::class)->create();
+        $data = $this->initializeCommonData(PostListTest::DATA_FIELDS_FOR_CHECK);
+
+        for ($i = 0; $i < 5; $i++) {
+            $post = factory(Post::class)->create([
+                'status' => Post::STATUS_PUBLISHED,
+                'user_id' => $user->id,
+                'created_at' => time() - $i * 100,
+            ]);
+
+            $this->saveCommonData($data, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
+        }
+
+        $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->slugged_id));
+
+        $this->assertSeeTextInOrderForCommonData($response, $data, PostListTest::DATA_FIELDS_FOR_CHECK);
+    }
+
+    public function test_user_profile_hides_drafts()
+    {
+        $user = factory(User::class)->create();
+        $userObserver = factory(User::class)->create();
+
+        $data = $this->initializeCommonData(PostListTest::DATA_FIELDS_FOR_CHECK);
+
+        for ($i = 0; $i < 5; $i++) {
+            $post = factory(Post::class)->create([
+                'status' => Post::STATUS_DRAFT,
+                'user_id' => $user->id,
+                'created_at' => time() - $i * 100,
+            ]);
+
+            $this->saveCommonData($data, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
+        }
+
+        // Anon
+        $response = $this->get(route(UserController::DRAFTS_PATH_NAME, $user->slugged_id));
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+
+        // Registered user
+        $response = $this
+            ->actingAs($userObserver)
+            ->get(route(UserController::DRAFTS_PATH_NAME, $user->slugged_id));
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+    }
+
+    public function test_user_profile_displays_drafts_if_author()
+    {
+        $user = factory(User::class)->create();
+        $data = $this->initializeCommonData(PostListTest::DATA_FIELDS_FOR_CHECK);
+
+        for ($i = 0; $i < 5; $i++) {
+            $post = factory(Post::class)->create([
+                'status' => Post::STATUS_DRAFT,
+                'user_id' => $user->id,
+                'created_at' => time() - $i * 100,
+            ]);
+
+            $this->saveCommonData($data, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
+        }
+
+        $response = $this
+            ->actingAs($user)
+            ->get(route(UserController::DRAFTS_PATH_NAME, $user->slugged_id));
+
+        $this->assertSeeTextInOrderForCommonData($response, $data, PostListTest::DATA_FIELDS_FOR_CHECK);
     }
 
     public function assertCommonData($response, $user) {

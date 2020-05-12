@@ -51,7 +51,7 @@ class UserController extends Controller
     public function show(string $profile)
     {
         $profileExploded = explode('-', $profile, 2);
-        $userObserved = User::with('posts')->findOrFail($profileExploded[0]);
+        $userObserved = User::withRelationOrderedBy('posts', 'created_at', 'DESC')->findOrFail($profileExploded[0]);
         $currentUser = request()->user();
 
         // If profile is not public or not their own profile
@@ -68,6 +68,31 @@ class UserController extends Controller
 
         return [
             'user' => $userObserved,
+            'time' => microtime(true) - LARAVEL_START,
+        ];
+    }
+
+    const DRAFTS_PATH_NAME = 'users.profile.drafts';
+    public function drafts(string $profile)
+    {
+        $profileExploded = explode('-', $profile, 2);
+        $userObserved = User::withRelationOrderedBy('drafts', 'created_at', 'DESC')->findOrFail($profileExploded[0]);
+        $currentUser = request()->user();
+
+        // If profile is not public or not their own profile
+        // then return 404
+        if (!($currentUser && ($currentUser->id === $userObserved->id))) {
+            return abort(Response::HTTP_FORBIDDEN);
+        }
+
+        // Redirect if slug is not provided or incorrect
+        // Must be run later so the would be no redirect when profile is private
+        if (!isset($profileExploded[1], $userObserved->slug) || ($profileExploded[1] !== $userObserved->slug)) {
+            return redirect($userObserved->getPersonalPageLink());
+        }
+
+        return [
+            'drafts' => $userObserved->drafts,
             'time' => microtime(true) - LARAVEL_START,
         ];
     }

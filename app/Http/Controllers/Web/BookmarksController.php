@@ -19,7 +19,7 @@ class BookmarksController extends Controller
     public function index(string $profile)
     {
         $profileExploded = explode('-', $profile, 2);
-        $userObserved = User::withBookmarksOrderedBy('created_at', 'DESC')->findOrFail($profileExploded[0]);
+        $userObserved = User::withRelationOrderedBy('bookmarks', 'created_at', 'DESC')->findOrFail($profileExploded[0]);
         $currentUser = request()->user();
 
         // If profile is not public or not their own profile

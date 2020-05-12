@@ -20,6 +20,14 @@ class PostSeeder extends Seeder
             'user_id' => 1,
             'category_id' => 1,
         ]);
+        factory(Post::class)->create([
+            'title' => 'mypost',
+            'excerpt' => 'myexcerpt',
+            'content' => 'mycontent #mytag ',
+            'status' => Post::STATUS_DRAFT,
+            'user_id' => 1,
+            'category_id' => 1,
+        ]);
         factory(Post::class, 5)->create();
     }
 }

@@ -87,6 +87,12 @@ class Post extends Model
         return $query->where('status', Post::STATUS_PUBLISHED);
     }
 
+    public function scopeDraft(Builder $query)
+    {
+        return $query->where('status', Post::STATUS_DRAFT);
+    }
+
+
     public function scopeLast24Hours(Builder $query)
     {
         return $query->where('created_at', '>', Carbon::now()->subHours(24));

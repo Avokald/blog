@@ -76,6 +76,11 @@ class User extends Authenticatable
         return $this->hasMany(Post::class, 'user_id', 'id')->published();
     }
 
+    public function drafts()
+    {
+        return $this->hasMany(Post::class, 'user_id', 'id')->draft();
+    }
+
     public function bookmarks()
     {
         return $this->hasMany(Bookmark::class, 'user_id', 'id');
@@ -99,10 +104,18 @@ class User extends Authenticatable
      Scopes
      *******************************************************************************************************************
     */
-    public function scopeWithBookmarksOrderedBy(Builder $query, $order, $direction)
+    /**
+     * Function to order relationships
+     * @param Builder $query
+     * @param $relation string - any relationship name that is
+     * @param $order string - column to order by
+     * @param $direction string - direction to order by
+     * @return Builder
+     */
+    public function scopeWithRelationOrderedBy(Builder $query, string $relation, string $order, string $direction)
     {
         return $query->with([
-            'bookmarks' => function($subquery) use ($order, $direction) {
+            $relation => function($subquery) use ($order, $direction) {
                 return $subquery->orderBy($order, $direction);
             }
         ]);
