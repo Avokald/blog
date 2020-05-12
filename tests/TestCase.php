@@ -2,7 +2,9 @@
 
 namespace Tests;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\TestResponse;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -39,9 +41,9 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Saves data into array with pulling fields from the model
-     * @param $list container for saved values of previous fields
-     * @param $model model that contains specified fields
-     * @param null $customFields
+     * @param $list array for saved values of previous fields
+     * @param $model Model that contains specified fields
+     * @param $customFields array|null
      */
     protected function saveCommonData(&$list, $model, $customFields = null)
     {
@@ -58,11 +60,11 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Asserts that the response has values set in model
-     * @param $response
-     * @param $model
-     * @param $customFields if DATA_FIELDS_FOR_CHECK are not suited
+     * @param $response TestResponse
+     * @param $model Model
+     * @param $customFields array|null if DATA_FIELDS_FOR_CHECK are not suited
      */
-    protected function assertSeeTextForCommonDataFromModel($response, $model, $customFields = null)
+    protected function assertSeeTextForCommonDataFromModel(TestResponse $response, $model, $customFields = null)
     {
         if (!is_null($customFields)) {
            foreach ($customFields as $field) {
@@ -77,11 +79,11 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Asserts that the response don't have values set in model
-     * @param $response
-     * @param $model
-     * @param $customFields if DATA_FIELDS_FOR_CHECK are not suited
+     * @param $response TestResponse
+     * @param $model Model
+     * @param $customFields array|null if DATA_FIELDS_FOR_CHECK are not suited
      */
-    protected function assertDontSeeTextForCommonDataFromModel($response, $model, $customFields = null)
+    protected function assertDontSeeTextForCommonDataFromModel(TestResponse $response, Model $model, array $customFields = null)
     {
         if (!is_null($customFields)) {
            foreach ($customFields as $field) {
@@ -97,11 +99,11 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Asserts that response contains values in order from given list for each specified field
-     * @param $response
-     * @param $list container for previously saved field values
-     * @param null $customFields
+     * @param $response TestResponse
+     * @param $list array for previously saved field values
+     * @param $customFields array|null
      */
-    protected function assertSeeTextInOrderForCommonData($response, $list, $customFields = null)
+    protected function assertSeeTextInOrderForCommonData(TestResponse $response, $list, $customFields = null)
     {
         if (!is_null($customFields)) {
            foreach ($customFields as $field) {
@@ -116,11 +118,11 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Asserts that response does not contain values from given list
-     * @param $response
-     * @param $list container for previously saved field values
-     * @param null $customFields
+     * @param $response TestResponse
+     * @param $list array for previously saved field values
+     * @param $customFields array|null
      */
-    protected function assertDontSeeTextInOrderForCommonData($response, $list, $customFields = null)
+    protected function assertDontSeeTextInOrderForCommonData(TestResponse $response, array $list, array $customFields = null)
     {
         if (!is_null($customFields)) {
            for ($i = 0; $i < count($list[$customFields[0]]); $i++) {
@@ -135,6 +137,15 @@ abstract class TestCase extends BaseTestCase
                 }
             }
         }
+    }
+
+    /**
+     * Print data into console
+     * @param array $data
+     */
+    protected function print_r(array $data)
+    {
+        fwrite(STDERR, print_r($data, TRUE));
     }
 }
 
