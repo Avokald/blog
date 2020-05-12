@@ -61,7 +61,7 @@
 - [ ] Rating
 - [ ] Parent
 
-### User can:
+##### User can:
 
 - [ ] Write it on post
 - [ ] Reply to it
@@ -72,23 +72,21 @@
 - [ ] Ignore it, or author 
 
 ## User 
-- [ ] Name
+- [x] Name
 - [ ] Short description
-- [ ] Profile picture
+- [x] Profile picture
+- [x] Banner
 - [ ] Overall rating
-- [ ] Creation date
-- [ ] Can create posts
-- [ ] Has list of previous posts
-- [ ] Has list of drafts
-- [ ] Has list of comments
-- [x] Has list of bookmarks - posts
-- [ ] Has list of bookmarks - comments
-- [ ] User can have pinned post
+- [x] Creation date
+- [x] List of previous posts
+- [x] List of drafts
+- [ ] List of comments
+- [x] List of bookmarks - posts (private)
+- [ ] List of bookmarks - comments (private)
+- [ ] Pinned post
 - [ ] Timeline for notification
-- [ ] Additional description
-- [ ] Different user can subscribe and receive 
-- [ ] If user is private, only their title is displayed and their 
-- [ ] If user is public 
+- [ ] Can create posts
+- [ ] Different user can subscribe
 - [ ] Profile settings and user data
 - [ ] 
 - [ ] 
@@ -102,34 +100,36 @@
 
 ## Category
 
-- [ ] Title
-- [ ] Image
-- [ ] Banner
-- [ ] Description
-- [ ] Additional description
-- [ ] User can subscribe to it 
-- [ ] Subscribed user timeline will display posts from it
+- [x] Title
+- [x] Image
+- [x] Banner
+- [x] Description
+- [x] Posts 
 - [ ] Subscriber count
-- [ ] User can unsubscribe from it
-- [ ] User can ignore it
-- [ ] Has posts 
+
+##### User can:
+
+- [ ] Subscribe to it 
+- [ ] unsubscribe from it
+- [ ] Subscribed user timeline will display posts from it
+- [ ] Ignore it
+- [ ] Be responsible for categories
 - [ ] Category posts can be ordered by popularity and creation date
-- [ ] User can write a mini post from it when logged in
-- [ ] Users can be responsible for categories
 - [ ] 
 
 ##### Maybe
 
 - [ ] Notifications
+- [ ] ? Write a mini post from it when logged in
 - [ ] ? User can write directly to the category
 - [ ] ? User can report it
 - [ ] 
 - [ ] 
 
 ## Tag
-- [ ] Title
+- [x] Title
+- [x] Posts
 - [ ] Logged in user can ignore it
-- [ ] Has posts
 - [ ] Tag posts can be sorted by popularity or creation time
 - [ ] Created when user publishes new post with given tag
 - [ ] 
