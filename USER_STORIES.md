@@ -15,7 +15,7 @@
 - [ ] User can report it
 - [x] User can bookmark it
 - [x] User can remove bookmark from it
-- [ ] User can upvote or downvote it
+- [x] User can like or dislike it
 - [ ] **User can ignore the author of it**
 - [ ] **User can hide it from timeline**
 - [ ] 
@@ -37,7 +37,7 @@
 - [ ] User can report it
 - [x] User can bookmark it
 - [x] User can remove bookmark from it
-- [ ] User can upvote or downvote it
+- [x] User can like or dislike it
 - [ ] **User can share it (vk, facebook, twitter, telegram, ok, email)**
 - [ ]
 - [ ]
@@ -47,16 +47,6 @@
 - [ ] User can write to author
 - [ ] User can subscribe to author
 - [ ]
-- [ ]
-
-###### My
-- [ ] Progress bar for post length
-- [ ]
-- [ ]
- 
-#### Editor
-- [ ] Can make titles and subtitles for table of content
-- [ ] 
 - [ ]
 
 
@@ -72,8 +62,8 @@
 
 - [ ] Write it on post
 - [ ] Reply to it
-- [ ] Upvote it
-- [ ] Downvote it
+- [ ] Like it
+- [ ] Dislike it
 - [ ] Bookmark it
 - [ ] Report it
 - [ ] Ignore it, or author 
@@ -88,8 +78,10 @@
 - [ ] Overall rating
 - [x] Creation date
 - [x] List of previous posts
+- [ ] Previous posts are orderable
 - [x] List of drafts
 - [ ] List of comments
+- [ ] Comments are orderable
 - [x] List of bookmarks - posts (private)
 - [ ] List of bookmarks - comments (private)
 - [x] Pinned post
@@ -124,7 +116,7 @@
 - [ ] Subscribed user timeline will display posts from it
 - [ ] Ignore it
 - [ ] Be responsible for categories
-- [ ] Category posts can be ordered by popularity and creation date
+- [ ] Category posts are orderable
 - [ ] 
 
 ##### Maybe
@@ -140,11 +132,20 @@
 ### Tag
 - [x] Title
 - [x] Posts
-- [ ] Tag posts can be sorted by popularity or creation time
+- [ ] Tag posts are orderable
 - [ ] Logged in user can ignore it
 - [ ] Created when user publishes new post with given tag
 - [ ] 
 - [ ] 
+
+---
+
+## Ideas and improvements
+
+- [ ] Rating, bookmarks count, view count and other constantly changed values move to NoSql database (Mongo?)
+- [ ] Editor can make titles and subtitles for table of content
+- [ ] Progress bar for post length
+- [ ]
 
 ---
 
@@ -197,15 +198,6 @@
 - [ ]
 - [ ]
 
-###### My
-- [ ] Progress bar for post length
-- [ ]
-- [ ]
- 
-#### Editor
-- [ ] Can make titles and subtitles for table of content
-- [ ] 
-- [ ]
 
 ### Comments
 - [ ] Author (Name, link, image)
@@ -252,6 +244,7 @@
 - [ ] 
 - [ ] 
 
+
 ### Category
 
 - [ ] Title
@@ -279,6 +272,7 @@
 - [ ] ? User can report it
 - [ ] 
 - [ ] 
+
 
 ### Tag
 - [ ] Title
