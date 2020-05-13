@@ -17,6 +17,13 @@ class UserSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => '$2y$10$EupfydU.p2ZgZXNjsC32N.Pz4AEt5OY5Zi.0jCQR30IyMHaNsnycO', // 123
         ]);
+
+        factory(User::class)->create([
+            'name' => 'testuser',
+            'email' => 'testuser@example.com',
+            'password' => '$2y$10$EupfydU.p2ZgZXNjsC32N.Pz4AEt5OY5Zi.0jCQR30IyMHaNsnycO', // 123
+        ]);
+
         factory(User::class, 5)->create();
     }
 }
