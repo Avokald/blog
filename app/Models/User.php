@@ -98,6 +98,11 @@ class User extends Authenticatable
         return $this->hasMany(PostLike::class, 'user_id', 'id');
     }
 
+    public function post_dislikes()
+    {
+        return $this->hasMany(PostDislike::class, 'user_id', 'id');
+    }
+
 
     /*
      *******************************************************************************************************************

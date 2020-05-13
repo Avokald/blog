@@ -50,6 +50,17 @@ Route::post('/post_likes/destroy/', 'Web\PostLikeController@destroy')
     ->name(\App\Http\Controllers\Web\PostLikeController::DESTROY_PATH_NAME);
 
 
+// Dislikes
+Route::get('/u/{profile}/post_dislikes', 'Web\PostDislikeController@index')
+    ->name(\App\Http\Controllers\Web\PostDislikeController::INDEX_PATH_NAME);
+
+Route::post('/post_dislikes/store', 'Web\PostDislikeController@store')
+    ->name(\App\Http\Controllers\Web\PostDislikeController::STORE_PATH_NAME);
+
+Route::post('/post_dislikes/destroy/', 'Web\PostDislikeController@destroy')
+    ->name(\App\Http\Controllers\Web\PostDislikeController::DESTROY_PATH_NAME);
+
+
 // Posts
 Route::get('/a/{article}', 'Web\PostController@show')
     ->name(\App\Http\Controllers\Web\PostController::SHOW_PATH_NAME);

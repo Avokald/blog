@@ -82,6 +82,11 @@ class Post extends Model
         return $this->hasMany(PostLike::class, 'post_id', 'id');
     }
 
+    public function post_dislikes()
+    {
+        return $this->hasMany(PostDislike::class, 'post_id', 'id');
+    }
+
     /*
     ********************************************************************************************************************
      Scopes
