@@ -12,7 +12,7 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        factory(Post::class)->create([
+        $post = factory(Post::class)->create([
             'title' => 'testpost',
             'excerpt' => 'testexcerpt',
             'content' => 'testcontent #testtag ',
@@ -31,5 +31,12 @@ class PostSeeder extends Seeder
         ]);
 
         factory(Post::class, 5)->create();
+
+        $user = \App\Models\User::find(2);
+        if ($user !== null) {
+            $user->pinned_post_id = $post->id;
+            $user->save();
+        }
+
     }
 }

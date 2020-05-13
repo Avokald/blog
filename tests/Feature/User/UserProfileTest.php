@@ -200,8 +200,7 @@ class UserProfileTest extends TestCase
 
         $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->slugged_id));
 
-        $response->assertDontSeeText($post->title);
-        $response->assertDontSeeText($post->excerpt);
+        $this->assertDontSeeTextForCommonDataFromModel($response, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
     }
 
 
