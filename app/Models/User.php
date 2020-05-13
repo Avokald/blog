@@ -27,6 +27,7 @@ class User extends Authenticatable
         'slug',
         'image',
         'banner',
+        'description',
         'pinned_post_id',
     ];
 

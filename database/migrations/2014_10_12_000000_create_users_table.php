@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->boolean('public')->default(true);
             $table->string('image')->nullable();
             $table->string('banner')->nullable();
+            $table->text('description')->nullable();
             $table->bigInteger('pinned_post_id')->nullable();
 
             $table->rememberToken();

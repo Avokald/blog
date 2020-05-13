@@ -27,5 +27,6 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
         'image' => $faker->imageUrl(120, 120),
         'banner' => $faker->imageUrl(640, 160),
+        'description' => $faker->text,
     ];
 });
