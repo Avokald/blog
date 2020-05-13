@@ -19,7 +19,7 @@ class CreatePostLikesTable extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('post_id');
 
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
         });
     }
 

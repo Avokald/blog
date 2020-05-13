@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bookmark extends Model
 {
-    const STATE_SAVE = 1;
-    const STATE_REMOVE = 2;
+    const UPDATED_AT = null;
 
     protected $fillable = [
         'user_id',

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PostDislike extends Model
 {
+    const UPDATED_AT = null;
+
     protected $fillable = [
         'user_id',
         'post_id',
