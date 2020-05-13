@@ -27,6 +27,7 @@ class User extends Authenticatable
         'slug',
         'image',
         'banner',
+        'pinned_post_id',
     ];
 
     /**
@@ -86,10 +87,15 @@ class User extends Authenticatable
         return $this->hasMany(Bookmark::class, 'user_id', 'id');
     }
 
+    public function pinned_post()
+    {
+        return $this->hasOne(Post::class, 'id', 'pinned_post_id')->published();
+    }
+
 
     /*
      *******************************************************************************************************************
-     Custom attributes
+     Attributes
      *******************************************************************************************************************
     */
     public function getSluggedIdAttribute()

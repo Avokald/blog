@@ -170,6 +170,44 @@ class UserProfileTest extends TestCase
         $this->assertSeeTextInOrderForCommonData($response, $data, PostListTest::DATA_FIELDS_FOR_CHECK);
     }
 
+    public function test_user_profile_displays_pinned_post()
+    {
+        $user = factory(User::class)->create();
+        $post = factory(Post::class)->create([
+            'status' => Post::STATUS_PUBLISHED,
+            'user_id' => $user->id,
+        ]);
+
+        $user->pinned_post_id = $post->id;
+        $user->save();
+
+
+        $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->slugged_id));
+
+        $response->assertSeeTextInOrder(['pinned_post', $post->title, $post->excerpt]);
+    }
+
+    public function test_user_profile_hides_pinned_draft_post()
+    {
+        $user = factory(User::class)->create();
+        $post = factory(Post::class)->create([
+            'status' => Post::STATUS_DRAFT,
+            'user_id' => $user->id,
+        ]);
+
+        $user->pinned_post_id = $post->id;
+        $user->save();
+
+        $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->slugged_id));
+
+        $response->assertDontSeeText($post->title);
+        $response->assertDontSeeText($post->excerpt);
+    }
+
+
+
+
+
     public function assertCommonData($response, $user) {
         $response->assertStatus(Response::HTTP_OK)
             ->assertSeeText($user->name)

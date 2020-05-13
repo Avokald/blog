@@ -51,7 +51,9 @@ class UserController extends Controller
     public function show(string $profile)
     {
         $profileExploded = explode('-', $profile, 2);
-        $userObserved = User::withRelationOrderedBy('posts', 'created_at', 'DESC')->findOrFail($profileExploded[0]);
+        $userObserved = User::withRelationOrderedBy('posts', 'created_at', 'DESC')
+            ->with('pinned_post')
+            ->findOrFail($profileExploded[0]);
         $currentUser = request()->user();
 
         // If profile is not public or not their own profile
