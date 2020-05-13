@@ -8,7 +8,7 @@ use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 
 
-class BookmarksController extends Controller
+class BookmarkController extends Controller
 {
     /**
      * Display a listing of the resource.

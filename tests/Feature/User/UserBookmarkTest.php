@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Controllers\Web\BookmarksController;
+use App\Http\Controllers\Web\BookmarkController;
 use App\Models\Bookmark;
 use App\Models\Post;
 use App\Models\User;
@@ -11,7 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
-class UserBookmarksTest extends TestCase
+class UserBookmarkTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -33,7 +33,7 @@ class UserBookmarksTest extends TestCase
         // Author of the bookmark
         $response = $this
             ->actingAs($user)
-            ->get(route(BookmarksController::INDEX_PATH_NAME, $user->slugged_id));
+            ->get(route(BookmarkController::INDEX_PATH_NAME, $user->slugged_id));
 
 
         $response->assertStatus(Response::HTTP_OK);
@@ -42,7 +42,7 @@ class UserBookmarksTest extends TestCase
         // Guest
         $response = $this
             ->actingAs($userGuest)
-            ->get(route(BookmarksController::INDEX_PATH_NAME, $user->slugged_id));
+            ->get(route(BookmarkController::INDEX_PATH_NAME, $user->slugged_id));
 
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
@@ -50,7 +50,7 @@ class UserBookmarksTest extends TestCase
 
         // Not registered user
         $response = $this
-            ->get(route(BookmarksController::INDEX_PATH_NAME, $user->slugged_id));
+            ->get(route(BookmarkController::INDEX_PATH_NAME, $user->slugged_id));
 
 
         $response->assertStatus(Response::HTTP_FORBIDDEN);
@@ -78,7 +78,7 @@ class UserBookmarksTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->get(route(BookmarksController::INDEX_PATH_NAME, $user->slugged_id));
+            ->get(route(BookmarkController::INDEX_PATH_NAME, $user->slugged_id));
 
 
         $this->assertSeeTextInOrderForCommonData($response, $data, PostListTest::DATA_FIELDS_FOR_CHECK);
@@ -91,7 +91,7 @@ class UserBookmarksTest extends TestCase
 
         // Add post to user bookmarks
         $response = $this->actingAs($user)
-            ->postJson(route(BookmarksController::STORE_PATH_NAME), [
+            ->postJson(route(BookmarkController::STORE_PATH_NAME), [
                 'post_id' => $post->id,
             ]);
 
@@ -99,7 +99,7 @@ class UserBookmarksTest extends TestCase
 
         // Check if the post is displayed on user bookmarks page
         $response = $this->actingAs($user)
-            ->get(route(BookmarksController::INDEX_PATH_NAME, $user->slugged_id));
+            ->get(route(BookmarkController::INDEX_PATH_NAME, $user->slugged_id));
 
         $this->assertSeeTextForCommonDataFromModel($response, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
     }
@@ -109,7 +109,7 @@ class UserBookmarksTest extends TestCase
         $post = factory(Post::class)->create();
 
         // Add post to user bookmarks
-        $response = $this->postJson(route(BookmarksController::STORE_PATH_NAME), [
+        $response = $this->postJson(route(BookmarkController::STORE_PATH_NAME), [
             'post_id' => $post->id,
         ]);
 
@@ -129,7 +129,7 @@ class UserBookmarksTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->postJson(route(BookmarksController::DESTROY_PATH_NAME), [
+            ->postJson(route(BookmarkController::DESTROY_PATH_NAME), [
                 'post_id' => $post->id,
             ]);
 
@@ -137,7 +137,7 @@ class UserBookmarksTest extends TestCase
 
         // Check if the post is displayed on user bookmarks page
         $response = $this->actingAs($user)
-            ->get(route(BookmarksController::INDEX_PATH_NAME, $user->slugged_id));
+            ->get(route(BookmarkController::INDEX_PATH_NAME, $user->slugged_id));
 
         $this->assertDontSeeTextForCommonDataFromModel($response, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
     }

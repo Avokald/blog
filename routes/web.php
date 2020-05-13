@@ -29,17 +29,21 @@ Route::get('/u/{profile}/drafts', 'Web\UserController@drafts')
 
 
 // Bookmarks
-Route::get('/u/{profile}/bookmarks', 'Web\BookmarksController@index')
-    ->name(\App\Http\Controllers\Web\BookmarksController::INDEX_PATH_NAME);
+Route::get('/u/{profile}/bookmarks', 'Web\BookmarkController@index')
+    ->name(\App\Http\Controllers\Web\BookmarkController::INDEX_PATH_NAME);
 
-Route::post('/bookmarks/store', 'Web\BookmarksController@store')
-    ->name(\App\Http\Controllers\Web\BookmarksController::STORE_PATH_NAME);
+Route::post('/bookmarks/store', 'Web\BookmarkController@store')
+    ->name(\App\Http\Controllers\Web\BookmarkController::STORE_PATH_NAME);
 
-Route::post('/bookmarks/destroy/', 'Web\BookmarksController@destroy')
-    ->name(\App\Http\Controllers\Web\BookmarksController::DESTROY_PATH_NAME);
+Route::post('/bookmarks/destroy/', 'Web\BookmarkController@destroy')
+    ->name(\App\Http\Controllers\Web\BookmarkController::DESTROY_PATH_NAME);
 
 
-// Articles
+
+
+
+
+// Posts
 Route::get('/a/{article}', 'Web\PostController@show')
     ->name(\App\Http\Controllers\Web\PostController::SHOW_PATH_NAME);
 
