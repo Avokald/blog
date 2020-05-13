@@ -65,11 +65,12 @@ class UserBookmarksTest extends TestCase
 
         for ($i = 0; $i < $posts->count(); $i++) {
             $post = $posts->get($i);
-            Bookmark::create([
+            $bookmark = Bookmark::create([
                 'user_id' => $user->id,
                 'post_id' => $post->id,
-                'created_at' => Carbon::now()->subDays($i),
             ]);
+            $bookmark->created_at = Carbon::now()->subDays($i);
+            $bookmark->save();
 
             $this->saveCommonData($data, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
         }
