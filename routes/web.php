@@ -39,8 +39,15 @@ Route::post('/bookmarks/destroy/', 'Web\BookmarkController@destroy')
     ->name(\App\Http\Controllers\Web\BookmarkController::DESTROY_PATH_NAME);
 
 
+// Likes
+Route::get('/u/{profile}/post_likes', 'Web\PostLikeController@index')
+    ->name(\App\Http\Controllers\Web\PostLikeController::INDEX_PATH_NAME);
 
+Route::post('/post_likes/store', 'Web\PostLikeController@store')
+    ->name(\App\Http\Controllers\Web\PostLikeController::STORE_PATH_NAME);
 
+Route::post('/post_likes/destroy/', 'Web\PostLikeController@destroy')
+    ->name(\App\Http\Controllers\Web\PostLikeController::DESTROY_PATH_NAME);
 
 
 // Posts

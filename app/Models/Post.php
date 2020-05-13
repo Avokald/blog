@@ -77,6 +77,11 @@ class Post extends Model
         return $this->hasMany(Bookmark::class, 'post_id', 'id');
     }
 
+    public function post_likes()
+    {
+        return $this->hasMany(PostLike::class, 'post_id', 'id');
+    }
+
     /*
     ********************************************************************************************************************
      Scopes

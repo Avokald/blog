@@ -93,6 +93,11 @@ class User extends Authenticatable
         return $this->hasOne(Post::class, 'id', 'pinned_post_id')->published();
     }
 
+    public function post_likes()
+    {
+        return $this->hasMany(PostLike::class, 'user_id', 'id');
+    }
+
 
     /*
      *******************************************************************************************************************
