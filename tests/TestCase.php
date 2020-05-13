@@ -141,9 +141,9 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * Print data into console
-     * @param array $data
+     * @param $data
      */
-    protected function print_r(array $data)
+    protected function print_r($data)
     {
         fwrite(STDERR, print_r($data, TRUE));
     }
