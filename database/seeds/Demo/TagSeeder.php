@@ -13,7 +13,7 @@ class TagSeeder extends Seeder
     public function run()
     {
         factory(Tag::class)->create([
-            'title' => 'mytag',
+            'title' => 'testtag',
         ]);
 
         factory(Tag::class, 10)->create();

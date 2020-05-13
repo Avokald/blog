@@ -13,8 +13,8 @@ class CategorySeeder extends Seeder
     public function run()
     {
         factory(Category::class)->create([
-            'title' => 'mycat',
-            'description' => 'mydesc',
+            'title' => 'testcat',
+            'description' => 'testdesc',
         ]);
 
         factory(Category::class, 5)

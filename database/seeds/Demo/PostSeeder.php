@@ -13,21 +13,23 @@ class PostSeeder extends Seeder
     public function run()
     {
         factory(Post::class)->create([
-            'title' => 'mypost',
-            'excerpt' => 'myexcerpt',
-            'content' => 'mycontent #mytag ',
+            'title' => 'testpost',
+            'excerpt' => 'testexcerpt',
+            'content' => 'testcontent #testtag ',
             'status' => Post::STATUS_PUBLISHED,
-            'user_id' => 1,
+            'user_id' => 2,
             'category_id' => 1,
         ]);
+
         factory(Post::class)->create([
-            'title' => 'mypost',
-            'excerpt' => 'myexcerpt',
-            'content' => 'mycontent #mytag ',
+            'title' => 'testpost draft',
+            'excerpt' => 'testexcerpt draft',
+            'content' => 'testcontent #testtag draft',
             'status' => Post::STATUS_DRAFT,
-            'user_id' => 1,
+            'user_id' => 2,
             'category_id' => 1,
         ]);
+
         factory(Post::class, 5)->create();
     }
 }
