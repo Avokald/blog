@@ -1,6 +1,9 @@
-## Post
+## API 
+
+### Post
 
 ##### In list
+
 - [x] Title
 - [x] Author user data
 - [x] Creation date
@@ -19,16 +22,18 @@
 - [ ] 
 
 ##### Full page
-- [ ] Title
-- [ ] Excerpt
-- [ ] **Content**
-- [ ] Author user (name, link, image, overall rating)
-- [ ] Creation date
-- [ ] Number of bookmarks
+
+- [x] Title
+- [x] Excerpt
+- [x] **Content**
+- [x] Author user (name, link, image)
+- [ ] Author overall rating
+- [x] Creation date
+- [x] Number of bookmarks
 - [ ] Number of comments
 - [ ] **Number of views**
 - [ ] Rating
-- [ ] Category (name, link, image)
+- [x] Category (name, link, image)
 - [ ] User can report it
 - [x] User can bookmark it
 - [x] User can remove bookmark from it
@@ -54,7 +59,9 @@
 - [ ] 
 - [ ]
 
-## Comments
+
+### Comments
+
 - [ ] Author (Name, link, image)
 - [ ] Content
 - [ ] Creation date
@@ -71,9 +78,11 @@
 - [ ] Report it
 - [ ] Ignore it, or author 
 
-## User 
+
+### User 
+
 - [x] Name
-- [ ] Short description
+- [x] Short description
 - [x] Profile picture
 - [x] Banner
 - [ ] Overall rating
@@ -83,11 +92,11 @@
 - [ ] List of comments
 - [x] List of bookmarks - posts (private)
 - [ ] List of bookmarks - comments (private)
-- [ ] Pinned post
-- [ ] Timeline for notification
+- [x] Pinned post
 - [ ] Can create posts
 - [ ] Different user can subscribe
 - [ ] Profile settings and user data
+- [ ] Timeline for notification
 - [ ] 
 - [ ] 
 
@@ -98,7 +107,8 @@
 - [ ] 
 - [ ] 
 
-## Category
+
+### Category
 
 - [x] Title
 - [x] Image
@@ -126,11 +136,156 @@
 - [ ] 
 - [ ] 
 
-## Tag
+
+### Tag
 - [x] Title
 - [x] Posts
+- [ ] Tag posts can be sorted by popularity or creation time
+- [ ] Logged in user can ignore it
+- [ ] Created when user publishes new post with given tag
+- [ ] 
+- [ ] 
+
+---
+
+## FRONT
+
+### Post
+
+##### In list
+- [ ] Title
+- [ ] Author user data
+- [ ] Creation date
+- [ ] Excerpt
+- [ ] Number of bookmarks
+- [ ] Number of comments
+- [ ] Rating
+- [ ] Category (name, link, image) (**hidden on category page**)
+- [ ] User can report it
+- [ ] User can bookmark it
+- [ ] User can remove bookmark from it
+- [ ] User can upvote or downvote it
+- [ ] **User can ignore the author of it**
+- [ ] **User can hide it from timeline**
+- [ ] 
+- [ ] 
+
+##### Full page
+- [ ] Title
+- [ ] Excerpt
+- [ ] **Content**
+- [ ] Author user (name, link, image)
+- [ ] Author overall rating
+- [ ] Creation date
+- [ ] Number of bookmarks
+- [ ] Number of comments
+- [ ] **Number of views**
+- [ ] Rating
+- [ ] Category (name, link, image)
+- [ ] User can report it
+- [ ] User can bookmark it
+- [ ] User can remove bookmark from it
+- [ ] User can upvote or downvote it
+- [ ] **User can share it (vk, facebook, twitter, telegram, ok, email)**
+- [ ]
+- [ ]
+
+###### Maybe
+
+- [ ] User can write to author
+- [ ] User can subscribe to author
+- [ ]
+- [ ]
+
+###### My
+- [ ] Progress bar for post length
+- [ ]
+- [ ]
+ 
+#### Editor
+- [ ] Can make titles and subtitles for table of content
+- [ ] 
+- [ ]
+
+### Comments
+- [ ] Author (Name, link, image)
+- [ ] Content
+- [ ] Creation date
+- [ ] Rating
+- [ ] Parent
+
+##### User can:
+
+- [ ] Write it on post
+- [ ] Reply to it
+- [ ] Upvote it
+- [ ] Downvote it
+- [ ] Bookmark it
+- [ ] Report it
+- [ ] Ignore it, or author 
+
+
+### User 
+- [ ] Name
+- [ ] Short description
+- [ ] Profile picture
+- [ ] Banner
+- [ ] Overall rating
+- [ ] Creation date
+- [ ] List of previous posts
+- [ ] List of drafts
+- [ ] List of comments
+- [ ] List of bookmarks - posts (private)
+- [ ] List of bookmarks - comments (private)
+- [ ] Pinned post
+- [ ] Can create posts
+- [ ] Different user can subscribe
+- [ ] Profile settings and user data
+- [ ] Timeline for notification
+- [ ] 
+- [ ] 
+
+##### Maybe
+- [ ] QR code for mobile quick login
+- [ ] Write a message to someone
+- [ ] User can view on their own page list of notifications - with messages from subscribed comments
+- [ ] 
+- [ ] 
+
+### Category
+
+- [ ] Title
+- [ ] Image
+- [ ] Banner
+- [ ] Description
+- [ ] Posts 
+- [ ] Subscriber count
+
+##### User can:
+
+- [ ] Subscribe to it 
+- [ ] unsubscribe from it
+- [ ] Subscribed user timeline will display posts from it
+- [ ] Ignore it
+- [ ] Be responsible for categories
+- [ ] Category posts can be ordered by popularity and creation date
+- [ ] 
+
+##### Maybe
+
+- [ ] Notifications
+- [ ] ? Write a mini post from it when logged in
+- [ ] ? User can write directly to the category
+- [ ] ? User can report it
+- [ ] 
+- [ ] 
+
+### Tag
+- [ ] Title
+- [ ] Posts
 - [ ] Logged in user can ignore it
 - [ ] Tag posts can be sorted by popularity or creation time
 - [ ] Created when user publishes new post with given tag
 - [ ] 
 - [ ] 
+
