@@ -20,5 +20,13 @@ class PostDislikeSeeder extends Seeder
                 'post_id' => $post->id,
             ]);
         }
+
+        $users = factory(\App\Models\User::class, 5)->create();
+        foreach ($users as $user) {
+            PostDislike::create([
+                'user_id' => $user->id,
+                'post_id' => PostSeeder::TEST_PUBLISHED_ID,
+            ]);
+        }
     }
 }

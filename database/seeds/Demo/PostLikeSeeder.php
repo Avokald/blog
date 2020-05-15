@@ -20,5 +20,13 @@ class PostLikeSeeder extends Seeder
                 'post_id' => $post->id,
             ]);
         }
+
+        $users = factory(\App\Models\User::class, 10)->create();
+        foreach ($users as $user) {
+            PostLike::create([
+                'user_id' => $user->id,
+                'post_id' => PostSeeder::TEST_PUBLISHED_ID,
+            ]);
+        }
     }
 }
