@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
+    const ADMIN_USER_ID = 1;
     const TEST_USER_ID = 2;
     /**
      * Run the database seeds.

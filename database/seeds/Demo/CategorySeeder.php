@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
+    const TEST_CATEGORY_ID = 1;
     /**
      * Run the database seeds.
      *

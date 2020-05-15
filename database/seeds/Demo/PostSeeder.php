@@ -5,6 +5,9 @@ use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
 {
+    const TEST_PUBLISHED_ID = 1;
+    const TEST_DRAFT_ID = 1;
+
     /**
      * Run the database seeds.
      *
