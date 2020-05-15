@@ -17,14 +17,12 @@ class CategorySeeder extends Seeder
             'description' => 'testdesc',
         ]);
 
-        factory(Category::class, 5)
-            ->create()
-            ->each(function ($category) {
-                $category->posts()->createMany(
-                    factory(\App\Models\Post::class, 10)->make([
-                        'category_id' => $category->id,
-                    ])->toArray()
-                );
-            });
+        $categories = factory(Category::class, 5)->create();
+
+        foreach ($categories as $category) {
+            factory(\App\Models\Post::class, 10)->make([
+                'category_id' => $category->id,
+            ]);
+        }
     }
 }
