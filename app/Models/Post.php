@@ -41,6 +41,14 @@ class Post extends Model
 
     protected $withCount = [
         'bookmarks',
+        'post_likes',
+        'post_dislikes',
+    ];
+
+    // TODO
+    // Rating, bookmarks count, views into separate database
+    protected $appends = [
+        'rating',
     ];
 
     /**
@@ -85,6 +93,16 @@ class Post extends Model
     public function post_dislikes()
     {
         return $this->hasMany(PostDislike::class, 'post_id', 'id');
+    }
+
+    /*
+    ********************************************************************************************************************
+     Attributes
+    ********************************************************************************************************************
+    */
+    public function getRatingAttribute()
+    {
+        return $this->post_likes_count - $this->post_dislikes_count;
     }
 
     /*

@@ -23,7 +23,6 @@ class CreatePostsTable extends Migration
             $table->json('json_content')->nullable();
 
             $table->unsignedSmallInteger('status')->default(Post::STATUS_DRAFT);
-            $table->bigInteger('rating')->default(0);
 
             $table->bigInteger('user_id');
             $table->bigInteger('category_id')->nullable();

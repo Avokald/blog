@@ -5,7 +5,6 @@ namespace Tests\Feature;
 use App\Http\Controllers\Web\PostController;
 use App\Models\Post;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -50,6 +49,15 @@ class PostListTest extends TestCase
 
         $response->assertSeeText($user->name);
         $response->assertSeeText($user->created_at);
+    }
+
+    /*
+    $users = factory(User::class, $i * 2)->create();
+    foreach ($users as $user) {
+        PostLike::create([
+            'user_id' => $user,
+            'post_id' => $post->id,
+        ]);
     }
 
     public function test_posts_top_is_sorted_in_order_by_score()
@@ -239,5 +247,6 @@ class PostListTest extends TestCase
         // All posts should be displayed in order of score
         $this->assertSeeTextInOrderForCommonData($response, $postsData);
     }
+    */
 
 }

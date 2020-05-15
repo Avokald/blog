@@ -10,7 +10,7 @@
 - [x] Excerpt
 - [x] Number of bookmarks
 - [ ] Number of comments
-- [ ] Rating
+- [x] Rating
 - [x] Category (name, link, image) (**hidden on category page**)
 - [ ] User can report it
 - [x] User can bookmark it
@@ -32,7 +32,7 @@
 - [x] Number of bookmarks
 - [ ] Number of comments
 - [ ] **Number of views**
-- [ ] Rating
+- [x] Rating
 - [x] Category (name, link, image)
 - [ ] User can report it
 - [x] User can bookmark it
