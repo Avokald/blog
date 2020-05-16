@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Http\Controllers\Web\UserController;
+use App\Traits\WithRelationScopes;
 use Cviebrock\EloquentSluggable\Sluggable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -13,6 +13,8 @@ class User extends Authenticatable
     use Notifiable;
 
     use Sluggable;
+
+    use WithRelationScopes;
 
     /**
      * The attributes that are mass assignable.
@@ -121,22 +123,7 @@ class User extends Authenticatable
      Scopes
      *******************************************************************************************************************
     */
-    /**
-     * Function to order relationships
-     * @param Builder $query
-     * @param $relation string - any relationship name that is
-     * @param $order string - column to order by
-     * @param $direction string - direction to order by
-     * @return Builder
-     */
-    public function scopeWithRelationOrderedBy(Builder $query, string $relation, string $order, string $direction)
-    {
-        return $query->with([
-            $relation => function($subquery) use ($order, $direction) {
-                return $subquery->orderBy($order, $direction);
-            }
-        ]);
-    }
+
 
 
     /*

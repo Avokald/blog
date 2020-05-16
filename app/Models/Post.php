@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Controllers\Web\PostController;
+use App\Traits\WithRelationScopes;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,6 +12,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use Sluggable;
+
+    use WithRelationScopes;
 
     const STATUS_PUBLISHED = 1;
     const STATUS_DRAFT = 2;
@@ -103,6 +106,11 @@ class Post extends Model
     public function getRatingAttribute()
     {
         return $this->post_likes_count - $this->post_dislikes_count;
+    }
+
+    public function getSluggedIdAttribute()
+    {
+        return $this->id . '-' . $this->slug;
     }
 
     /*
