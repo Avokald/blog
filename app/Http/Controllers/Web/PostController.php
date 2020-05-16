@@ -111,7 +111,11 @@ class PostController extends Controller
     public function show(string $articlePath)
     {
         $articlePathExploded = explode('-', $articlePath, 2);
-        $article = Post::with('category')->findOrFail($articlePathExploded[0]);
+
+        $article = Post::with('category')
+            ->withRelationOrderedBy('comments.replies.replies', 'created_at', 'DESC')
+            ->findOrFail($articlePathExploded[0]);
+
         $userObserver = request()->user();
 
         // If the status is not published and the current user is not the author
