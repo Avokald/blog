@@ -72,6 +72,14 @@ Route::get('/top/{timeframe?}/', 'Web\PostController@topArticles')
     ->name(\App\Http\Controllers\Web\PostController::TOP_PATH_NAME);
 
 
+// Comments
+Route::post('/comments/{postId}/store', 'Web\CommentController@store')
+    ->name(\App\Http\Controllers\Web\CommentController::STORE_PATH_NAME);
+
+//Route::get('/comments/load_responses/{commentId}', 'Web\CommentController@loadResponses')
+//    ->name(\App\Http\Controllers\Web\CommentController::LOAD_RESPONSES_PATH_NAME);
+
+
 // Tags
 Route::get('/tag/{tag}/{timeframe?}', 'Web\TagController@show')
     ->name(\App\Http\Controllers\Web\TagController::SHOW_PATH_NAME);

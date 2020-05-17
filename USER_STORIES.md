@@ -50,23 +50,26 @@
 - [ ]
 
 
-### Comments
+### Comment
 
-- [ ] Author (Name, link, image)
-- [ ] Content
-- [ ] Creation date
+- [x] Author (Name, link, image)
+- [x] Content
+- [x] Creation date
 - [ ] Rating
-- [ ] Parent
+- [x] Parent
+- [x] 3 levels deep
 
 ##### User can:
 
-- [ ] Write it on post
-- [ ] Reply to it
+- [x] Write it on post
+- [x] Reply to it
 - [ ] Like it
 - [ ] Dislike it
 - [ ] Bookmark it
 - [ ] Report it
+- [ ] Get permalink to it that returns slice of discussion with all parents and replies to the given comment
 - [ ] Ignore it, or author 
+- [ ] Pin comment on their own post
 
 
 ### User 
