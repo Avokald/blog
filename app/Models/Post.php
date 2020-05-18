@@ -46,6 +46,7 @@ class Post extends Model
         'bookmarks',
         'post_likes',
         'post_dislikes',
+        'comments',
     ];
 
     // TODO

@@ -9,7 +9,7 @@
 - [x] Creation date
 - [x] Excerpt
 - [x] Number of bookmarks
-- [ ] Number of comments
+- [x] Number of comments
 - [x] Rating
 - [x] Category (name, link, image) (**hidden on category page**)
 - [ ] User can report it
@@ -30,7 +30,7 @@
 - [ ] Author overall rating
 - [x] Creation date
 - [x] Number of bookmarks
-- [ ] Number of comments
+- [x] Number of comments
 - [ ] **Number of views**
 - [x] Rating
 - [x] Category (name, link, image)
@@ -40,7 +40,10 @@
 - [x] User can like or dislike it
 - [ ] **User can share it (vk, facebook, twitter, telegram, ok, email)**
 - [ ]
-- [ ]
+
+- [ ] Author can edit post
+- [ ] Author can delete post
+
 
 ###### Maybe
 
