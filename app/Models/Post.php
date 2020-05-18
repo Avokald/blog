@@ -100,7 +100,7 @@ class Post extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'post_id', 'id')->where('reply_id', '=',  null);
+        return $this->hasMany(Comment::class, 'post_id', 'id');
     }
 
 

@@ -113,7 +113,7 @@ class PostController extends Controller
         $articlePathExploded = explode('-', $articlePath, 2);
 
         $article = Post::with('category')
-            ->withRelationOrderedBy('comments.replies.replies', 'created_at', 'DESC')
+            ->withRelationOrderedBy('comments', 'created_at', 'DESC')
             ->findOrFail($articlePathExploded[0]);
 
         $userObserver = request()->user();
