@@ -32,6 +32,7 @@ Route::get('/u/{profile}/drafts', 'Web\UserController@drafts')
 Route::get('/u/{profile}/bookmarks', 'Web\BookmarkController@index')
     ->name(\App\Http\Controllers\Web\BookmarkController::INDEX_PATH_NAME);
 
+// FIXME correct rest path names and request types
 Route::post('/bookmarks/store', 'Web\BookmarkController@store')
     ->name(\App\Http\Controllers\Web\BookmarkController::STORE_PATH_NAME);
 
@@ -81,11 +82,13 @@ Route::post('/comments/{postId}/store', 'Web\CommentController@store')
 
 
 // Tags
-Route::get('/tag/{tag}/{timeframe?}', 'Web\TagController@show')
+Route::get('/tags/{tag}/{timeframe?}', 'Web\TagController@show')
     ->name(\App\Http\Controllers\Web\TagController::SHOW_PATH_NAME);
 
 
-
+// Reports
+Route::post('/reports', '\Web\ReportController@store')
+    ->name(\App\Http\Controllers\Web\ReportController::STORE_PATH_NAME);
 
 
 

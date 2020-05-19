@@ -110,6 +110,16 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class, 'user_id', 'id');
     }
 
+    public function informs()
+    {
+        return $this->hasMany(Report::class, 'informer_id', 'id');
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'offender_id', 'id');
+    }
+
     /*
      *******************************************************************************************************************
      Attributes

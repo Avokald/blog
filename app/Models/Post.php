@@ -104,6 +104,11 @@ class Post extends Model
         return $this->hasMany(Comment::class, 'post_id', 'id');
     }
 
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'post_id', 'id');
+    }
+
 
     /*
     ********************************************************************************************************************
