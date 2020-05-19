@@ -29,9 +29,6 @@ class ReportController extends Controller
     const STORE_PATH_NAME = 'reports.store';
     public function store(Request $request)
     {
-//        $report = Report::create([
-//            'content_id' => $request['post_id'],
-//        ]);
         $user = $request->user();
 
         if ($user === null) {

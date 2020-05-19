@@ -17,6 +17,8 @@ class Report extends Model
     protected $fillable = [
         'post_id',
         'comment_id',
+        'offender_id',
+        'informer_id',
     ];
 
     public function post()

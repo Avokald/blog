@@ -18,8 +18,8 @@ class CreateReportsTable extends Migration
 
             $table->unsignedTinyInteger('status')->default(\App\Models\Report::STATUS_SUBMITTED);
             $table->bigInteger('post_id');
-            $table->bigInteger('comment_id');
-            $table->bigInteger('offender_id');
+            $table->bigInteger('comment_id')->nullable();
+            $table->bigInteger('offender_id')->nullable();
             $table->bigInteger('informer_id');
 
             $table->timestamps();

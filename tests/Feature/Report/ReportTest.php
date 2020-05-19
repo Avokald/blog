@@ -23,11 +23,15 @@ class ReportTest extends TestCase
             'content' => 'Illegal content',
         ]);
 
-        $this->actingAs($user)
+        $response = $this->actingAs($user)
             ->postJson(route(ReportController::STORE_PATH_NAME), [
                 'post_id' => $post->id,
             ]);
 
-        $this->assertDatabaseHas('reports', [$post->id, $user->id, Report::STATUS_SUBMITTED]);
+        $this->assertDatabaseHas('reports', [
+            'post_id' => $post->id,
+            'informer_id' => $user->id,
+            'status' => Report::STATUS_SUBMITTED,
+        ]);
     }
 }
