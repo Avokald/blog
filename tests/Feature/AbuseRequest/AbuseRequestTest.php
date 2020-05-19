@@ -3,14 +3,14 @@
 namespace Tests\Feature;
 
 
-use App\Http\Controllers\Web\ReportController;
+use App\Http\Controllers\Web\AbuseRequestController;
+use App\Models\AbuseRequest;
 use App\Models\Post;
-use App\Models\Report;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ReportTest extends TestCase
+class AbuseRequestTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -24,14 +24,14 @@ class ReportTest extends TestCase
         ]);
 
         $response = $this->actingAs($user)
-            ->postJson(route(ReportController::STORE_PATH_NAME), [
+            ->postJson(route(AbuseRequestController::STORE_PATH_NAME), [
                 'post_id' => $post->id,
             ]);
 
-        $this->assertDatabaseHas('reports', [
+        $this->assertDatabaseHas('abuse_requests', [
             'post_id' => $post->id,
-            'informer_id' => $user->id,
-            'status' => Report::STATUS_SUBMITTED,
+            'status' => AbuseRequest::STATUS_SUBMITTED,
+            'user_id' => $user->id,
         ]);
     }
 }

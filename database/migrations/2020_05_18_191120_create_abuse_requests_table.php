@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReportsTable extends Migration
+class CreateAbuseRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateReportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reports', function (Blueprint $table) {
+        Schema::create('abuse_requests', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedTinyInteger('status')->default(\App\Models\Report::STATUS_SUBMITTED);
+            $table->unsignedTinyInteger('status')->default(\App\Models\AbuseRequest::STATUS_SUBMITTED);
             $table->bigInteger('post_id');
             $table->bigInteger('comment_id')->nullable();
-            $table->bigInteger('offender_id')->nullable();
-            $table->bigInteger('informer_id');
+            $table->bigInteger('target_id')->nullable();
+            $table->bigInteger('user_id');
 
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ class CreateReportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reports');
+        Schema::dropIfExists('abuse_requests');
     }
 }

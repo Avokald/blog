@@ -87,8 +87,8 @@ Route::get('/tags/{tag}/{timeframe?}', 'Web\TagController@show')
 
 
 // Reports
-Route::post('/reports', 'Web\ReportController@store')
-    ->name(\App\Http\Controllers\Web\ReportController::STORE_PATH_NAME);
+Route::post('/abuse_requests', 'Web\AbuseRequestController@store')
+    ->name(\App\Http\Controllers\Web\AbuseRequestController::STORE_PATH_NAME);
 
 
 

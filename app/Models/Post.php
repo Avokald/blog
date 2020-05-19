@@ -104,9 +104,9 @@ class Post extends Model
         return $this->hasMany(Comment::class, 'post_id', 'id');
     }
 
-    public function reports()
+    public function abuse_requests()
     {
-        return $this->hasMany(Report::class, 'post_id', 'id');
+        return $this->hasMany(AbuseRequest::class, 'post_id', 'id');
     }
 
 

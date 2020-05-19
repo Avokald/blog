@@ -112,12 +112,12 @@ class User extends Authenticatable
 
     public function informs()
     {
-        return $this->hasMany(Report::class, 'informer_id', 'id');
+        return $this->hasMany(AbuseRequest::class, 'user_id', 'id');
     }
 
-    public function reports()
+    public function abuses()
     {
-        return $this->hasMany(Report::class, 'offender_id', 'id');
+        return $this->hasMany(AbuseRequest::class, 'target_id', 'id');
     }
 
     /*

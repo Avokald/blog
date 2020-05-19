@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\AbuseRequest;
+use App\Models\Comment;
 use App\Models\Post;
-use App\Models\Report;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ReportController extends Controller
+class AbuseRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,13 +37,20 @@ class ReportController extends Controller
         }
 
         $post = Post::findOrFail($request['post_id']);
+        $targetUser = $post->author;
+        $comment = null;
+
+        if (isset($request['comment_id']) && $request['comment_id']) {
+            $comment = Comment::findOrFail($request['comment_id']);
+            $targetUser = $comment->author;
+        }
 
 
-        Report::create([
+        AbuseRequest::create([
             'post_id' => $post->id,
-            'comment_id' => $request['comment_id'] ?? null,
-            'offender_id' => $request['user_id'] ?? null,
-            'informer_id' => $user->id,
+            'comment_id' => $comment,
+            'target_id' => $targetUser->id,
+            'user_id' => $user->id,
         ]);
 
         return response()
@@ -54,10 +62,10 @@ class ReportController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Report  $report
+     * @param  \App\Models\AbuseRequest  $report
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Report $report)
+    public function update(Request $request, AbuseRequest $report)
     {
         //
     }

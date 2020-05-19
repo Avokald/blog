@@ -46,9 +46,9 @@ class Comment extends Model
         return $this->belongsTo(Comment::class, 'reply_id', 'id');
     }
 
-    public function reports()
+    public function abuse_requests()
     {
-        return $this->hasMany(Report::class, 'comment_id', 'id');
+        return $this->hasMany(AbuseRequest::class, 'comment_id', 'id');
     }
 
 

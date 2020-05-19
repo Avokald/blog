@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Report extends Model
+class AbuseRequest extends Model
 {
     const STATUS_SUBMITTED = 1;
     const STATUS_FULFILLED = 2;
@@ -17,8 +17,8 @@ class Report extends Model
     protected $fillable = [
         'post_id',
         'comment_id',
-        'offender_id',
-        'informer_id',
+        'target_id',
+        'user_id',
     ];
 
     public function post()
@@ -33,11 +33,11 @@ class Report extends Model
 
     public function target()
     {
-        return $this->belongsTo(User::class, 'offender_id', 'id');
+        return $this->belongsTo(User::class, 'target_id', 'id');
     }
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'informer_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 }
