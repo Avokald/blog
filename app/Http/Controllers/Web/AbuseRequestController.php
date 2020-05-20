@@ -38,17 +38,19 @@ class AbuseRequestController extends Controller
 
         $post = Post::findOrFail($request['post_id']);
         $targetUser = $post->author;
-        $comment = null;
+        $commentId = null;
 
         if (isset($request['comment_id']) && $request['comment_id']) {
             $comment = Comment::findOrFail($request['comment_id']);
             $targetUser = $comment->author;
+            $post = $comment->post;
+            $commentId = $comment->id;
         }
 
 
         AbuseRequest::create([
             'post_id' => $post->id,
-            'comment_id' => $comment,
+            'comment_id' => $commentId,
             'target_id' => $targetUser->id,
             'user_id' => $user->id,
         ]);
