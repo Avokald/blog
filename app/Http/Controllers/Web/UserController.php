@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class UserController extends Controller
@@ -54,7 +53,6 @@ class UserController extends Controller
         $userObserved = User::withRelationOrderedBy('posts', 'created_at', 'DESC')
             ->with('pinned_post')
             ->findOrFail($profileExploded[0]);
-        $currentUser = request()->user();
 
         return [
             'user' => $userObserved,
@@ -67,13 +65,6 @@ class UserController extends Controller
     {
         $profileExploded = explode('-', $profile, 2);
         $userObserved = User::withRelationOrderedBy('drafts', 'created_at', 'DESC')->findOrFail($profileExploded[0]);
-        $currentUser = request()->user();
-
-        // If profile is not public or not their own profile
-        // then return 404
-        if (!($currentUser && ($currentUser->id === $userObserved->id))) {
-            return abort(Response::HTTP_FORBIDDEN);
-        }
 
         return [
             'drafts' => $userObserved->drafts,

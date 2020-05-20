@@ -17,7 +17,10 @@ class UserProfileSlugRedirect
     public function handle($request, Closure $next)
     {
         $routeName = $request->route()->getAction('as');
+
+        // Stored user object from previous middlewares
         $userObserved = $request->attributes->get('userObserved');
+
         $sluggedId = $request->route('sluggedId');
         $sluggedIdExploded = explode('-', $sluggedId, 2);
 

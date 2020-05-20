@@ -62,6 +62,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user.profile.redirect' => \App\Http\Middleware\UserProfileSlugRedirect::class,
+        'user.profile.restricted' => \App\Http\Middleware\UserProfileRestricted::class,
     ];
 
     /**
@@ -80,5 +81,6 @@ class Kernel extends HttpKernel
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
         \Illuminate\Auth\Middleware\Authorize::class,
         \App\Http\Middleware\UserProfileSlugRedirect::class,
+        \App\Http\Middleware\UserProfileRestricted::class,
     ];
 }
