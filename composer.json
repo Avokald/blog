@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.2",
         "cviebrock/eloquent-sluggable": "6.*",
+        "darkaonline/l5-swagger": "6.*",
         "fideloper/proxy": "^4.0",
         "itsgoingd/clockwork": "^4.1",
         "laravel/framework": "^6.2",
