@@ -56,12 +56,6 @@ class UserController extends Controller
             ->findOrFail($profileExploded[0]);
         $currentUser = request()->user();
 
-        // If profile is not public or not their own profile
-        // then return 404
-        if (!$userObserved->public && !($currentUser && ($currentUser->id === $userObserved->id))) {
-            return abort(Response::HTTP_NOT_FOUND);
-        }
-
         return [
             'user' => $userObserved,
             'time' => microtime(true) - LARAVEL_START,

@@ -25,7 +25,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'public',
         'slug',
         'image',
         'banner',
@@ -42,7 +41,6 @@ class User extends Authenticatable
         'email',
         'email_verified_at',
         'password',
-        'public',
         'remember_token',
     ];
 
