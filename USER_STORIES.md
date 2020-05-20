@@ -97,7 +97,7 @@
 - [x] List of previous posts
 - [ ] Previous posts are orderable
 - [x] List of drafts
-- [ ] List of comments
+- [x] List of comments
 - [ ] Comments are orderable
 - [x] List of bookmarks - posts (private)
 - [ ] List of bookmarks - comments (private)

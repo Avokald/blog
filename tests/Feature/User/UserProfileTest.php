@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Controllers\Web\UserController;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -201,6 +202,43 @@ class UserProfileTest extends TestCase
         $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->slugged_id));
 
         $this->assertDontSeeTextForCommonDataFromModel($response, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
+    }
+
+    public function test_user_profile_displays_comments()
+    {
+        $this->seed(\PostSeeder::class);
+        $this->seed(\UserSeeder::class);
+        $this->seed(\CommentSeeder::class);
+
+        $user = $user = factory(User::class)->create();
+        $data = [
+            'content' => [],
+            'post_title' => [],
+            'created_at' => [],
+        ];
+        $posts = factory(Post::class, 3)->create([
+            'status' => Post::STATUS_PUBLISHED,
+            'user_id' => $user->id,
+        ]);
+
+        foreach ($posts as $key => $post) {
+            $comment = factory(Comment::class)->create([
+                'user_id' => $user->id,
+                'post_id' => $post->id,
+            ]);
+            $comment->created_at = time() - ($key * 100);
+            $comment->save();
+
+            $data['content'][] = $comment->content;
+            $data['post_title'][] = $post->title;
+            $data['created_at'][] = $comment->created_at;
+        }
+
+        $response = $this->get(route(UserController::COMMENTS_PATH_NAME, $user->slugged_id));
+
+        $response->assertStatus(Response::HTTP_OK);
+
+        $this->assertSeeTextInOrderForCommonData($response, $data, ['content', 'created_at']);
     }
 
 

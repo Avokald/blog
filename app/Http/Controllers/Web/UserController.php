@@ -99,6 +99,18 @@ class UserController extends Controller
         ];
     }
 
+    const COMMENTS_PATH_NAME = 'user.profile.comments';
+    public function comments(string $profile)
+    {
+        $profileExploded = explode('-', $profile, 2);
+        $userObserved = User::withRelationOrderedBy('comments', 'created_at', 'DESC')->findOrFail($profileExploded[0]);
+
+        return [
+            'comments' => $userObserved->comments,
+            'time' => microtime(true) - LARAVEL_START,
+        ];
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
