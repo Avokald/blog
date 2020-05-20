@@ -62,12 +62,6 @@ class UserController extends Controller
             return abort(Response::HTTP_NOT_FOUND);
         }
 
-        // Redirect if slug is not provided or incorrect
-        // Must be run later so the would be no redirect when profile is private
-        if (!isset($profileExploded[1], $userObserved->slug) || ($profileExploded[1] !== $userObserved->slug)) {
-            return redirect($userObserved->getPersonalPageLink());
-        }
-
         return [
             'user' => $userObserved,
             'time' => microtime(true) - LARAVEL_START,
@@ -85,12 +79,6 @@ class UserController extends Controller
         // then return 404
         if (!($currentUser && ($currentUser->id === $userObserved->id))) {
             return abort(Response::HTTP_FORBIDDEN);
-        }
-
-        // Redirect if slug is not provided or incorrect
-        // Must be run later so the would be no redirect when profile is private
-        if (!isset($profileExploded[1], $userObserved->slug) || ($profileExploded[1] !== $userObserved->slug)) {
-            return redirect($userObserved->getPersonalPageLink());
         }
 
         return [

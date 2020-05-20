@@ -20,18 +20,34 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-// Users
-Route::get('/u/{profile}', 'Web\UserController@show')
-    ->name(\App\Http\Controllers\Web\UserController::SHOW_PATH_NAME);
+// User profile
+Route::group(['middleware' => [
+    \App\Http\Middleware\UserProfileSlugRedirect::class,
+]], function () {
+    Route::get('/u/{profile}', 'Web\UserController@show')
+        ->name(\App\Http\Controllers\Web\UserController::SHOW_PATH_NAME);
 
-Route::get('/u/{profile}/drafts', 'Web\UserController@drafts')
-    ->name(\App\Http\Controllers\Web\UserController::DRAFTS_PATH_NAME);
+    Route::get('/u/{profile}/comments', 'Web\UserController@comments')
+        ->name(\App\Http\Controllers\Web\UserController::COMMENTS_PATH_NAME);
+
+
+    // Private tabs
+    Route::get('/u/{profile}/drafts', 'Web\UserController@drafts')
+        ->name(\App\Http\Controllers\Web\UserController::DRAFTS_PATH_NAME);
+
+    Route::get('/u/{profile}/bookmarks', 'Web\BookmarkController@index')
+        ->name(\App\Http\Controllers\Web\BookmarkController::INDEX_PATH_NAME);
+
+    Route::get('/u/{profile}/post_likes', 'Web\PostLikeController@index')
+        ->name(\App\Http\Controllers\Web\PostLikeController::INDEX_PATH_NAME);
+
+    Route::get('/u/{profile}/post_dislikes', 'Web\PostDislikeController@index')
+        ->name(\App\Http\Controllers\Web\PostDislikeController::INDEX_PATH_NAME);
+});
+
 
 
 // Comments
-Route::get('/u/{profile}/comments', 'Web\UserController@comments')
-    ->name(\App\Http\Controllers\Web\UserController::COMMENTS_PATH_NAME);
-
 Route::post('/comments/{postId}/store', 'Web\CommentController@store')
     ->name(\App\Http\Controllers\Web\CommentController::STORE_PATH_NAME);
 
@@ -40,9 +56,6 @@ Route::post('/comments/{postId}/store', 'Web\CommentController@store')
 
 
 // Bookmarks
-Route::get('/u/{profile}/bookmarks', 'Web\BookmarkController@index')
-    ->name(\App\Http\Controllers\Web\BookmarkController::INDEX_PATH_NAME);
-
 // FIXME correct rest path names and request types
 Route::post('/bookmarks/store', 'Web\BookmarkController@store')
     ->name(\App\Http\Controllers\Web\BookmarkController::STORE_PATH_NAME);
@@ -52,9 +65,6 @@ Route::post('/bookmarks/destroy/', 'Web\BookmarkController@destroy')
 
 
 // Likes
-Route::get('/u/{profile}/post_likes', 'Web\PostLikeController@index')
-    ->name(\App\Http\Controllers\Web\PostLikeController::INDEX_PATH_NAME);
-
 Route::post('/post_likes/store', 'Web\PostLikeController@store')
     ->name(\App\Http\Controllers\Web\PostLikeController::STORE_PATH_NAME);
 
@@ -63,9 +73,6 @@ Route::post('/post_likes/destroy/', 'Web\PostLikeController@destroy')
 
 
 // Dislikes
-Route::get('/u/{profile}/post_dislikes', 'Web\PostDislikeController@index')
-    ->name(\App\Http\Controllers\Web\PostDislikeController::INDEX_PATH_NAME);
-
 Route::post('/post_dislikes/store', 'Web\PostDislikeController@store')
     ->name(\App\Http\Controllers\Web\PostDislikeController::STORE_PATH_NAME);
 

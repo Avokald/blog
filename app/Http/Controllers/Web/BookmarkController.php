@@ -28,11 +28,6 @@ class BookmarkController extends Controller
             return abort(Response::HTTP_FORBIDDEN);
         }
 
-        // Redirect if slug is not provided or incorrect
-        if (!isset($profileExploded[1], $userObserved->slug) || ($profileExploded[1] !== $userObserved->slug)) {
-            return redirect(route(static::INDEX_PATH_NAME, $userObserved->slugged_id));
-        }
-
         return [
             'bookmarks' => $userObserved->bookmarks,
             'time' => microtime(true) - LARAVEL_START,

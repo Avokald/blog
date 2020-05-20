@@ -27,12 +27,6 @@ class PostDislikeController extends Controller
             return abort(Response::HTTP_FORBIDDEN);
         }
 
-        // Redirect if slug is not provided or incorrect
-        // Must be run later so the would be no redirect when profile is private
-        if (!isset($profileExploded[1], $userObserved->slug) || ($profileExploded[1] !== $userObserved->slug)) {
-            return redirect(route(static::INDEX_PATH_NAME, $userObserved->slugged_id));
-        }
-
         return [
             'post_dislikes' => $userObserved->post_dislikes,
             'time' => microtime(true) - LARAVEL_START,
