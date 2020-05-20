@@ -35,6 +35,13 @@ class AbuseRequestTest extends TestCase
             'post_id' => $post->id,
         ]);
 
+
+        $response = $this->postJson(route(AbuseRequestController::STORE_PATH_NAME), [
+            'post_id' => $post->id,
+        ]);
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
+
         $response = $this->actingAs($user)
             ->postJson(route(AbuseRequestController::STORE_PATH_NAME), [
                 'post_id' => $post->id,
@@ -49,6 +56,34 @@ class AbuseRequestTest extends TestCase
             'status' => AbuseRequest::STATUS_SUBMITTED,
             'user_id' => $user->id,
         ]);
+    }
+
+    public function test_comment_abuse_request_can_be_submitted()
+    {
+        $this->seed(\UserSeeder::class);
+        $user = factory(User::class)->create();
+        $postAuthor = factory(User::class)->create();
+        $commentAuthor = factory(User::class)->create();
+
+        $post = factory(Post::class)->create([
+            'title' => 'Illegal title',
+            'content' => 'Illegal content',
+            'user_id' => $postAuthor->id,
+        ]);
+
+        $comment = factory(Comment::class)->create([
+            'content' => 'comment content',
+            'user_id' => $commentAuthor->id,
+            'post_id' => $post->id,
+        ]);
+
+
+        $response = $this->postJson(route(AbuseRequestController::STORE_PATH_NAME), [
+            'post_id' => $post->id,
+            'comment_id' => $comment->id,
+        ]);
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
 
         $response = $this->actingAs($user)
             ->postJson(route(AbuseRequestController::STORE_PATH_NAME), [
@@ -65,39 +100,6 @@ class AbuseRequestTest extends TestCase
             'status' => AbuseRequest::STATUS_SUBMITTED,
             'user_id' => $user->id,
         ]);
-    }
-
-    public function test_abuse_request_is_denied_if_unregistered_user()
-    {
-        $this->seed(\UserSeeder::class);
-        $postAuthor = factory(User::class)->create();
-        $commentAuthor = factory(User::class)->create();
-
-        $post = factory(Post::class)->create([
-            'title' => 'Illegal title',
-            'content' => 'Illegal content',
-            'user_id' => $postAuthor->id,
-        ]);
-
-        $comment = factory(Comment::class)->create([
-            'content' => 'comment content',
-            'user_id' => $commentAuthor->id,
-            'post_id' => $post->id,
-        ]);
-
-        $response = $this->postJson(route(AbuseRequestController::STORE_PATH_NAME), [
-            'post_id' => $post->id,
-        ]);
-
-        $response->assertStatus(Response::HTTP_FORBIDDEN);
-
-
-        $response = $this->postJson(route(AbuseRequestController::STORE_PATH_NAME), [
-            'post_id' => $post->id,
-            'comment_id' => $comment->id,
-        ]);
-
-        $response->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
 }

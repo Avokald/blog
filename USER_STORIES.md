@@ -12,7 +12,7 @@
 - [x] Number of comments
 - [x] Rating
 - [x] Category (name, link, image) (**hidden on category page**)
-- [ ] User can report it
+- [x] User can report it
 - [x] User can bookmark it
 - [x] User can remove bookmark from it
 - [x] User can like or dislike it
@@ -34,15 +34,26 @@
 - [ ] **Number of views**
 - [x] Rating
 - [x] Category (name, link, image)
-- [ ] User can report it
+- [x] User can report it
 - [x] User can bookmark it
 - [x] User can remove bookmark from it
 - [x] User can like or dislike it
 - [ ] **User can share it (vk, facebook, twitter, telegram, ok, email)**
 - [ ]
 
-- [ ] Author can edit post
-- [ ] Author can delete post
+##### Managing
+
+- [ ] User can create new post
+- [ ] Author can edit their post
+- [ ] Author can delete their post
+
+##### Admin / Moderator
+
+- [ ] Can create post
+- [ ] Can edit any post
+- [ ] Can delete any post
+- [ ] Post can be "locked" with no ability to comment on it
+
 
 
 ###### Maybe
@@ -69,7 +80,7 @@
 - [ ] Like it
 - [ ] Dislike it
 - [ ] Bookmark it
-- [ ] Report it
+- [x] Report it
 - [ ] Get permalink to it that returns slice of discussion with all parents and replies to the given comment
 - [ ] Ignore it, or author 
 - [ ] Pin comment on their own post
