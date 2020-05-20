@@ -24,24 +24,24 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => [
     \App\Http\Middleware\UserProfileSlugRedirect::class,
 ]], function () {
-    Route::get('/u/{profile}', 'Web\UserController@show')
+    Route::get('/u/{sluggedId}', 'Web\UserController@show')
         ->name(\App\Http\Controllers\Web\UserController::SHOW_PATH_NAME);
 
-    Route::get('/u/{profile}/comments', 'Web\UserController@comments')
+    Route::get('/u/{sluggedId}/comments', 'Web\UserController@comments')
         ->name(\App\Http\Controllers\Web\UserController::COMMENTS_PATH_NAME);
 
 
     // Private tabs
-    Route::get('/u/{profile}/drafts', 'Web\UserController@drafts')
+    Route::get('/u/{sluggedId}/drafts', 'Web\UserController@drafts')
         ->name(\App\Http\Controllers\Web\UserController::DRAFTS_PATH_NAME);
 
-    Route::get('/u/{profile}/bookmarks', 'Web\BookmarkController@index')
+    Route::get('/u/{sluggedId}/bookmarks', 'Web\BookmarkController@index')
         ->name(\App\Http\Controllers\Web\BookmarkController::INDEX_PATH_NAME);
 
-    Route::get('/u/{profile}/post_likes', 'Web\PostLikeController@index')
+    Route::get('/u/{sluggedId}/post_likes', 'Web\PostLikeController@index')
         ->name(\App\Http\Controllers\Web\PostLikeController::INDEX_PATH_NAME);
 
-    Route::get('/u/{profile}/post_dislikes', 'Web\PostDislikeController@index')
+    Route::get('/u/{sluggedId}/post_dislikes', 'Web\PostDislikeController@index')
         ->name(\App\Http\Controllers\Web\PostDislikeController::INDEX_PATH_NAME);
 });
 

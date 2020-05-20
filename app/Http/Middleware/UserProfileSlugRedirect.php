@@ -18,21 +18,38 @@ class UserProfileSlugRedirect
     {
         $routeName = $request->route()->getAction('as');
         $userObserved = $request->attributes->get('userObserved');
-        $profile = $request->route('profile');
-        $profileExploded = explode('-', $profile, 2);
+        $sluggedId = $request->route('sluggedId');
+        $sluggedIdExploded = explode('-', $sluggedId, 2);
 
 
         if ($userObserved === null) {
-            $userObserved = User::findOrFail($profileExploded[0]);
+            $userObserved = User::findOrFail($sluggedIdExploded[0]);
 
             $request->attributes->add(['userObserved' => $userObserved]);
         }
 
-        // Redirect if slug is not provided or incorrect
-        if (!isset($profileExploded[1], $userObserved->slug) || ($profileExploded[1] !== $userObserved->slug)) {
+        if ($this->isUrlIncorrect($sluggedIdExploded, $userObserved)) {
             return redirect(route($routeName, $userObserved->slugged_id));
         }
 
         return $next($request);
+    }
+
+    /**
+     * Checks if url has both slug and user has slug
+     * if they are not equal returns true
+     *
+     * Can't use User model as sluggable package throws error in middleware test
+     * Illuminate\Contracts\Container\BindingResolutionException:
+     * Target [Illuminate\Contracts\Events\Dispatcher] is not instantiable while building
+     * [Cviebrock\EloquentSluggable\SluggableObserver]
+     *
+     * @param array|null $sluggedIdExploded
+     * @param $user
+     * @return bool
+     */
+    public function isUrlIncorrect(?array $sluggedIdExploded, $user)
+    {
+        return (!isset($sluggedIdExploded[1], $user->slug) || ($sluggedIdExploded[1] !== $user->slug));
     }
 }
