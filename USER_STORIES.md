@@ -38,7 +38,6 @@
 - [x] User can bookmark it
 - [x] User can remove bookmark from it
 - [x] User can like or dislike it
-- [ ] **User can share it (vk, facebook, twitter, telegram, ok, email)**
 - [ ]
 
 ##### Managing
@@ -162,7 +161,7 @@
 - [ ] Rating, bookmarks count, view count and other constantly changed values move to NoSql database (Mongo?)
 - [ ] Editor can make titles and subtitles for table of content
 - [ ] Progress bar for post length
-- [ ]
+- [ ] **User can share post (vk, facebook, twitter, telegram, ok, email)**
 
 ---
 

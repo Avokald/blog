@@ -13,12 +13,12 @@ class AbuseRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
      */
+    const INDEX_PATH_NAME = 'abuse_requests.index';
     public function index()
     {
-        //
+        $abuseRequests = AbuseRequest::with('post')->orderBy('created_at', 'desc')->limit(10)->get();
+        return $abuseRequests;
     }
 
     /**
@@ -27,7 +27,7 @@ class AbuseRequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    const STORE_PATH_NAME = 'reports.store';
+    const STORE_PATH_NAME = 'abuse_requests.store';
     public function store(Request $request)
     {
         $user = $request->user();

@@ -100,7 +100,10 @@ Route::get('/tags/{tag}/{timeframe?}', 'Web\TagController@show')
     ->name(\App\Http\Controllers\Web\TagController::SHOW_PATH_NAME);
 
 
-// Reports
+// Abuse requests
+Route::get('/abuse_requests', 'Web\AbuseRequestController@index')
+    ->name(\App\Http\Controllers\Web\AbuseRequestController::INDEX_PATH_NAME);
+
 Route::post('/abuse_requests', 'Web\AbuseRequestController@store')
     ->name(\App\Http\Controllers\Web\AbuseRequestController::STORE_PATH_NAME);
 
