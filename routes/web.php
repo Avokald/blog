@@ -33,6 +33,7 @@ Route::group(['middleware' => [
 
     // Private
     Route::group(['middleware' => [
+        \App\Http\Middleware\UserLoggedIn::class,
         \App\Http\Middleware\UserProfileRestricted::class,
     ]], function () {
         Route::get('/u/{sluggedId}/drafts', 'Web\UserController@drafts')

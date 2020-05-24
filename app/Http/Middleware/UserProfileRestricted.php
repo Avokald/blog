@@ -31,8 +31,8 @@ class UserProfileRestricted
             $request->attributes->add(['userObserved' => $userObserved]);
         }
 
-        // If not their own profile then return 403
-        if (!($currentUser && ($currentUser->id === $userObserved->id))) {
+        // If not user's own profile then return 403
+        if ($currentUser->id !== $userObserved->id) {
             return abort(Response::HTTP_FORBIDDEN);
         }
 
