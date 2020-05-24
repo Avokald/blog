@@ -50,6 +50,19 @@ Route::group(['middleware' => [
 });
 
 
+// Posts
+Route::get('/a/{article}', 'Web\PostController@show')
+    ->name(\App\Http\Controllers\Web\PostController::SHOW_PATH_NAME);
+
+Route::post('/a', 'Web\PostController@store')
+    ->name(\App\Http\Controllers\Web\PostController::STORE_PATH_NAME);
+
+Route::get('/new', 'Web\PostController@newArticles')
+    ->name(\App\Http\Controllers\Web\PostController::NEW_PATH_NAME);
+
+Route::get('/top/{timeframe?}/', 'Web\PostController@topArticles')
+    ->name(\App\Http\Controllers\Web\PostController::TOP_PATH_NAME);
+
 
 // Comments
 Route::post('/comments/{postId}/store', 'Web\CommentController@store')
@@ -82,17 +95,6 @@ Route::post('/post_dislikes/store', 'Web\PostDislikeController@store')
 
 Route::post('/post_dislikes/destroy/', 'Web\PostDislikeController@destroy')
     ->name(\App\Http\Controllers\Web\PostDislikeController::DESTROY_PATH_NAME);
-
-
-// Posts
-Route::get('/a/{article}', 'Web\PostController@show')
-    ->name(\App\Http\Controllers\Web\PostController::SHOW_PATH_NAME);
-
-Route::get('/new', 'Web\PostController@newArticles')
-    ->name(\App\Http\Controllers\Web\PostController::NEW_PATH_NAME);
-
-Route::get('/top/{timeframe?}/', 'Web\PostController@topArticles')
-    ->name(\App\Http\Controllers\Web\PostController::TOP_PATH_NAME);
 
 
 // Tags

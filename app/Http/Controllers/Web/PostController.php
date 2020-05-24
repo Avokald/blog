@@ -96,9 +96,26 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+    const STORE_PATH_NAME = 'posts.store';
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+
+        if ($user === null) {
+            return abort(Response::HTTP_FORBIDDEN);
+        }
+
+        $post = Post::create([
+            'title' => $request->get('title'),
+            'excerpt' => $request->get('excerpt'),
+            'content' => $request->get('content'),
+            'status' => $request->get('status'),
+            'user_id' => $user->id,
+            'category_id' => $request->get('category_id'),
+            'tags' => $request->get('tags'),
+        ]);
+
+        return response()->json([])->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
