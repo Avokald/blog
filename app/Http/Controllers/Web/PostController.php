@@ -105,6 +105,14 @@ class PostController extends Controller
             return abort(Response::HTTP_FORBIDDEN);
         }
 
+        $request->validate([
+            'title' => 'required|max:255',
+            'excerpt' => 'max:255',
+            'content' => 'required',
+            'status' => 'required',
+            'category_id' => 'required',
+        ]);
+
         $post = Post::create([
             'title' => $request->get('title'),
             'excerpt' => $request->get('excerpt'),
