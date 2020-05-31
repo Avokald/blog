@@ -24,6 +24,7 @@ class Post extends Model
         'excerpt',
         'content',
         'status',
+        'view_count',
         'json_content',
         'user_id',
         'category_id',
@@ -35,6 +36,7 @@ class Post extends Model
         'status' => 'integer',
         'user_id' => 'integer',
         'category_id' => 'integer',
+        'view_count' => 'integer',
         'tags' => 'array',
     ];
 

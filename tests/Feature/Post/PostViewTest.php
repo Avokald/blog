@@ -129,4 +129,16 @@ class PostViewTest extends TestCase
 
         $response->assertSeeText($userCount + 1);
     }
+
+    public function test_post_has_view_count()
+    {
+        $viewCount = 5;
+        $post = factory(Post::class)->create([
+            'view_count' => $viewCount,
+        ]);
+
+        $response = $this->get(route(PostController::SHOW_PATH_NAME, $post->slugged_id));
+
+        $response->assertSeeText('"view_count":' . $viewCount);
+    }
 }

@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->text('excerpt')->nullable(); // 350 max
             $table->text('content')->nullable();
             $table->json('json_content')->nullable();
-
+            $table->unsignedBigInteger('view_count')->default(0);
             $table->unsignedSmallInteger('status')->default(Post::STATUS_DRAFT);
 
             $table->bigInteger('user_id');
