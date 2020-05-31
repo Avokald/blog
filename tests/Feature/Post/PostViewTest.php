@@ -139,6 +139,6 @@ class PostViewTest extends TestCase
 
         $response = $this->get(route(PostController::SHOW_PATH_NAME, $post->slugged_id));
 
-        $response->assertSeeText('"view_count":' . $viewCount);
+        $response->assertSeeText('"view_count":' . ($viewCount + 1));
     }
 }

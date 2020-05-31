@@ -156,6 +156,9 @@ class PostController extends Controller
             return redirect($article->getShowLink());
         }
 
+        $article->view_count += 1;
+        $article->save();
+
         return [
             'article' => $article,
         ];
