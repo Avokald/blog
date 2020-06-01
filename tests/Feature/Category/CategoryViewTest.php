@@ -40,19 +40,23 @@ class CategoryViewTest extends TestCase
         $notDisplayedData = $this->initializeCommonData(PostListTest::DATA_FIELDS_FOR_CHECK);
 
         for ($i = 5; $i > 0; $i--) {
-            $post = factory(Post::class)->create([
+            $post = factory(Post::class)->make([
                 'category_id' => $category->id,
-                'created_at' => time() + ($i * 10),
             ]);
+            $post->created_at = time() + ($i * 10);
+            $post->save();
+
             $this->saveCommonData($postsData, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
         }
 
         for ($i = 10; $i > 5; $i--) {
-            $post = factory(Post::class)->create([
+            $post = factory(Post::class)->make([
                 'status' => Post::STATUS_DRAFT,
                 'category_id' => $category->id,
-                'created_at' => time() + ($i * 100),
             ]);
+            $post->created_at = time() + ($i * 100);
+            $post->save();
+
             $this->saveCommonData($notDisplayedData, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
         }
 

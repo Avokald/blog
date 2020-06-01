@@ -29,7 +29,6 @@ class Post extends Model
         'user_id',
         'category_id',
         'tags',
-        'created_at',
     ];
 
     protected $casts = [

@@ -118,9 +118,10 @@ class UserBookmarkTest extends TestCase
 
     public function test_post_can_be_removed_from_bookmarks()
     {
-        $post = factory(Post::class)->create([
-            'created_at' => time() - 10000,
-        ]);
+        $post = factory(Post::class)->make();
+        $post->created_at = time() - 10000;
+        $post->save();
+
         $user = factory(User::class)->create();
 
         Bookmark::create([

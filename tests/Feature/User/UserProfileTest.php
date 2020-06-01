@@ -71,11 +71,12 @@ class UserProfileTest extends TestCase
         $data = $this->initializeCommonData(PostListTest::DATA_FIELDS_FOR_CHECK);
 
         for ($i = 0; $i < 5; $i++) {
-            $post = factory(Post::class)->create([
+            $post = factory(Post::class)->make([
                 'status' => Post::STATUS_PUBLISHED,
                 'user_id' => $user->id,
-                'created_at' => time() - $i * 100,
             ]);
+            $post->created_at = time() - $i * 100;
+            $post->save();
 
             $this->saveCommonData($data, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
         }
@@ -93,11 +94,12 @@ class UserProfileTest extends TestCase
         $data = $this->initializeCommonData(PostListTest::DATA_FIELDS_FOR_CHECK);
 
         for ($i = 0; $i < 5; $i++) {
-            $post = factory(Post::class)->create([
+            $post = factory(Post::class)->make([
                 'status' => Post::STATUS_DRAFT,
                 'user_id' => $user->id,
-                'created_at' => time() - $i * 100,
             ]);
+            $post->created_at = time() - $i * 100;
+            $post->save();
 
             $this->saveCommonData($data, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
         }
@@ -121,11 +123,12 @@ class UserProfileTest extends TestCase
         $data = $this->initializeCommonData(PostListTest::DATA_FIELDS_FOR_CHECK);
 
         for ($i = 0; $i < 5; $i++) {
-            $post = factory(Post::class)->create([
+            $post = factory(Post::class)->make([
                 'status' => Post::STATUS_DRAFT,
                 'user_id' => $user->id,
-                'created_at' => time() - $i * 100,
             ]);
+            $post->created_at = time() - $i * 100;
+            $post->save();
 
             $this->saveCommonData($data, $post, PostListTest::DATA_FIELDS_FOR_CHECK);
         }
@@ -144,7 +147,6 @@ class UserProfileTest extends TestCase
             'status' => Post::STATUS_PUBLISHED,
             'user_id' => $user->id,
         ]);
-
         $user->pinned_post_id = $post->id;
         $user->save();
 

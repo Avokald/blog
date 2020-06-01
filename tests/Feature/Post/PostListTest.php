@@ -26,9 +26,9 @@ class PostListTest extends TestCase
         $postsData = $this->initializeCommonData();
 
         for ($i = 4; $i > 0; $i--) {
-            $post = factory(Post::class)->create([
-                'created_at' => time() + ($i * 10),
-            ]);
+            $post = factory(Post::class)->make();
+            $post->created_at = time() + ($i * 10);
+            $post->save();
 
             $this->saveCommonData($postsData, $post);
         }

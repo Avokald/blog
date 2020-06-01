@@ -42,19 +42,22 @@ class TagViewTest extends TestCase
         $notDisplayedData = $this->initializeCommonData($postCommonData);
 
         for ($i = 5; $i > 0; $i--) {
-            $post = factory(Post::class)->create([
+            $post = factory(Post::class)->make([
                 'content' =>  $this->faker->text . '#' . $tag->title . ' ' . $this->faker->text,
-                'created_at' => time() + ($i * 10),
             ]);
+            $post->created_at = time() + ($i * 10);
+            $post->save();
+
             $this->saveCommonData($postsData, $post, $postCommonData);
         }
 
         for ($i = 10; $i > 5; $i--) {
-            $post = factory(Post::class)->create([
+            $post = factory(Post::class)->make([
                 'content' => $this->faker->text . '#' . $tag->title . ' ' . $this->faker->text,
                 'status' => Post::STATUS_DRAFT,
-                'created_at' => time() + ($i * 100),
             ]);
+            $post->created_at = time() + ($i * 100);
+            $post->save();
 
             $this->saveCommonData($notDisplayedData, $post, $postCommonData);
         }
