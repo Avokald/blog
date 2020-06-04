@@ -18,8 +18,9 @@ class PostList extends Component {
                             <PostListElement key={post.id}
                                              title={post.title}
                                              excerpt={post.excerpt}
-                                             likes={post.like_count}
-                                             bookmarks={post.bookmark_count}
+                                             rating={post.rating}
+                                             bookmarks_count={post.bookmarks_count}
+                                             comments_count={post.comments_count}
                                              created_at={post.created_at}
                             />
                         )
@@ -33,14 +34,15 @@ class PostList extends Component {
 const PostListElement = (props) => {
     return (
         <div>
-            <h3>{props.title}</h3>
-            <p>{props.excerpt}</p>
-            <p>{props.created_at}</p>
+            <h3>Title: {props.title}</h3>
+            <p>Excerpt: {props.excerpt}</p>
+            <p>Created at: {props.created_at}</p>
             <p>Like</p>
-            <p>{props.likes}</p>
+            <p>Rating: {props.rating}</p>
             <p>Dislike</p>
             <p>Bookmark</p>
-            <p>{props.bookmark_count}</p>
+            <p>Bookmarks count: {props.bookmarks_count}</p>
+            <p>Comments count: {props.comments_count}</p>
         </div>
     )
 };
