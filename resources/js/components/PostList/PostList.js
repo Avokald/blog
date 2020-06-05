@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
+import urlhelper from '../../helpers/urlhelper';
 
 class PostList extends Component {
     constructor(props) {
@@ -18,13 +19,7 @@ class PostList extends Component {
                 { this.state.posts.map((post) => {
                         return (
                             <PostListElement key={post.id}
-                                             title={post.title}
-                                             link={post.link}
-                                             excerpt={post.excerpt}
-                                             rating={post.rating}
-                                             bookmarks_count={post.bookmarks_count}
-                                             comments_count={post.comments_count}
-                                             created_at={post.created_at}
+                                             post={post}
                             />
                         )
                     })
@@ -36,23 +31,40 @@ class PostList extends Component {
 
 const StyledPostListElement = styled.div`
     border: 1px solid black;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
 `;
 
 const PostListElement = (props) => {
+    let post = props.post;
     return (
         <StyledPostListElement>
-            <div href={props.link}>
-                <h2>Title: {props.title}</h2>
-                <p>Excerpt: {props.excerpt}</p>
-                <p>Created at: {props.created_at}</p>
+            <div href={post.link}>
+                <div className="category">
+                    Category:&nbsp;
+                    <Link to={urlhelper.absoluteToRelativePath(post.category.link)}>
+                        {post.category.title}
+                    </Link>
+                </div>
+                <div className="author">
+                   {/*<img src={post.author.image}*/}
+                        {/*alt={post.author.name}*/}
+                        {/*width="50"*/}
+                        {/*height="50"*/}
+                   {/*/>*/}
+                   Author: &nbsp;
+                    <Link to={post.author.link}>{post.author.name}</Link>
+                </div>
+                <h2>Title: {post.title}</h2>
+                <p>Excerpt: {post.excerpt}</p>
+                <p>Created at: {post.created_at}</p>
                 <p>Like &#x1f44d;</p>
-                <p>Rating: {props.rating}</p>
+                <p>Rating: {post.rating || '-'}</p>
                 <p>Dislike &#128078;</p>
                 <p>Bookmark &#128278;</p>
-                <p>Bookmarks count: {props.bookmarks_count}</p>
-                <p>Comments count: {props.comments_count}</p>
-                <Link to={props.link.replace(/^(?:\/\/|[^/]+)*\//, '')}>Go</Link>
+                <p>Bookmarks count: {post.bookmarks_count}</p>
+                <p>Comments count: {post.comments_count}</p>
+                <p>TODO Options: hide | report | ignore author | ignore category</p>
+                <Link to={urlhelper.absoluteToRelativePath(post.link)}>Go</Link>
             </div>
         </StyledPostListElement>
     )
