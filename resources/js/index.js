@@ -8,7 +8,8 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
 import Sidebar from './components/Sidebar';
-import Header from "./components/Header/Header";
+import Header from "./components/Header";
+import Category from "./components/Category/Category";
 
 
 const StyledApp = styled.div`
@@ -39,6 +40,7 @@ const app = (
                             <Route exact path="/" component={PostList} />
                             <Route exact path="/a/:slugged_id" component={PostView} />
 
+                            <Route exact path="/:category" component={Category} />
                         </Switch>
                     </StyledContent>
                 </StyledMain>
