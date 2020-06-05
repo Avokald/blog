@@ -9,15 +9,17 @@ import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
 const app = (
     <Provider store={store}>
         <BrowserRouter>
-            <div>Hello
+            <div>
                 <div>
                     <Link to="/">Home</Link>
                 </div>
+                <br />
                 <Switch>
                     <Route exact path="/" component={PostList} />
                     <Route exact path="/a/:slugged_id" component={PostView} />
                 </Switch>
             </div>
+            <div style={{ height: "1000px" }}/>
         </BrowserRouter>
     </Provider>
 );
