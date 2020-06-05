@@ -1,10 +1,3 @@
-const helper = {
-   absoluteToRelativePath(path) {
+export function absoluteToRelativePath(path) {
        return path.replace(/^(?:\/\/|[^/]+)*\//, '');
-   }
-
-
-};
-
-
-export default helper;
+}

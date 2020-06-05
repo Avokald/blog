@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
-import urlhelper from '../../helpers/urlhelper';
+import {absoluteToRelativePath} from '../../helpers/urlhelper';
 
 class PostList extends Component {
     constructor(props) {
@@ -41,7 +41,7 @@ const PostListElement = (props) => {
             <div href={post.link}>
                 <div className="category">
                     Category:&nbsp;
-                    <Link to={urlhelper.absoluteToRelativePath(post.category.link)}>
+                    <Link to={absoluteToRelativePath(post.category.link)}>
                         {post.category.title}
                     </Link>
                 </div>
@@ -64,7 +64,7 @@ const PostListElement = (props) => {
                 <p>Bookmarks count: {post.bookmarks_count}</p>
                 <p>Comments count: {post.comments_count}</p>
                 <p>TODO Options: hide | report | ignore author | ignore category</p>
-                <Link to={urlhelper.absoluteToRelativePath(post.link)}>Go</Link>
+                <Link to={absoluteToRelativePath(post.link)}>Go</Link>
             </div>
         </StyledPostListElement>
     )
