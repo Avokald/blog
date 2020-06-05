@@ -54,6 +54,7 @@ class Post extends Model
     // Rating, bookmarks count, views into separate database
     protected $appends = [
         'rating',
+        'link',
     ];
 
     /**
@@ -124,6 +125,16 @@ class Post extends Model
     public function getSluggedIdAttribute()
     {
         return $this->id . '-' . $this->slug;
+    }
+
+    public function getLinkAttribute()
+    {
+        if ($this->slug) {
+            $link = $this->id . '-' . $this->slug;
+        } else {
+            $link = $this->id;
+        }
+        return route(PostController::SHOW_PATH_NAME, $link);
     }
 
     /*
