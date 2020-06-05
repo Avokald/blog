@@ -34,6 +34,17 @@ const initalState = [
         "pinned_post_id": 1,
         "created_at": "2020-05-31 18:53:32",
         "updated_at": "2020-05-31 18:53:32"
+      },
+      "category": {
+          "id": 1,
+          "title": "testcat",
+          "slug": "testcat",
+          "description": "testdesc",
+          "image": "https://lorempixel.com/120/120/?61201",
+          "banner": "https://lorempixel.com/640/160/?19156",
+          "created_at": "2020-05-31 18:53:32",
+          "updated_at": "2020-05-31 18:53:32",
+          "link": "http://0.0.0.0/testcat"
       }
     },
     {
@@ -70,6 +81,17 @@ const initalState = [
         "pinned_post_id": 1,
         "created_at": "2020-05-31 18:53:32",
         "updated_at": "2020-05-31 18:53:32"
+      },
+      "category": {
+        "id": 1,
+        "title": "testcat",
+        "slug": "testcat",
+        "description": "testdesc",
+        "image": "https://lorempixel.com/120/120/?61201",
+        "banner": "https://lorempixel.com/640/160/?19156",
+        "created_at": "2020-05-31 18:53:32",
+        "updated_at": "2020-05-31 18:53:32",
+        "link": "http://0.0.0.0/testcat"
       }
     },
     {
@@ -106,6 +128,17 @@ const initalState = [
         "pinned_post_id": 1,
         "created_at": "2020-05-31 18:53:32",
         "updated_at": "2020-05-31 18:53:32"
+      },
+      "category": {
+        "id": 1,
+        "title": "testcat",
+        "slug": "testcat",
+        "description": "testdesc",
+        "image": "https://lorempixel.com/120/120/?61201",
+        "banner": "https://lorempixel.com/640/160/?19156",
+        "created_at": "2020-05-31 18:53:32",
+        "updated_at": "2020-05-31 18:53:32",
+        "link": "http://0.0.0.0/testcat"
       }
     },
     {
@@ -142,6 +175,17 @@ const initalState = [
         "pinned_post_id": 1,
         "created_at": "2020-05-31 18:53:32",
         "updated_at": "2020-05-31 18:53:32"
+      },
+      "category": {
+        "id": 1,
+        "title": "testcat",
+        "slug": "testcat",
+        "description": "testdesc",
+        "image": "https://lorempixel.com/120/120/?61201",
+        "banner": "https://lorempixel.com/640/160/?19156",
+        "created_at": "2020-05-31 18:53:32",
+        "updated_at": "2020-05-31 18:53:32",
+        "link": "http://0.0.0.0/testcat"
       }
     },
     {
@@ -178,6 +222,17 @@ const initalState = [
         "pinned_post_id": 1,
         "created_at": "2020-05-31 18:53:32",
         "updated_at": "2020-05-31 18:53:32"
+      },
+      "category": {
+        "id": 1,
+        "title": "testcat",
+        "slug": "testcat",
+        "description": "testdesc",
+        "image": "https://lorempixel.com/120/120/?61201",
+        "banner": "https://lorempixel.com/640/160/?19156",
+        "created_at": "2020-05-31 18:53:32",
+        "updated_at": "2020-05-31 18:53:32",
+        "link": "http://0.0.0.0/testcat"
       }
     },
     {
@@ -214,6 +269,17 @@ const initalState = [
         "pinned_post_id": 1,
         "created_at": "2020-05-31 18:53:32",
         "updated_at": "2020-05-31 18:53:32"
+      },
+      "category": {
+        "id": 1,
+        "title": "testcat",
+        "slug": "testcat",
+        "description": "testdesc",
+        "image": "https://lorempixel.com/120/120/?61201",
+        "banner": "https://lorempixel.com/640/160/?19156",
+        "created_at": "2020-05-31 18:53:32",
+        "updated_at": "2020-05-31 18:53:32",
+        "link": "http://0.0.0.0/testcat"
       }
     }
 ];
