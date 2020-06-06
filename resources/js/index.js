@@ -10,6 +10,9 @@ import styled from 'styled-components';
 import Sidebar from './components/Sidebar';
 import Header from "./components/Header";
 import Category from "./components/Category/Category";
+import Categories from "./components/Categories";
+import Tags from "./components/Tag/Tags";
+import Tag from "./components/Tag";
 
 
 const StyledApp = styled.div`
@@ -40,6 +43,10 @@ const app = (
                             <Route exact path="/" component={PostList} />
                             <Route exact path="/a/:slugged_id" component={PostView} />
 
+                            <Route exact path="/tag/:tag" component={Tag} />
+                            <Route exact path="/tags" component={Tags} />
+
+                            <Route exact path="/categories" component={Categories} />
                             <Route exact path="/:category" component={Category} />
                         </Switch>
                     </StyledContent>
