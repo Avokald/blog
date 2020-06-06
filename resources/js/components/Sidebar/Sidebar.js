@@ -15,11 +15,21 @@ class Sidebar extends React.Component {
         return (
             <StyledSidebar className="active">
                 <ul>
-                    <Link to="/new">New</Link>
-                    <Link to="/categories">Categories</Link>
+                    <li>
+                        <Link to="/">Popular</Link>
+                    </li>
+                    <li>
+                        <Link to="/new">New</Link>
+                    </li>
+                    <li>
+                        <Link to="/categories">Categories</Link>
+                    </li>
+                    <li>
+                        <Link to="/tags">Tags</Link>
+                    </li>
                     { categories.map((category) => {
                         return (
-                            <li>
+                            <li key={category.id}>
                                 <Link to={absoluteToRelativePath(category.link)}>
                                     {category.title}
                                 </Link>
