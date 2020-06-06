@@ -1,5 +1,5 @@
 
-const initalState = [
+const initialState = [
   {
       "id": 1,
       "title": "testpost",
@@ -284,7 +284,7 @@ const initalState = [
     }
 ];
 
-const reducer = (state = initalState, action) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
         default:
             return state;
