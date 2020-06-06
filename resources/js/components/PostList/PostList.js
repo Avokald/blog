@@ -52,7 +52,7 @@ const PostListElement = (props) => {
                         {/*height="50"*/}
                    {/*/>*/}
                    Author: &nbsp;
-                    <Link to={post.author.link}>{post.author.name}</Link>
+                    <Link to={post.author.link || '/'}>{post.author.name}</Link>
                 </div>
                 <h2>Title: {post.title}</h2>
                 <p>Excerpt: {post.excerpt}</p>
@@ -71,7 +71,6 @@ const PostListElement = (props) => {
 };
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         posts: state.posts,
     }
