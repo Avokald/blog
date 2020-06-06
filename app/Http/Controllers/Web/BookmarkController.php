@@ -28,10 +28,7 @@ class BookmarkController extends Controller
             return abort(Response::HTTP_FORBIDDEN);
         }
 
-        return [
-            'bookmarks' => $userObserved->bookmarks,
-            'time' => microtime(true) - LARAVEL_START,
-        ];
+        return $userObserved->bookmarks;
     }
 
     /**

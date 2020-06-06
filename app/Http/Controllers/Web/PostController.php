@@ -159,9 +159,7 @@ class PostController extends Controller
         $article->view_count += 1;
         $article->save();
 
-        return [
-            'article' => $article,
-        ];
+        return $article;
     }
 
     /**

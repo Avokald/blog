@@ -72,10 +72,18 @@ class UserController extends Controller
             ->with('pinned_post')
             ->findOrFail($profileExploded[0]);
 
-        return [
-            'user' => $userObserved,
-            'time' => microtime(true) - LARAVEL_START,
-        ];
+        return $userObserved;
+    }
+
+    // TODO
+    const TOP_PATH_NAME = 'users.profile.top';
+    public function top(string $profile, string $timeframe)
+    {
+        $profileExploded = explode('-', $profile, 2);
+
+        $userObserved = User::findOrFail($profileExploded[0]);
+
+        return  $userObserved;
     }
 
     const DRAFTS_PATH_NAME = 'users.profile.drafts';
@@ -84,10 +92,7 @@ class UserController extends Controller
         $profileExploded = explode('-', $profile, 2);
         $userObserved = User::withRelationOrderedBy('drafts', 'created_at', 'DESC')->findOrFail($profileExploded[0]);
 
-        return [
-            'drafts' => $userObserved->drafts,
-            'time' => microtime(true) - LARAVEL_START,
-        ];
+        return $userObserved->drafts;
     }
 
     const COMMENTS_PATH_NAME = 'user.profile.comments';
@@ -96,10 +101,7 @@ class UserController extends Controller
         $profileExploded = explode('-', $profile, 2);
         $userObserved = User::withRelationOrderedBy('comments', 'created_at', 'DESC')->findOrFail($profileExploded[0]);
 
-        return [
-            'comments' => $userObserved->comments,
-            'time' => microtime(true) - LARAVEL_START,
-        ];
+        return $userObserved->comments;
     }
 
     /**

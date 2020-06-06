@@ -27,10 +27,7 @@ class PostLikeController extends Controller
             return abort(Response::HTTP_FORBIDDEN);
         }
 
-        return [
-            'post_likes' => $userObserved->post_likes,
-            'time' => microtime(true) - LARAVEL_START,
-        ];
+        return $userObserved->post_likes;
     }
 
     /**

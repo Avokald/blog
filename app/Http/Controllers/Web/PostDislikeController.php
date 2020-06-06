@@ -27,10 +27,7 @@ class PostDislikeController extends Controller
             return abort(Response::HTTP_FORBIDDEN);
         }
 
-        return [
-            'post_dislikes' => $userObserved->post_dislikes,
-            'time' => microtime(true) - LARAVEL_START,
-        ];
+        return $userObserved->post_dislikes;
     }
 
     /**
