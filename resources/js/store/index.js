@@ -1,5 +1,6 @@
 import {applyMiddleware, compose, createStore} from 'redux';
 import app from '../reducers';
+import thunkMiddleware from 'redux-thunk';
 
 /* eslint-disable no-underscore-dangle */
 // This enables the redux dev tools extension, or does nothing if not installed
@@ -19,7 +20,10 @@ const logger = (store) => {
 
 const store = createStore(
     app,
-    composeEnhancers(applyMiddleware(logger))
+    composeEnhancers(
+        applyMiddleware(logger),
+        applyMiddleware(thunkMiddleware),
+    )
 );
 
 export default store;
