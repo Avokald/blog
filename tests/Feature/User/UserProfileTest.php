@@ -47,23 +47,24 @@ class UserProfileTest extends TestCase
         $response->assertStatus(Response::HTTP_OK);
     }
 
-    public function test_user_profile_redirects_if_only_id_provided_or_slug_incorrect()
-    {
-        $user = factory(User::class)->create();
-
-        $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->id));
-
-        $response->assertStatus(Response::HTTP_FOUND);
-
-        $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->id . '-'));
-
-        $response->assertStatus(Response::HTTP_FOUND);
-
-        $response = $this->get(route(UserController::SHOW_PATH_NAME,
-            $user->id . '-' . $user->slug . random_int(0, 100)));
-
-        $response->assertStatus(Response::HTTP_FOUND);
-    }
+    // TODO Remove
+//    public function test_user_profile_redirects_if_only_id_provided_or_slug_incorrect()
+//    {
+//        $user = factory(User::class)->create();
+//
+//        $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->id));
+//
+//        $response->assertStatus(Response::HTTP_FOUND);
+//
+//        $response = $this->get(route(UserController::SHOW_PATH_NAME, $user->id . '-'));
+//
+//        $response->assertStatus(Response::HTTP_FOUND);
+//
+//        $response = $this->get(route(UserController::SHOW_PATH_NAME,
+//            $user->id . '-' . $user->slug . random_int(0, 100)));
+//
+//        $response->assertStatus(Response::HTTP_FOUND);
+//    }
 
     public function test_user_profile_displays_only_published_posts()
     {
