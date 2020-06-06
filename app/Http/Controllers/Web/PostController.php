@@ -48,7 +48,7 @@ class PostController extends Controller
     const TOP_PATH_YEAR_STRING = 'year';
     const TOP_PATH_ALL_TIME_STRING = 'all';
 
-    public function topArticles(string $timeframe)
+    public function topArticles(?string $timeframe = null)
     {
         if (is_null($timeframe)
             || ($timeframe === self::TOP_PATH_DAY_STRING)) {

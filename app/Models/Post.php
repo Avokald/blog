@@ -129,12 +129,7 @@ class Post extends Model
 
     public function getLinkAttribute()
     {
-        if ($this->slug) {
-            $link = $this->id . '-' . $this->slug;
-        } else {
-            $link = $this->id;
-        }
-        return route(PostController::SHOW_PATH_NAME, $link);
+        return route(PostController::SHOW_PATH_NAME, $this->slugged_id);
     }
 
     /*
