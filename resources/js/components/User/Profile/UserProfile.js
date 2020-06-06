@@ -1,9 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {fetchUserProfile} from "../../../actions";
 
 class UserProfile extends React.Component {
+
+    componentDidMount() {
+       this.props.fetchUserProfile(this.props.match.params.slugged_id.split('-')[0]);
+    }
+
     render() {
-        const user = this.props.user;
+        const user = this.props.profile;
         return (
             <div>User Profile
                 <p>Banner: {user.banner}</p>
@@ -18,23 +24,14 @@ class UserProfile extends React.Component {
 }
 
 
-const mapStateToProps = (state, props) => {
-   let currentUser = null;
-   let sluggedId = props.match.params.slugged_id;
-   let id = sluggedId.split('-')[0];
-
-   console.log(sluggedId, id);
-   for (let user of state.users) {
-       if (Number(user.id) === Number(id)) {
-           currentUser = user;
-       }
-   }
-
-   console.log(currentUser);
+const mapStateToProps = (state) => {
    return {
-       user: currentUser,
+       profile: state.user.data,
    };
-
 };
 
-export default connect(mapStateToProps, null)(UserProfile);
+const mapDispatchToProps = (dispatch) => ({
+    fetchUserProfile: (userId) => dispatch(fetchUserProfile(userId)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
