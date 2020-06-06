@@ -13,6 +13,8 @@ import Category from "./components/Category/Category";
 import Categories from "./components/Categories";
 import Tags from "./components/Tag/Tags";
 import Tag from "./components/Tag";
+import UserProfile from "./components/User/Profile/UserProfile";
+import Users from "./components/Users/Users";
 
 
 const StyledApp = styled.div`
@@ -42,6 +44,10 @@ const app = (
                         <Switch>
                             <Route exact path="/" component={PostList} />
                             <Route exact path="/a/:slugged_id" component={PostView} />
+
+                            <Route exact path="/u/:slugged_id" component={UserProfile} />
+
+                            <Route exact path="/users/" component={Users} />
 
                             <Route exact path="/tag/:tag" component={Tag} />
                             <Route exact path="/tags" component={Tags} />

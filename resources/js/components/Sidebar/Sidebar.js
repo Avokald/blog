@@ -27,6 +27,9 @@ class Sidebar extends React.Component {
                     <li>
                         <Link to="/tags">Tags</Link>
                     </li>
+                    <li>
+                        <Link to="/users">Users</Link>
+                    </li>
                     { categories.map((category) => {
                         return (
                             <li key={category.id}>
