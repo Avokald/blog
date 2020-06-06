@@ -13,8 +13,10 @@ class Sidebar extends React.Component {
     render() {
         let categories = this.props.categories;
         return (
-            <StyledSidebar className="active" ref={this.sidebarRef}>
+            <StyledSidebar className="active">
                 <ul>
+                    <Link to="/new">New</Link>
+                    <Link to="/categories">Categories</Link>
                     { categories.map((category) => {
                         return (
                             <li>
