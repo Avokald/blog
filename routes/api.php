@@ -23,16 +23,14 @@ Route::group(['prefix' => '/v1/'], function() {
 
 
     // User profile
-    Route::group(['middleware' => [
-                                       //    \App\Http\Middleware\UserProfileSlugRedirect::class,
-                                          ]], function () {
-        Route::get('/u/{sluggedId}', 'Web\UserController@show')
+    Route::group([], function () {
+        Route::get('/user/{sluggedId}', 'Web\UserController@show')
             ->name(\App\Http\Controllers\Web\UserController::SHOW_PATH_NAME);
 
-        Route::get('/u/{sluggedId}/top/{timeframe}', 'Web\UserController@top')
+        Route::get('/user/{sluggedId}/top/{timeframe}', 'Web\UserController@top')
             ->name(\App\Http\Controllers\Web\UserController::TOP_PATH_NAME);
 
-        Route::get('/u/{sluggedId}/comments', 'Web\UserController@comments')
+        Route::get('/user/{sluggedId}/comments', 'Web\UserController@comments')
             ->name(\App\Http\Controllers\Web\UserController::COMMENTS_PATH_NAME);
 
 
@@ -41,32 +39,32 @@ Route::group(['prefix' => '/v1/'], function() {
             \App\Http\Middleware\UserLoggedIn::class,
             \App\Http\Middleware\UserProfileRestricted::class,
         ]], function () {
-            Route::get('/u/{sluggedId}/drafts', 'Web\UserController@drafts')
+            Route::get('/user/{sluggedId}/drafts', 'Web\UserController@drafts')
                 ->name(\App\Http\Controllers\Web\UserController::DRAFTS_PATH_NAME);
 
-            Route::get('/u/{sluggedId}/bookmarks', 'Web\BookmarkController@index')
+            Route::get('/user/{sluggedId}/bookmarks', 'Web\BookmarkController@index')
                 ->name(\App\Http\Controllers\Web\BookmarkController::INDEX_PATH_NAME);
 
-            Route::get('/u/{sluggedId}/post_likes', 'Web\PostLikeController@index')
+            Route::get('/user/{sluggedId}/post_likes', 'Web\PostLikeController@index')
                 ->name(\App\Http\Controllers\Web\PostLikeController::INDEX_PATH_NAME);
 
-            Route::get('/u/{sluggedId}/post_dislikes', 'Web\PostDislikeController@index')
+            Route::get('/user/{sluggedId}/post_dislikes', 'Web\PostDislikeController@index')
                 ->name(\App\Http\Controllers\Web\PostDislikeController::INDEX_PATH_NAME);
         });
     });
 
 
     // Posts
-    Route::get('/a/{article}', 'Web\PostController@show')
+    Route::get('/post/{slugged_id}', 'Web\PostController@show')
         ->name(\App\Http\Controllers\Web\PostController::SHOW_PATH_NAME);
 
-    Route::post('/a', 'Web\PostController@store')
+    Route::post('/post', 'Web\PostController@store')
         ->name(\App\Http\Controllers\Web\PostController::STORE_PATH_NAME);
 
-    Route::get('/new', 'Web\PostController@newArticles')
+    Route::get('/page/new', 'Web\PostController@newArticles')
         ->name(\App\Http\Controllers\Web\PostController::NEW_PATH_NAME);
 
-    Route::get('/top/{timeframe?}/', 'Web\PostController@topArticles')
+    Route::get('/page/top/{timeframe?}/', 'Web\PostController@topArticles')
         ->name(\App\Http\Controllers\Web\PostController::TOP_PATH_NAME);
 
 
@@ -117,6 +115,14 @@ Route::group(['prefix' => '/v1/'], function() {
 
 
     // Categories
-    Route::get('/{category}/{timeframe?}', 'Web\CategoryController@show')
+    Route::get('/category/{category}/{timeframe?}', 'Web\CategoryController@show')
         ->name(\App\Http\Controllers\Web\CategoryController::SHOW_PATH_NAME);
+
+    Route::get('/misc', function() {
+        return [
+            \App\Models\Category::all(),
+            \App\Models\Tag::all(),
+            \App\Models\User::all(),
+        ];
+    });
 });
