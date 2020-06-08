@@ -22,33 +22,31 @@ class PostList extends Component {
 }
 
 const StyledPostListElement = styled.div`
-    border: 1px solid black;
     margin-bottom: 25px;
 `;
 
 const PostListElement = (props) => {
     let post = props.post;
     return (
-        <StyledPostListElement>
-            <div href={post.link}>
-                <div className="category">
-                    Category:&nbsp;
-                    <Link to={webRouter.route('category', [post.category.slug])}>
-                        {post.category.title}
-                    </Link>
-                </div>
-                <div className="author">
-                   {/*<img src={post.author.image}*/}
-                        {/*alt={post.author.name}*/}
-                        {/*width="50"*/}
-                        {/*height="50"*/}
-                   {/*/>*/}
-                   Author: &nbsp;
-                    <Link to={webRouter.route('user', [post.author.id + '-' + post.author.slug])}>{post.author.name}</Link>
-                </div>
+        <StyledPostListElement className="card">
+            <div className="category card-header">
+                Category:&nbsp;
+                <Link to={webRouter.route('category', [post.category.slug])}>
+                    {post.category.title}
+                </Link>
+                &nbsp; | &nbsp;
+                {/*<img src={post.author.image}*/}
+                {/*alt={post.author.name}*/}
+                {/*width="50"*/}
+                {/*height="50"*/}
+                {/*/>*/}
+                Author: &nbsp;
+                <Link to={webRouter.route('user', [post.author.id + '-' + post.author.slug])}>{post.author.name}</Link>
+                &nbsp; | &nbsp; Created at: {post.created_at}
+            </div>
+            <div href={post.link} className="card-body">
                 <h2>Title: {post.title}</h2>
                 <p>Excerpt: {post.excerpt}</p>
-                <p>Created at: {post.created_at}</p>
                 <p>Like &#x1f44d;</p>
                 <p>Rating: {post.rating || '-'}</p>
                 <p>Dislike &#128078;</p>

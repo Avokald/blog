@@ -34,6 +34,37 @@ const StyledContent = styled.div`
     
 `;
 
+const ButtonToTop = styled.div`
+    display: block;
+    width: 50px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    
+    &>div {
+        display: block;
+        width: 50px;
+        height: 100vh;
+        position: fixed;
+        top: 0;          
+        left: -50px;
+        opacity: 0.1;
+        background-color: grey;
+        transition: left 0.1s ease-in; 
+        
+    }
+    
+    &:hover {
+      &>div {
+        
+        left: 0;
+      }
+    }
+    
+`;
+
 store.dispatch(getCategories());
 
 const app = (
@@ -66,6 +97,9 @@ const app = (
                 </StyledMain>
             </div>
             <div style={{ height: "1000px" }}/>
+            <ButtonToTop onClick={ () => window.scrollTo(0, 0) } >
+                <div></div>
+            </ButtonToTop>
         </BrowserRouter>
     </Provider>
 );
