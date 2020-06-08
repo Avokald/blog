@@ -41,6 +41,7 @@ class Post extends Model
 
     protected $with = [
         'author',
+        'category',
     ];
 
     protected $withCount = [
