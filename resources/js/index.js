@@ -16,6 +16,8 @@ import Tag from "./components/Tag";
 import UserProfile from "./components/User/Profile/UserProfile";
 import Users from "./components/Users/Users";
 import webRouter from "./routes/WebRouter";
+import PageNew from "./containers/PageNew";
+import {fetchCategories} from "./actions";
 
 
 const StyledApp = styled.div`
@@ -32,7 +34,8 @@ const StyledContent = styled.div`
     
 `;
 
-console.log(webRouter.path('user'));
+store.dispatch(fetchCategories());
+
 const app = (
     <Provider store={store}>
         <BrowserRouter>
@@ -45,6 +48,7 @@ const app = (
                     <StyledContent>
                         <Switch>
                             <Route exact path={webRouter.path('frontpage')} component={PostList} />
+                            <Route exact path={webRouter.path('pageNew')} component={PageNew} />
                             <Route exact path={webRouter.path('post')} component={PostView} />
 
                             <Route exact path={webRouter.path('user')}

@@ -1,34 +1,22 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import apiRouter from "../../routes/ApiRouter";
+import {connect} from 'react-redux';
 import webRouter from "../../routes/WebRouter";
+import {fetchCategories} from "../../actions";
 
 class Categories extends React.Component {
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            categories: [],
-        };
-    }
-
     componentDidMount() {
-        axios.get(apiRouter.route('categories'))
-            .then((response) => {
-                this.setState({
-                    categories: response.data,
-                });
-            });
+        this.props.fetchCategories();
     }
 
     render() {
-        let { categories = [] } = this.state;
+        let { categories = [] } = this.props;
         return (
             <div>
                 { categories.map((category) => {
                     return (
-                        <div>
+                        <div key={category.id}>
                             <h2>{category.title}</h2>
                             <p>{category.description}</p>
                             <p>{category.image}</p>
@@ -43,4 +31,12 @@ class Categories extends React.Component {
     }
 }
 
-export default Categories;
+const mapStateToProps = (state) => ({
+    categories: state.categories.data,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchCategories: () => dispatch(fetchCategories()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

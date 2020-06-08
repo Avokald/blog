@@ -11,7 +11,8 @@ const StyledSidebar = styled.div`
 
 class Sidebar extends React.Component {
     render() {
-        let categories = this.props.categories;
+        let { categories = [] } = this.props;
+
         return (
             <StyledSidebar className="active">
                 <ul>
@@ -47,7 +48,7 @@ class Sidebar extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        categories: state.categories,
+        categories: state.categories.data,
     };
 };
 
