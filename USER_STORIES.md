@@ -31,7 +31,7 @@
 - [x] Creation date
 - [x] Number of bookmarks
 - [x] Number of comments
-- [ ] **Number of views**
+- [x] **Number of views**
 - [x] Rating
 - [x] Category (name, link, image)
 - [x] User can report it
@@ -170,14 +170,14 @@
 ### Post
 
 ##### In list
-- [ ] Title
-- [ ] Author user data
-- [ ] Creation date
-- [ ] Excerpt
-- [ ] Number of bookmarks
-- [ ] Number of comments
-- [ ] Rating
-- [ ] Category (name, link, image) (**hidden on category page**)
+- [x] Title
+- [x] Author user data
+- [x] Creation date
+- [x] Excerpt
+- [x] Number of bookmarks
+- [x] Number of comments
+- [x] Rating
+- [x] Category (name, link, image) (**hidden on category page**)
 - [ ] User can report it
 - [ ] User can bookmark it
 - [ ] User can remove bookmark from it
@@ -188,17 +188,17 @@
 - [ ] 
 
 ##### Full page
-- [ ] Title
-- [ ] Excerpt
-- [ ] **Content**
-- [ ] Author user (name, link, image)
+- [x] Title
+- [x] Excerpt
+- [x] **Content**
+- [x] Author user (name, link, image)
 - [ ] Author overall rating
-- [ ] Creation date
-- [ ] Number of bookmarks
-- [ ] Number of comments
-- [ ] **Number of views**
-- [ ] Rating
-- [ ] Category (name, link, image)
+- [x] Creation date
+- [x] Number of bookmarks
+- [x] Number of comments
+- [x] **Number of views**
+- [x] Rating
+- [x] Category (name, link, image)
 - [ ] User can report it
 - [ ] User can bookmark it
 - [ ] User can remove bookmark from it
