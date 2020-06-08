@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {getCategory} from "../../actions";
+import PostList from "../PostList/PostList";
 
 
 class Category extends Component {
+    componentDidMount() {
+        this.props.getCategory(this.props.match.params.category);
+    }
 
     render() {
-        let category = this.props.category;
+        let category = this.props.categoriesData;
         return (
             <div>
                 <img src={category.banner} />
@@ -13,6 +18,8 @@ class Category extends Component {
                 <img src={category.image} />
                 <p>{category.title}</p>
                 <p>{category.description}</p>
+
+                <PostList posts={this.props.category.posts} />
             </div>
         );
     }
@@ -23,15 +30,20 @@ const mapStateToProps = (state, props) => {
 
     let slug = props.match.params.category;
 
-    for (let category of state.categories) {
+    for (let category of state.categories.data) {
         if (category.slug === slug) {
             currentCategory = category;
         }
     }
 
     return {
-        category: currentCategory,
+        categoriesData: currentCategory,
+        category: state.category.data,
     }
 };
 
-export default connect(mapStateToProps, null)(Category);
+const mapDispatchToProps = (dispatch) => ({
+    getCategory: (slug) => dispatch(getCategory(slug))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category);
