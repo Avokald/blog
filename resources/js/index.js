@@ -17,7 +17,7 @@ import UserProfile from "./components/User/Profile/UserProfile";
 import Users from "./components/Users/Users";
 import webRouter from "./routes/WebRouter";
 import PageNew from "./containers/PageNew";
-import {fetchCategories} from "./actions";
+import {getCategories} from "./actions";
 
 
 const StyledApp = styled.div`
@@ -34,7 +34,7 @@ const StyledContent = styled.div`
     
 `;
 
-store.dispatch(fetchCategories());
+store.dispatch(getCategories());
 
 const app = (
     <Provider store={store}>

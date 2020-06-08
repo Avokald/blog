@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
 import webRouter from "../../routes/WebRouter";
-import {fetchCategories} from "../../actions";
+import {getCategories} from "../../actions";
 
 class Categories extends React.Component {
 
@@ -36,7 +36,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchCategories: () => dispatch(fetchCategories()),
+    fetchCategories: () => dispatch(getCategories()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);

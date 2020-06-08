@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchUserProfile} from "../../../actions";
+import {getUserProfile} from "../../../actions";
 import {NavLink, Route, Switch} from "react-router-dom";
 import PostList from "../../PostList/PostList";
 import webRouter from "../../../routes/WebRouter";
@@ -14,14 +14,14 @@ class UserProfile extends React.Component {
     }
 
     componentDidMount() {
-       this.props.fetchUserProfile(this.props.match.params.sluggedId.split('-')[0]);
+       this.props.getUserProfile(this.props.match.params.sluggedId.split('-')[0]);
     }
 
     componentDidUpdate(prevProps) {
         const id = this.props.match.params.sluggedId.split('-')[0];
         const previousId = prevProps.match.params.sluggedId.split('-')[0];
         if (previousId !== id) {
-            this.props.fetchUserProfile(id);
+            this.props.getUserProfile(id);
         }
     }
 

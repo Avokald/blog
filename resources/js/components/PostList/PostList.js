@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
-import {absoluteToRelativePath} from '../../helpers/urlhelper';
+import webRouter from "../../routes/WebRouter";
 
 class PostList extends Component {
     render() {
@@ -33,7 +33,7 @@ const PostListElement = (props) => {
             <div href={post.link}>
                 <div className="category">
                     Category:&nbsp;
-                    <Link to={absoluteToRelativePath(post.category.link)}>
+                    <Link to={webRouter.route('category', [post.category.slug])}>
                         {post.category.title}
                     </Link>
                 </div>
@@ -44,7 +44,7 @@ const PostListElement = (props) => {
                         {/*height="50"*/}
                    {/*/>*/}
                    Author: &nbsp;
-                    <Link to={post.author.link || '/'}>{post.author.name}</Link>
+                    <Link to={webRouter.route('user', [post.author.id + '-' + post.author.slug])}>{post.author.name}</Link>
                 </div>
                 <h2>Title: {post.title}</h2>
                 <p>Excerpt: {post.excerpt}</p>
@@ -56,7 +56,7 @@ const PostListElement = (props) => {
                 <p>Bookmarks count: {post.bookmarks_count}</p>
                 <p>Comments count: {post.comments_count}</p>
                 <p>TODO Options: hide | report | ignore author | ignore category</p>
-                <Link to={absoluteToRelativePath(post.link)}>Go</Link>
+                <Link to={webRouter.route('post', [post.id + '-' + post.slug])}>Go</Link>
             </div>
         </StyledPostListElement>
     )
