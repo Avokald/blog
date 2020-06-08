@@ -1,9 +1,9 @@
 // https://github.com/Avokald/opendota-web/blob/master/src/actions/action.js
 import querystring from 'querystring';
 
-export default function action(type, host, path, params = {}) {
+export default function action(type, link, params = {}) {
     return (dispatch) => {
-        const url = `${host}/${path}?${typeof params === 'string' ? params.substring(1) : querystring.stringify(params)}`;
+        const url = `${link}?${typeof params === 'string' ? params.substring(1) : querystring.stringify(params)}`;
         const getDataStart = () => ({
             type: `REQUEST/${type}`,
         });

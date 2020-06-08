@@ -1,3 +1,4 @@
 import action from './action';
+import ApiRequest from "../routes/ApiRouter";
 
-export const fetchUserProfile = (userId) => action('user', process.env.MIX_APP_API_HOST, `api/v1/u/${userId}`);
+export const fetchUserProfile = (userId) => action('user', ApiRequest.route('user', [userId]));

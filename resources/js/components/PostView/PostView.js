@@ -409,7 +409,7 @@ class PostView extends Component {
 const mapStateToProps = (state, props) => {
     let currentPost = null;
 
-    let sluggedId = props.match.params.slugged_id;
+    let sluggedId = props.match.params.sluggedId;
     let postId = sluggedId.split('-')[0];
 
     for (let post of state.posts) {

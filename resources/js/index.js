@@ -15,6 +15,7 @@ import Tags from "./components/Tag/Tags";
 import Tag from "./components/Tag";
 import UserProfile from "./components/User/Profile/UserProfile";
 import Users from "./components/Users/Users";
+import webRouter from "./routes/WebRouter";
 
 
 const StyledApp = styled.div`
@@ -31,6 +32,7 @@ const StyledContent = styled.div`
     
 `;
 
+console.log(webRouter.path('user'));
 const app = (
     <Provider store={store}>
         <BrowserRouter>
@@ -42,18 +44,19 @@ const app = (
 
                     <StyledContent>
                         <Switch>
-                            <Route exact path="/" component={PostList} />
-                            <Route exact path="/a/:slugged_id" component={PostView} />
+                            <Route exact path={webRouter.path('frontpage')} component={PostList} />
+                            <Route exact path={webRouter.path('post')} component={PostView} />
 
-                            <Route exact path="/u/:slugged_id" component={UserProfile} />
+                            <Route exact path={webRouter.path('user')}
+                                   component={UserProfile} />
 
                             <Route exact path="/users/" component={Users} />
 
-                            <Route exact path="/tag/:tag" component={Tag} />
+                            <Route exact path={webRouter.path('tag')} component={Tag} />
                             <Route exact path="/tags" component={Tags} />
 
                             <Route exact path="/categories" component={Categories} />
-                            <Route exact path="/:category" component={Category} />
+                            <Route exact path={webRouter.path('category')} component={Category} />
                         </Switch>
                     </StyledContent>
                 </StyledMain>
