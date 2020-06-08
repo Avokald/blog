@@ -1,11 +1,29 @@
 import React from "react";
-import {connect} from 'react-redux';
-import {absoluteToRelativePath} from "../../helpers/urlhelper";
 import {Link} from "react-router-dom";
+import apiRouter from "../../routes/ApiRouter";
+import webRouter from "../../routes/WebRouter";
 
 class Categories extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            categories: [],
+        };
+    }
+
+    componentDidMount() {
+        axios.get(apiRouter.route('categories'))
+            .then((response) => {
+                this.setState({
+                    categories: response.data,
+                });
+            });
+    }
+
     render() {
-        let categories = this.props.categories;
+        let { categories = [] } = this.state;
         return (
             <div>
                 { categories.map((category) => {
@@ -14,7 +32,7 @@ class Categories extends React.Component {
                             <h2>{category.title}</h2>
                             <p>{category.description}</p>
                             <p>{category.image}</p>
-                            <Link to={absoluteToRelativePath(category.link)}>
+                            <Link to={webRouter.route('category', [category.slug])}>
                                 Go
                             </Link>
                         </div>
@@ -25,10 +43,4 @@ class Categories extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        categories: state.categories,
-    }
-};
-
-export default connect(mapStateToProps, null)(Categories);
+export default Categories;

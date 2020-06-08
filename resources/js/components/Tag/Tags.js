@@ -1,28 +1,45 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import {connect} from 'react-redux';
+import apiRouter from "../../routes/ApiRouter";
+import webRouter from "../../routes/WebRouter";
 
-const tags = (props) => {
-    return (
-        <div>
-            { props.tags.map((tag) => {
-                return (
-                    <React.Fragment key={tag.id}>
-                        <div>{tag.title}</div>
-                        <Link to={'/tag/' + tag.title }>
-                            Go
-                        </Link>
-                    </React.Fragment>
-                );
-            }) }
-        </div>
-    );
-};
+class Tags extends React.Component {
 
-const mapStateToProps = (state) => {
-    return {
-        tags: state.tags,
-    };
-};
+    constructor(props) {
+        super(props);
 
-export default connect(mapStateToProps, null)(tags);
+        this.state = {
+            tags: [],
+        };
+    }
+
+    componentDidMount() {
+        axios.get(apiRouter.route('tags'))
+            .then((response) => {
+                this.setState({
+                    tags: response.data,
+                });
+            });
+    }
+
+    render() {
+        const { tags = [] } = this.state;
+        return (
+            <div>
+                { tags.map((tag) => {
+                    return (
+                        <React.Fragment key={tag.id}>
+                            <div>{tag.title}</div>
+                            <Link to={webRouter.route('tag', tag.title)}>
+                                Go
+                            </Link>
+                            <hr />
+                        </React.Fragment>
+                    );
+                })}
+            </div>
+        );
+    }
+}
+
+export default Tags;

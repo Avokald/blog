@@ -1,17 +1,36 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {Link} from "react-router-dom";
+import apiRouter from "../../routes/ApiRouter";
+import webRouter from "../../routes/WebRouter";
 
 class Users extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            users: [],
+        };
+    }
+
+    componentDidMount() {
+        axios.get(apiRouter.route('users'))
+            .then((response) => {
+                this.setState({
+                    users: response.data,
+                });
+            });
+    }
+
     render() {
-        const users = this.props.users;
+        const { users } = this.state;
         return (
             <div>
                 { users.map((user) => {
                     return (
                         <div key={user.id}>
                             <h2>
-                                <Link to={'/u/' + user.id + '-' + user.slug}>
+                                <Link to={ webRouter.route('user', [user.id + '-' + user.slug]) }>
                                     {user.name}
                                 </Link>
                             </h2>
@@ -25,10 +44,4 @@ class Users extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        users: state.users,
-    };
-};
-
-export default connect(mapStateToProps, null)(Users);
+export default Users;

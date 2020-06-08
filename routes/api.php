@@ -118,11 +118,15 @@ Route::group(['prefix' => '/v1/'], function() {
     Route::get('/category/{category}/{timeframe?}', 'Web\CategoryController@show')
         ->name(\App\Http\Controllers\Web\CategoryController::SHOW_PATH_NAME);
 
-    Route::get('/misc', function() {
-        return [
-            \App\Models\Category::all(),
-            \App\Models\Tag::all(),
-            \App\Models\User::all(),
-        ];
+    Route::get('/misc/users', function() {
+        return \App\Models\User::all();
+    });
+
+    Route::get('/misc/categories', function() {
+        return \App\Models\Category::all();
+    });
+
+    Route::get('/misc/tags', function() {
+        return \App\Models\Tag::all();
     });
 });
