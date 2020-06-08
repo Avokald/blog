@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
 import {absoluteToRelativePath} from "../../helpers/urlhelper";
+import webRouter from "../../routes/WebRouter";
 
 const StyledSidebar = styled.div`
     width: 400px;
@@ -17,13 +18,13 @@ class Sidebar extends React.Component {
             <StyledSidebar className="active">
                 <ul>
                     <li>
-                        <Link to="/">Popular</Link>
+                        <Link to={webRouter.route('frontpage')}>Popular</Link>
                     </li>
                     <li>
-                        <Link to="/new">New</Link>
+                        <Link to={webRouter.route('pageNew')}>New</Link>
                     </li>
                     <li>
-                        <Link to="/categories">Categories</Link>
+                        <Link to={webRouter.route('categories')}>Categories</Link>
                     </li>
                     <li>
                         <Link to="/tags">Tags</Link>
