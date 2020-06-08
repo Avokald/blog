@@ -2,7 +2,7 @@
 const initialState = [
   {
       "id": 1,
-      "title": "testpost",
+      "title": "INITIAL STATE testpost",
       "slug": "testpost",
       "excerpt": "testexcerpt",
       "content": "testcontent #testtag ",
@@ -49,7 +49,7 @@ const initialState = [
     },
     {
       "id": 3,
-      "title": "Voluptas cumque nemo numquam temporibus sed qui blanditiis.",
+      "title": "INITIAL STATE Voluptas cumque nemo numquam temporibus sed qui blanditiis.",
       "slug": "voluptas-cumque-nemo-numquam-temporibus-sed-qui-blanditiis",
       "excerpt": "Dolorem velit molestiae rem aut. Quod rerum et id nam optio. Nihil numquam quia incidunt.",
       "content": "Eaque ut sed tempore quae porro. Corporis ratione consequatur ipsa quia consequatur commodi. Dolor iure ipsa officia sunt quas.",
@@ -96,7 +96,7 @@ const initialState = [
     },
     {
       "id": 4,
-      "title": "Labore quas asperiores quia error molestias.",
+      "title": "INITIAL STATE Labore quas asperiores quia error molestias.",
       "slug": "labore-quas-asperiores-quia-error-molestias",
       "excerpt": "Quia voluptatibus adipisci et eum ab. Voluptates ab ea laudantium repellat aut cupiditate eveniet molestiae.",
       "content": "Voluptatem odit aliquam qui doloribus aut illum incidunt. Dolorem est nihil voluptas aperiam placeat ut.",
@@ -143,7 +143,7 @@ const initialState = [
     },
     {
       "id": 5,
-      "title": "Aut quia in temporibus.",
+      "title": "INITIAL STATE Aut quia in temporibus.",
       "slug": "aut-quia-in-temporibus",
       "excerpt": "Ullam hic voluptas ducimus facilis. Ratione aut nemo maxime ipsum fugiat. Ut architecto qui in libero.",
       "content": "Veritatis atque repellendus culpa corporis error non blanditiis. Laboriosam ea amet facere totam. Et aliquid tempore consequatur ipsum accusamus nesciunt autem. Ipsam ipsam aspernatur qui ut ratione.",
@@ -190,7 +190,7 @@ const initialState = [
     },
     {
       "id": 6,
-      "title": "Ex porro doloremque saepe et totam et dicta at.",
+      "title": "INITIAL STATE Ex porro doloremque saepe et totam et dicta at.",
       "slug": "ex-porro-doloremque-saepe-et-totam-et-dicta-at",
       "excerpt": "Quibusdam adipisci alias quo dignissimos voluptates. Facere sit temporibus et ab. Quia distinctio sequi ex.",
       "content": "Sed sit aut consequuntur sunt corrupti. Autem quae repellendus et et exercitationem sed consequatur. Tempora exercitationem eveniet dolores eius cum perferendis. Natus a odio id.",
@@ -237,7 +237,7 @@ const initialState = [
     },
     {
       "id": 7,
-      "title": "Optio voluptatem nostrum odit vel asperiores recusandae vel inventore.",
+      "title": "INITIAL STATE Optio voluptatem nostrum odit vel asperiores recusandae vel inventore.",
       "slug": "optio-voluptatem-nostrum-odit-vel-asperiores-recusandae-vel-inventore",
       "excerpt": "Eligendi expedita ex animi expedita dolor porro dignissimos. Recusandae exercitationem nobis rem saepe aut.",
       "content": "Odio blanditiis voluptas doloribus sint qui et. Assumenda vel et eos tempora consectetur dolorum. Odio porro non eveniet voluptatem. Voluptate animi esse repellat modi velit mollitia.",

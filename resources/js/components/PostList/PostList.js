@@ -5,18 +5,10 @@ import {Link} from "react-router-dom";
 import {absoluteToRelativePath} from '../../helpers/urlhelper';
 
 class PostList extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            posts: this.props.posts
-        }
-    }
-
     render() {
         return (
             <div>
-                { this.state.posts.map((post) => {
+                { this.props.posts && this.props.posts.map((post) => {
                         return (
                             <PostListElement key={post.id}
                                              post={post}
@@ -70,9 +62,13 @@ const PostListElement = (props) => {
     )
 };
 
-const mapStateToProps = state => {
-    return {
-        posts: state.posts,
+const mapStateToProps = (state, props) => {
+    if (!props.posts) {
+        return {
+            posts: state.posts,
+        }
+    } else {
+        return {};
     }
 };
 
