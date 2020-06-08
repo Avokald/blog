@@ -7,6 +7,8 @@ const webRouter = new Router({
     user: '/u/{sluggedId}/{info?}/{subInfo?}',
     tag: '/tag/{tag}',
     category: '/{category}',
+    categories: '/categories',
+    tags: '/tags',
 
 }, false);
 
