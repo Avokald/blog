@@ -216,11 +216,11 @@
 
 
 ### Comments
-- [ ] Author (Name, link, image)
-- [ ] Content
-- [ ] Creation date
+- [x] Author (Name, link, image)
+- [x] Content
+- [x] Creation date
 - [ ] Rating
-- [ ] Parent
+- [x] Parent
 
 ##### User can:
 
