@@ -18,14 +18,15 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $pfps = ['/images/pfp.jpg', '/images/pfp-2.jpg', '/images/pfp-3.jpg'];
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
-        'image' => $faker->imageUrl(120, 120),
-        'banner' => $faker->imageUrl(640, 160),
+        'image' => $pfps[array_rand($pfps)], // $faker->imageUrl(120, 120),
+        'banner' => '/images/banner.jpg', // $faker->imageUrl(640, 160),
         'description' => $faker->text,
     ];
 });
