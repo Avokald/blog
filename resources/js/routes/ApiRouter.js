@@ -4,7 +4,13 @@ const apiRouter = new Router({
     frontpage:  '/api/v1/page/frontpage/',
     pageNew: '/api/v1/page/new/',
     post: '/api/v1/post/{postId}',
+
     user: '/api/v1/user/{userId}/',
+    userComments: '/api/v1/user/{userId}/comments',
+    userDrafts: '/api/v1/user/{userId}/drafts',
+    userBookmarks: '/api/v1/user/{userId}/bookmarks',
+    userBookmarksComments: '/api/v1/user/{userId}/bookmarks/comments',
+
     category: '/api/v1/category/{categorySlug}',
     users: '/api/v1/misc/users',
     categories: '/api/v1/misc/categories',
