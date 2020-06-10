@@ -4,6 +4,7 @@ import {getUserProfile} from "../../../actions";
 import {NavLink, Route, Switch} from "react-router-dom";
 import PostList from "../../PostList/PostList";
 import webRouter from "../../../routes/WebRouter";
+import UserProfileComments from "./Pages/Comments/UserProfileComments";
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -11,16 +12,18 @@ class UserProfile extends React.Component {
 
         let { params } = this.props.match;
         this.defaultLink = webRouter.route('user', [params.sluggedId]);
+        this.userId = this.props.match.params.sluggedId.split('-')[0];
     }
 
     componentDidMount() {
-       this.props.getUserProfile(this.props.match.params.sluggedId.split('-')[0]);
+        this.props.getUserProfile(this.userId);
     }
 
     componentDidUpdate(prevProps) {
         const id = this.props.match.params.sluggedId.split('-')[0];
         const previousId = prevProps.match.params.sluggedId.split('-')[0];
         if (previousId !== id) {
+            this.userId = id;
             this.props.getUserProfile(id);
         }
     }
@@ -82,14 +85,28 @@ class UserProfile extends React.Component {
                     {/* Must be in this specific order otherwise some will be unreachable */}
                     <Route exact path={this.props.match.path + "/bookmarks/comments"} render={() => (<h3>Bookmarks comments</h3>)} />
                     <Route exact path={this.props.match.path + "/bookmarks"} render={() => (<h3>Bookmarks posts</h3>)} />
-                    <Route exact path={this.props.match.path + "/comments"} render={() => (<h3>Comments</h3>)} />
-                    <Route exact path={this.props.match.path + "/drafts"} render={() => (<h3>Drafts</h3>)} />
+                    <Route exact path={this.props.match.path + "/comments"} render={() => (
+                        <React.Fragment>
+                            <h3>Comments</h3>
+                            <UserProfileComments userId={this.userId} />
+                        </React.Fragment>
+                            )} />
+                    <Route exact path={this.props.match.path + "/drafts"} render={() => (
+                        <React.Fragment>
+                            <h3>Drafts</h3>
+                            <PostList />
+                        </React.Fragment>
+
+                    )} />
                     <Route exact path={this.props.match.path} render={() => {
                         if (this.props.posts) {
                             return (
                                 <React.Fragment>
                                     <h3>Posts</h3>
-                                    <PostList posts={this.props.posts}/>
+                                    <h4>Pinned</h4>
+                                    {user.pinned_post && (<PostList posts={[user.pinned_post]} />)}
+                                    <h4>Other</h4>
+                                    <PostList posts={this.props.posts} />
                                 </React.Fragment>
                             );
                         }

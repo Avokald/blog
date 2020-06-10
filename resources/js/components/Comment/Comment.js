@@ -8,7 +8,6 @@ class Comment extends React.Component {
         return (
             <div id={'comment_' + comment.id} className="media">
                 <img className="d-flex mr-3"
-                     data-src={comment.author.image}
                      src={comment.author.image}
                      alt={comment.author.name}
                      width="64"

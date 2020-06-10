@@ -46,7 +46,12 @@ const appReducer = combineReducers({
     categories: reducer('categories', categoriesInitialState),
     tags: tagsReducer,
     users: usersReducer,
+
     user: reducer('user'),
+    userComments: reducer('userComments'),
+    userDrafts: reducer('userDrafts'),
+    userBookmarks: reducer('userBookmarks'),
+
     category: reducer('category'),
     tag: reducer('tag'),
     post: reducer('post'),
