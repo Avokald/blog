@@ -63,25 +63,26 @@ class PostViewTest extends TestCase
         $response->assertStatus(Response::HTTP_NOT_FOUND);
     }
 
-    public function test_user_post_redirects_if_only_id_provided_or_slug_incorrect()
-    {
-        $post = factory(Post::class)->create([
-            'status' => Post::STATUS_PUBLISHED,
-        ]);
-
-        $response = $this->get(route(PostController::SHOW_PATH_NAME, $post->id));
-
-        $response->assertStatus(Response::HTTP_FOUND);
-
-        $response = $this->get(route(PostController::SHOW_PATH_NAME, $post->id . '-'));
-
-        $response->assertStatus(Response::HTTP_FOUND);
-
-        $response = $this->get(route(PostController::SHOW_PATH_NAME,
-            $post->id . '-' . $post->slug . random_int(0, 100)));
-
-        $response->assertStatus(Response::HTTP_FOUND);
-    }
+    // TODO remove
+//    public function test_user_post_redirects_if_only_id_provided_or_slug_incorrect()
+//    {
+//        $post = factory(Post::class)->create([
+//            'status' => Post::STATUS_PUBLISHED,
+//        ]);
+//
+//        $response = $this->get(route(PostController::SHOW_PATH_NAME, $post->id));
+//
+//        $response->assertStatus(Response::HTTP_FOUND);
+//
+//        $response = $this->get(route(PostController::SHOW_PATH_NAME, $post->id . '-'));
+//
+//        $response->assertStatus(Response::HTTP_FOUND);
+//
+//        $response = $this->get(route(PostController::SHOW_PATH_NAME,
+//            $post->id . '-' . $post->slug . random_int(0, 100)));
+//
+//        $response->assertStatus(Response::HTTP_FOUND);
+//    }
 
     public function test_post_contains_category_data()
     {
