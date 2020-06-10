@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -99,9 +100,24 @@ class UserController extends Controller
     public function comments(string $profile)
     {
         $profileExploded = explode('-', $profile, 2);
-        $userObserved = User::withRelationOrderedBy('comments', 'created_at', 'DESC')->findOrFail($profileExploded[0]);
+//        $comments = DB::select("
+//        SELECT comments.*, ':',
+//        post.title as post_title, post.slug as post_slug,
+//        user.id as author_id, user.name as author_name, user.slug as author_slug, user.image as author_image
+//        FROM comments as comments
+//        INNER JOIN posts as post
+//        ON comments.post_id = post.id
+//        INNER JOIN users as user
+//        ON comments.user_id = user.id
+//        WHERE comments.user_id = ?
+//        ", [$profileExploded[0]]);
 
-        return $userObserved->comments;
+        $comments = Comment::with('post')
+            ->where('user_id', $profileExploded[0])
+            ->orderBy( 'created_at', 'DESC')
+            ->get();
+
+        return $comments;
     }
 
     /**

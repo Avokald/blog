@@ -140,6 +140,17 @@ class PostController extends Controller
         $article = Post::with('category')
             ->withRelationOrderedBy('comments', 'created_at', 'DESC')
             ->findOrFail($articlePathExploded[0]);
+//        $article = DB::select("
+//        SELECT post.*,
+//        category.title as category_title, category.slug as category_slug, category.image as category_image,
+//        post_author.id as author_id, post_author.name as author_name, post_author.slug as author_slug, post_author.image as author_image
+//        FROM posts as post
+//        INNER JOIN categories as category
+//        ON post.category_id = category.id
+//        INNER JOIN users as post_author
+//        ON post.user_id = post_author.id
+//        WHERE post.id = ?
+//        ", [$articlePathExploded[0]])[0];
 
         $userObserver = request()->user();
 
@@ -150,15 +161,11 @@ class PostController extends Controller
             return abort(Response::HTTP_NOT_FOUND);
         }
 
-        // Redirect if slug is not provided or incorrect
-        // Must be run later so there would be no redirect when model is private
-        if (!isset($articlePathExploded[1], $article->slug) || ($articlePathExploded[1] !== $article->slug)) {
-            return redirect($article->getShowLink());
-        }
-
+//        DB::update("UPDATE posts SET view_count = view_count + 1 WHERE id = ?", [$article->id]);
         $article->view_count += 1;
         $article->save();
 
+//        return json_decode(json_encode($article), true);
         return $article;
     }
 
