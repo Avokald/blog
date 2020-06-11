@@ -21,11 +21,16 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            $table->string('api_token', 80)
+                ->unique()
+                ->nullable()
+                ->default(null);
+
             $table->string('image')->nullable();
             $table->string('banner')->nullable();
             $table->text('description')->nullable();
             $table->bigInteger('pinned_post_id')->nullable();
-
             $table->rememberToken();
             $table->timestamps();
         });
