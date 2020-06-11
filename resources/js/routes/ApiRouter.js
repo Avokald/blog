@@ -1,6 +1,8 @@
 import Router from './Router';
 
 const apiRouter = new Router({
+    metadata: '/api/v1/metadata',
+
     frontpage:  '/api/v1/page/frontpage/',
     pageNew: '/api/v1/page/new/',
     post: '/api/v1/post/{postId}',

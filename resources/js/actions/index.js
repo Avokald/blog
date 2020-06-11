@@ -1,6 +1,8 @@
 import action from './action';
 import ApiRequest from "../routes/ApiRouter";
 
+export const getMetadata = () => action('metadata', ApiRequest.route('metadata'));
+
 export const getUserProfile = (userId) => action('user', ApiRequest.route('user', [userId]));
 
 export const getUserComments = (userId) => action('userComments', ApiRequest.route('userComments', [userId]));

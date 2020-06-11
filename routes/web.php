@@ -112,6 +112,13 @@ Route::group(['prefix' => '/api/v1/'], function () {
     Route::get('/category/{category}/{timeframe?}', 'Web\CategoryController@show')
         ->name(\App\Http\Controllers\Web\CategoryController::SHOW_PATH_NAME);
 
+    // TODO Refactor into separate controller
+    Route::get('/metadata', function () {
+        return [
+            'user' => request()->user(),
+        ];
+    });
+
     Route::get('/misc/users', function () {
         return \App\Models\User::all();
     });

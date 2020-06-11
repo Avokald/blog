@@ -42,6 +42,8 @@ const categoriesInitialState = [
 ];
 
 const appReducer = combineReducers({
+    metadata: reducer('metadata'),
+
     posts: postsReducer,
     categories: reducer('categories', categoriesInitialState),
     tags: tagsReducer,

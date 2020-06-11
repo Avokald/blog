@@ -18,7 +18,7 @@ import UserProfile from "./components/User/Profile/UserProfile";
 import Users from "./components/Users/Users";
 import webRouter from "./routes/WebRouter";
 import PageNew from "./containers/PageNew";
-import {getCategories} from "./actions";
+import {getCategories, getMetadata} from "./actions";
 
 
 const StyledApp = styled.div`
@@ -66,6 +66,7 @@ const ButtonToTop = styled.div`
     
 `;
 
+store.dispatch(getMetadata());
 store.dispatch(getCategories());
 
 const app = (
