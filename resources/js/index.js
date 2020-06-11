@@ -5,6 +5,7 @@ import PostList from "./components/PostList";
 import PostView from "./components/PostView";
 import store from './store/index';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import 'normalize.css/normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
 import Sidebar from './components/Sidebar';
@@ -21,7 +22,7 @@ import {getCategories} from "./actions";
 
 
 const StyledApp = styled.div`
-    
+
 `;
 
 const StyledMain = styled.main`
