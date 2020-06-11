@@ -54,11 +54,167 @@ services:
     networks:
       - app-network
 
+#  mongo:
+#    image: mongo:latest
+#    container_name: mongo
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: password
+#    ports:
+#      - 27017:27017
+#    volumes:
+#      - mongodb_data_container:/data/db
+
+#  rabbit1:
+##    image: rabbitmq:3-management
+#    container_name: rabbit1
+#    restart: unless-stopped
+#    build:
+#      context: .
+#      dockerfile: .docker/Rabbitmq/Dockerfile
+#    ports:
+#      - "15672:15672"
+#      - "5672:5672"
+#    networks:
+#      - app-network
+#    volumes:
+#      - rabbitmq-data:/var/lib/rabbitmq
+
+
+
+  redis1:
+    image: redis:alpine
+    container_name: redis1
+    ports:
+     - "6379:6379"
+    volumes:
+     - ./.docker/redis-data:/var/lib/redis
+    networks:
+      - app-network
+    environment:
+     - REDIS_REPLICATION_MODE=master
+
+#  es01:
+#    image: elasticsearch:7.6.2
+#    container_name: es01
+#    environment:
+#      - node.name=es01
+#      - cluster.name=es-docker-cluster
+#      - discovery.seed_hosts=es02,es03
+#      - cluster.initial_master_nodes=es01,es02,es03
+#      - bootstrap.memory_lock=true
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    volumes:
+#      - data01:/usr/share/elasticsearch/data
+#    ports:
+#      - 9200:9200
+#    networks:
+#      - elastic
+#
+#
+#  es02:
+#    image: elasticsearch:7.6.2
+#    container_name: es02
+#    environment:
+#      - node.name=es02
+#      - cluster.name=es-docker-cluster
+#      - discovery.seed_hosts=es01,es03
+#      - cluster.initial_master_nodes=es01,es02,es03
+#      - bootstrap.memory_lock=true
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    volumes:
+#      - data02:/usr/share/elasticsearch/data
+#    ports:
+#      - 9201:9201
+#    networks:
+#      - elastic
+#
+#  es03:
+#    image: elasticsearch:7.6.2
+#    container_name: es03
+#    environment:
+#      - node.name=es03
+#      - cluster.name=es-docker-cluster
+#      - discovery.seed_hosts=es01,es02
+#      - cluster.initial_master_nodes=es01,es02,es03
+#      - bootstrap.memory_lock=true
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#    volumes:
+#      - data03:/usr/share/elasticsearch/data
+#    ports:
+#      - 9202:9202
+#    networks:
+#      - elastic
+#
+#  kib01:
+#    image: docker.elastic.co/kibana/kibana:7.6.2
+#    container_name: kib01
+#    ports:
+#      - 5601:5601
+#    environment:
+#      ELASTICSEARCH_URL: http://es01:9200
+#      ELASTICSEARCH_HOSTS: http://es01:9200
+#    networks:
+#      - elastic
+
+#  prometheus1:
+#    image: prom/prometheus
+#    container_name: prometheus1
+#    ports:
+#      - 9090:9090
+#    volumes:
+#      - ./.docker/prometheus.yml:/etc/prometheus/prometheus.yml
+#    networks:
+#      - app-network
+
+#
+#  grafana1:
+#    image: grafana/grafana
+#    container_name: grafana1
+#    env_file:
+#      - ./.docker/grafana/config.monitoring
+#    volumes:
+#      - grafana_data:/var/lib/grafana
+#      - ./.docker/grafana/prov/:/etc/grafana/provisioning/
+#    depends_on:
+#      - prometheus1
+#    ports:
+#      - 3020:3000
+#    networks:
+#      - app-network
+
+
 #Docker Networks
 networks:
   app-network:
     driver: bridge
+#  prometheus:
+#    driver: bridge
+#  elastic:
+#    driver: bridge
+
 #Volumes
 volumes:
   dbdata:
     driver: local
+  mongodb_data_container:
+  grafana_data:
+#  rabbitmq-data:
+#  data01:
+#    driver: local
+#  data02:
+#    driver: local
+#  data03:
+#    driver: local

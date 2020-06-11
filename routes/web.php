@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['prefix' => '/api/v1/'], function() {
+Route::group(['prefix' => '/api/v1/'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
 
@@ -27,10 +27,12 @@ Route::group(['prefix' => '/api/v1/'], function() {
 
 
         // Private
-        Route::group(['middleware' => [
-            \App\Http\Middleware\UserLoggedIn::class,
-            \App\Http\Middleware\UserProfileRestricted::class,
-        ]], function () {
+        Route::group([
+            'middleware' => [
+                \App\Http\Middleware\UserLoggedIn::class,
+                \App\Http\Middleware\UserProfileRestricted::class,
+            ]
+        ], function () {
             Route::get('/user/{sluggedId}/drafts', 'Web\UserController@drafts')
                 ->name(\App\Http\Controllers\Web\UserController::DRAFTS_PATH_NAME);
 
@@ -110,17 +112,34 @@ Route::group(['prefix' => '/api/v1/'], function() {
     Route::get('/category/{category}/{timeframe?}', 'Web\CategoryController@show')
         ->name(\App\Http\Controllers\Web\CategoryController::SHOW_PATH_NAME);
 
-    Route::get('/misc/users', function() {
+    Route::get('/misc/users', function () {
         return \App\Models\User::all();
     });
 
-    Route::get('/misc/categories', function() {
+    Route::get('/misc/categories', function () {
         return \App\Models\Category::all();
     });
 
-    Route::get('/misc/tags', function() {
+    Route::get('/misc/tags', function () {
         return \App\Models\Tag::all();
     });
+});
+
+Route::get('/metrics', function () {
+    $registry = new \Prometheus\Storage\Redis([
+        'host' => 'redis1',
+        'port' => 6379,
+        'password' => null,
+        'timeout' => 0.1, // in seconds
+        'read_timeout' => '10', // in seconds
+        'persistent_connections' => false
+    ]);
+
+    $renderer = new \Prometheus\RenderTextFormat();
+    $result = $renderer->render($registry->collect());
+
+    header('Content-type: ' . \Prometheus\RenderTextFormat::MIME_TYPE);
+    return $result;
 });
 
 Auth::routes();

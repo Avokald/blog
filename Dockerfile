@@ -1,4 +1,9 @@
 FROM php:7.2-fpm
+RUN docker-php-ext-install sockets
+
+RUN pecl install -o -f redis \
+&&  rm -rf /tmp/pear \
+&&  docker-php-ext-enable redis
 
 # Copy composer.lock and composer.json
 COPY composer.lock composer.json /var/www/
@@ -47,6 +52,3 @@ USER www
 # Expose port 9000 and start php-fpm server
 EXPOSE 9000
 CMD ["php-fpm"]
-
-RUN php artisan migrate:fresh --seed
-
