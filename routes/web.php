@@ -128,11 +128,6 @@ Route::group(['prefix' => '/api/v1/'], function () {
 Route::get('/metrics', function () {
     $registry = new \Prometheus\Storage\Redis([
         'host' => 'redis1',
-        'port' => 6379,
-        'password' => null,
-        'timeout' => 0.1, // in seconds
-        'read_timeout' => '10', // in seconds
-        'persistent_connections' => false
     ]);
 
     $renderer = new \Prometheus\RenderTextFormat();
