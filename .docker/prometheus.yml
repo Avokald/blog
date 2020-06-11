@@ -1,5 +1,5 @@
 global:
-  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+  scrape_interval:     120s
 
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
@@ -13,12 +13,20 @@ scrape_configs:
 #  - job_name: 'prometheus_itself'
 #
 #    # Override the global default and scrape targets from this job every 5 seconds.
-#    scrape_interval: 5s
+#    scrape_interval: 60s
 #
 #    static_configs:
 #      - targets: ['localhost:9090']
 
   - job_name: 'laravel_app'
-    scrape_interval: 10s
+    scrape_interval: 60s
     static_configs:
       - targets: ['webserver:80']
+
+#  - job_name: 'node-exporter'
+#
+#    # Override the global default and scrape targets from this job every 5 seconds.
+#    scrape_interval: 60s
+#
+#    static_configs:
+#      - targets: ['node_exporter:9100']
