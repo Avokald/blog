@@ -243,7 +243,7 @@
 - [x] List of previous posts
 - [x] List of drafts
 - [x] List of comments (with commented post data)
-- [ ] List of bookmarks - posts (private)
+- [x] List of bookmarks - posts (private)
 - [ ] List of bookmarks - comments (private)
 - [x] Pinned post
 - [ ] Can create posts
@@ -263,11 +263,11 @@
 
 ### Category
 
-- [ ] Title
-- [ ] Image
-- [ ] Banner
-- [ ] Description
-- [ ] Posts 
+- [x] Title
+- [x] Image
+- [x] Banner
+- [x] Description
+- [x] Posts 
 - [ ] Subscriber count
 
 ##### User can:
