@@ -41,11 +41,12 @@ class UserProfile extends React.Component {
                 <p>Description: {user.description}</p>
                 <p>Created: {user.created_at}</p>
 
-                <ul className="nav">
+                <ul className="nav nav-pills">
                     <li className="nav-item">
                         <NavLink to={`${defaultLink}`}
                                  className="nav-link"
-                                 activeClassName="active">
+                                 activeClassName="active"
+                                 exact={true}>
                             Posts
                         </NavLink>
                     </li>
@@ -53,7 +54,8 @@ class UserProfile extends React.Component {
                     <li className="nav-item">
                        <NavLink to={`${defaultLink}` + "/comments"}
                                  className="nav-link"
-                                 activeClassName="active">
+                                 activeClassName="active"
+                                 exact={true}>
                            Comments
                        </NavLink>
                     </li>
@@ -61,7 +63,8 @@ class UserProfile extends React.Component {
                     <li className="nav-item">
                         <NavLink to={defaultLink + "/drafts"}
                                  className="nav-link"
-                                 activeClassName="active">
+                                 activeClassName="active"
+                                 exact={true}>
                             Drafts
                         </NavLink>
                     </li>
@@ -69,7 +72,8 @@ class UserProfile extends React.Component {
                     <li className="nav-item">
                         <NavLink to={defaultLink + "/bookmarks"}
                                  className="nav-link"
-                                 activeClassName="active">
+                                 activeClassName="active"
+                                 exact={true}>
                             Bookmarks posts
                         </NavLink>
                     </li>
@@ -77,7 +81,8 @@ class UserProfile extends React.Component {
                     <li className="nav-item">
                         <NavLink to={defaultLink + "/bookmarks/comments"}
                                  className="nav-link"
-                                 activeClassName="active">
+                                 activeClassName="active"
+                                 exact={true}>
                             Bookmarks comments
                         </NavLink>
                     </li>
