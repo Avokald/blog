@@ -50,7 +50,7 @@ const appReducer = combineReducers({
     user: reducer('user'),
     userComments: reducer('userComments'),
     userDrafts: reducer('userDrafts'),
-    userBookmarks: reducer('userBookmarks'),
+    userBookmarkPosts: reducer('userBookmarkPosts'),
 
     category: reducer('category'),
     tag: reducer('tag'),

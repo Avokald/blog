@@ -36,7 +36,7 @@ Route::group(['prefix' => '/api/v1/'], function () {
             Route::get('/user/{sluggedId}/drafts', 'Web\UserController@drafts')
                 ->name(\App\Http\Controllers\Web\UserController::DRAFTS_PATH_NAME);
 
-            Route::get('/user/{sluggedId}/bookmarks', 'Web\BookmarkController@index')
+            Route::get('/user/{sluggedId}/bookmarks/posts', 'Web\BookmarkController@index')
                 ->name(\App\Http\Controllers\Web\BookmarkController::INDEX_PATH_NAME);
 
             Route::get('/user/{sluggedId}/post_likes', 'Web\PostLikeController@index')

@@ -6,6 +6,7 @@ import PostList from "../../PostList/PostList";
 import webRouter from "../../../routes/WebRouter";
 import UserProfileComments from "./Pages/Comments/UserProfileComments";
 import UserProfileDrafts from "./Pages/Drafts/UserProfileDrafts";
+import UserProfileBookmarkPosts from "./Pages/BookmarkPosts/UserProfileBookmarkPosts";
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -88,6 +89,7 @@ class UserProfile extends React.Component {
                     <Route exact path={this.props.match.path + "/bookmarks"} render={() => (
                         <React.Fragment>
                             <h3>Bookmarks posts</h3>
+                            <UserProfileBookmarkPosts userId={this.userId} />
                         </React.Fragment>
                             )} />
                     <Route exact path={this.props.match.path + "/comments"} render={() => (
