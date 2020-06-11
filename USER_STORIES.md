@@ -234,18 +234,18 @@
 
 
 ### User 
-- [ ] Name
-- [ ] Short description
-- [ ] Profile picture
-- [ ] Banner
+- [x] Name
+- [x] Short description
+- [x] Profile picture
+- [x] Banner
 - [ ] Overall rating
-- [ ] Creation date
-- [ ] List of previous posts
-- [ ] List of drafts
-- [ ] List of comments
+- [x] Creation date
+- [x] List of previous posts
+- [x] List of drafts
+- [x] List of comments (with commented post data)
 - [ ] List of bookmarks - posts (private)
 - [ ] List of bookmarks - comments (private)
-- [ ] Pinned post
+- [x] Pinned post
 - [ ] Can create posts
 - [ ] Different user can subscribe
 - [ ] Profile settings and user data

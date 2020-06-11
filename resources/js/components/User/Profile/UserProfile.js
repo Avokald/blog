@@ -5,6 +5,7 @@ import {NavLink, Route, Switch} from "react-router-dom";
 import PostList from "../../PostList/PostList";
 import webRouter from "../../../routes/WebRouter";
 import UserProfileComments from "./Pages/Comments/UserProfileComments";
+import UserProfileDrafts from "./Pages/Drafts/UserProfileDrafts";
 
 class UserProfile extends React.Component {
     constructor(props) {
@@ -84,7 +85,11 @@ class UserProfile extends React.Component {
                 <Switch>
                     {/* Must be in this specific order otherwise some will be unreachable */}
                     <Route exact path={this.props.match.path + "/bookmarks/comments"} render={() => (<h3>Bookmarks comments</h3>)} />
-                    <Route exact path={this.props.match.path + "/bookmarks"} render={() => (<h3>Bookmarks posts</h3>)} />
+                    <Route exact path={this.props.match.path + "/bookmarks"} render={() => (
+                        <React.Fragment>
+                            <h3>Bookmarks posts</h3>
+                        </React.Fragment>
+                            )} />
                     <Route exact path={this.props.match.path + "/comments"} render={() => (
                         <React.Fragment>
                             <h3>Comments</h3>
@@ -94,7 +99,7 @@ class UserProfile extends React.Component {
                     <Route exact path={this.props.match.path + "/drafts"} render={() => (
                         <React.Fragment>
                             <h3>Drafts</h3>
-                            <PostList />
+                            <UserProfileDrafts userId={this.userId} />
                         </React.Fragment>
 
                     )} />
