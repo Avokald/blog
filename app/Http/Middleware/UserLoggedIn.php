@@ -16,17 +16,17 @@ class UserLoggedIn
      */
     public function handle($request, Closure $next)
     {
-         try {
-            $adapter = new \Prometheus\Storage\Redis([
-                'host' => 'redis1',
-            ]);
-
-            $registry = new \Prometheus\CollectorRegistry($adapter);
-            $counter = $registry->getOrRegisterCounter('test', 'user_logged_in', 'Number of times users logged in');
-            $counter->inc();
-        } catch (\Exception $e) {
+//         try {
+//            $adapter = new \Prometheus\Storage\Redis([
+//                'host' => 'redis1',
+//            ]);
+//
+//            $registry = new \Prometheus\CollectorRegistry($adapter);
+//            $counter = $registry->getOrRegisterCounter('test', 'user_logged_in', 'Number of times users logged in');
+//            $counter->inc();
+//        } catch (\Exception $e) {
 //            return abort(Response::HTTP_INTERNAL_SERVER_ERROR);
-        }
+//        }
         // If user not logged in then 403
         if ($request->user() === null) {
             return abort(Response::HTTP_FORBIDDEN);
