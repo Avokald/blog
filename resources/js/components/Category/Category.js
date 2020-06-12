@@ -13,9 +13,24 @@ class Category extends Component {
         let category = this.props.categoriesData;
         return (
             <div>
-                <img src={category.banner} />
+                {category.banner && (
+                    <div style={
+                        {
+                            width: '640px',
+                            height: '160px',
+                            overflow: 'hidden',
+                    }}>
+                        <img src={category.banner}
+                             width="640"
+                             height="auto"
+                        />
+                    </div>
+                )}
                 <br />
-                <img src={category.image} />
+                <img src={category.image}
+                     width="40"
+                     height="40"
+                />
                 <p>{category.title}</p>
                 <p>{category.description}</p>
 
