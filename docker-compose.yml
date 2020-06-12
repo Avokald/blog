@@ -82,26 +82,24 @@ services:
 
 
 
-  redis1:
-    image: redis:alpine
-    container_name: redis1
-    ports:
-     - "6379:6379"
-    volumes:
-     - ./.docker/redis-data:/var/lib/redis
-    networks:
-      - app-network
-    environment:
-     - REDIS_REPLICATION_MODE=master
+#  redis1:
+#    image: redis:alpine
+#    container_name: redis1
+#    ports:
+#     - "6379:6379"
+#    volumes:
+#     - ./.docker/redis-data:/var/lib/redis
+#    networks:
+#      - app-network
+#    environment:
+#     - REDIS_REPLICATION_MODE=master
 
 #  es01:
 #    image: elasticsearch:7.6.2
 #    container_name: es01
 #    environment:
 #      - node.name=es01
-#      - cluster.name=es-docker-cluster
-#      - discovery.seed_hosts=es02,es03
-#      - cluster.initial_master_nodes=es01,es02,es03
+#      - discovery.type=single-node
 #      - bootstrap.memory_lock=true
 #      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
 #    ulimits:
@@ -109,11 +107,12 @@ services:
 #        soft: -1
 #        hard: -1
 #    volumes:
-#      - data01:/usr/share/elasticsearch/data
+#      - elastic_data:/usr/share/elasticsearch/data
 #    ports:
 #      - 9200:9200
+#      - 9300:9300
 #    networks:
-#      - elastic
+#      - app-network
 #
 #
 #  es02:
@@ -169,16 +168,16 @@ services:
 #    networks:
 #      - elastic
 
-  prometheus1:
-    image: prom/prometheus
-    container_name: prometheus1
-    ports:
-      - 9090:9090
-    volumes:
-      - ./.docker/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
-    networks:
-      - app-network
+#  prometheus1:
+#    image: prom/prometheus
+#    container_name: prometheus1
+#    ports:
+#      - 9090:9090
+#    volumes:
+#      - ./.docker/prometheus.yml:/etc/prometheus/prometheus.yml
+#      - prometheus_data:/prometheus
+#    networks:
+#      - app-network
 
 
 #  grafana1:
@@ -226,9 +225,6 @@ volumes:
   grafana_data:
   prometheus_data:
 #  rabbitmq-data:
-#  data01:
+#  elastic_data:
 #    driver: local
-#  data02:
-#    driver: local
-#  data03:
-#    driver: local
+

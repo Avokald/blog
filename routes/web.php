@@ -132,6 +132,53 @@ Route::group(['prefix' => '/api/v1/'], function () {
     });
 });
 
+// TODO Later
+//Route::get('/elastic', function () {
+//    $hosts = [
+//        'es01:9200',
+//    ];
+//
+//    $client = \Elasticsearch\ClientBuilder::create()
+//        ->setHosts($hosts)
+//        ->build();
+//
+//    $params = [
+//        'index' => 'my_index',
+//        'id' => 'my_id',
+//        'body' => ['testField' => 'abc'],
+//    ];
+//
+//    $response = $client->index($params);
+//
+//    dd($response);
+//});
+//
+//Route::get('/el', function () {
+//    $hosts = [
+//        'es01:9200',
+//    ];
+//
+//    $client = \Elasticsearch\ClientBuilder::create()
+//        ->setHosts($hosts)
+//        ->build();
+//
+//    $params = [
+//        'index' => 'my_index',
+//        'body' => [
+//            'query' => [
+//                'match' => [
+//                    'testField' => 'abc',
+//                ],
+//            ],
+//        ],
+//    ];
+//
+//    $response = $client->search($params);
+//
+//    dd($response);
+//
+//});
+
 Route::get('/metrics', function () {
     $registry = new \Prometheus\Storage\Redis([
         'host' => 'redis1',
