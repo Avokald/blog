@@ -5,9 +5,6 @@ language: php
 php:
   - 7.2
 
-addons:
-  mysql: 5.7.22
-
 before_script:
   - cp .env.travis .env
   - composer self-update
@@ -19,6 +16,7 @@ before_script:
 
 before_install:
   - mysql -e 'CREATE DATABASE blog_test;'
+  - before_script: echo "extension = redis.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 
 script:
   - vendor/bin/phpunit
