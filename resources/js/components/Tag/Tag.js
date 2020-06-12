@@ -1,32 +1,36 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import apiRouter from "../../routes/ApiRouter";
+import PostList from "../PostList/PostList";
 
 class Tag extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            tag: {},
+        };
+    }
+
+    componentDidMount() {
+        const { tag } = this.props.match.params;
+        axios.get(apiRouter.route('tag', [tag]))
+            .then((response) => {
+                this.setState({
+                    tag: response.data,
+                });
+            });
+    }
+
     render() {
-        let tag = this.props.tag;
+        let { tag } = this.state;
         return (
             <div>
                 <p>{tag.title}</p>
+                <PostList posts={tag.posts} />
             </div>
         );
     }
 }
 
-const mapStateToProps = (state, props) => {
-    let currentTag = null;
-
-    let slug = props.match.params.tag;
-
-    for (let tag of state.tags) {
-        if (tag.title === slug) {
-            currentTag = tag;
-        }
-    }
-
-    return {
-        tag: currentTag,
-    }
-};
-
-export default connect(mapStateToProps, null)(Tag);
+export default Tag;

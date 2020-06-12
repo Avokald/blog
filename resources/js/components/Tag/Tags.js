@@ -29,9 +29,8 @@ class Tags extends React.Component {
                 { tags.map((tag) => {
                     return (
                         <React.Fragment key={tag.id}>
-                            <div>{tag.title}</div>
-                            <Link to={webRouter.route('tag', tag.title)}>
-                                Go
+                            <Link to={webRouter.route('tag', [tag.title])}>
+                                #{tag.title}
                             </Link>
                             <hr />
                         </React.Fragment>
