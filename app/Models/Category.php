@@ -7,8 +7,24 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @OA\Schema(@OA\Xml(name="Category"))
+ */
 class Category extends Model
 {
+    /**
+     * @OA\Property(property="id", type="integer", format="int64")
+     * @OA\Property(property="title", type="string", example="Категория")
+     * @OA\Property(property="slug", type="string", description="url-friendly title", example="kategoriya")
+     * @OA\Property(property="description", type="string")
+     * @OA\Property(property="image", type="string")
+     * @OA\Property(property="banner", type="string")
+     * @OA\Property(property="posts", type="array", @OA\Items(ref="#/components/schemas/Post"))
+     * @OA\Property(property="created_at", type="string", format="date-time", example="2020-04-13 20:12:01")
+     * @OA\Property(property="updated_at", type="string", format="date-time", example="2020-05-20 12:45:39")
+
+    */
     use Sluggable;
 
     protected $fillable = [

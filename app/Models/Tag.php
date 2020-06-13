@@ -5,11 +5,19 @@ namespace App\Models;
 use App\Http\Controllers\Web\TagController;
 use Illuminate\Database\Eloquent\Model;
 
+
 /**
- * @property string title
+ * @OA\Schema(@OA\Xml(name="Tag"), required={"id", "title"})
  */
 class Tag extends Model
 {
+    /**
+     * @OA\Property(property="id", type="integer", format="int64")
+     * @OA\Property(property="title", type="string")
+     * @OA\Property(property="created_at", type="string", format="date-time", example="2020-04-13 20:12:01")
+     * @OA\Property(property="updated_at", type="string", format="date-time", example="2020-05-20 12:45:39")
+     */
+
     protected $fillable = [
         'title',
     ];

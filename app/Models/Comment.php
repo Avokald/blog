@@ -4,8 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @OA\Schema(@OA\Xml(name="Comment"), required={"id", "content", "user_id", "post_id"})
+ */
 class Comment extends Model
 {
+    /**
+     * @OA\Property(property="id", type="integer", format="int64")
+     * @OA\Property(property="content", type="string")
+     * @OA\Property(property="user_id", type="integer", format="int64")
+     * @OA\Property(property="author", ref="#/components/schemas/User")*
+     * @OA\Property(property="post_id", type="integer", format="int64")
+     * @OA\Property(property="post", ref="#/components/schemas/Post")
+     * @OA\Property(property="created_at", type="string", format="date-time", example="2020-04-13 20:12:01")
+     * @OA\Property(property="updated_at", type="string", format="date-time", example="2020-05-20 12:45:39")
+
+    */
+
     protected $fillable = [
         'content',
         'user_id',

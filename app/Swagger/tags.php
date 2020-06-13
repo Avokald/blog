@@ -1,24 +1,44 @@
 <?php
 
 /**
- * @OA\Tag(
- *   name="pet",
- *   description="Everything about your Pets",
- *   @OA\ExternalDocumentation(
- *     description="Find out more",
- *     url="http://swagger.io"
- *   )
- * )
- * @OA\Tag(
- *   name="store",
- *   description="Access to Petstore orders"
- * )
+ *
  * @OA\Tag(
  *   name="user",
  *   description="Operations about user",
- *   @OA\ExternalDocumentation(
- *     description="Find out more about our store",
- *     url="http://swagger.io"
- *   )
+ * )
+ *
+ * @OA\Tag(
+ *   name="post",
+ *   description="Post methods",
+ * )
+ *
+ * @OA\Tag(
+ *     name="category",
+ *     description="Operations about categories",
+ * )
+ *
+ * @OA\Tag(
+ *     name="tag",
+ *     description="Operations about tags",
+ * )
+ *
+ * @OA\Tag(
+ *     name="comment",
+ *     description="Operations about comments",
+ * )
+ *
+ * @OA\Tag(
+ *     name="post bookmark",
+ *     description="Operations about bookmarks",
+ * )
+ *
+ * @OA\Tag(
+ *     name="post like",
+ *     description="Operations about post likes",
+ * )
+ *
+ * @OA\Tag(
+ *     name="post dislike",
+ *     description="Operations about post dislikes",
  * )
  */

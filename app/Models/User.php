@@ -13,6 +13,17 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable
 {
+    /**
+     * @OA\Property(property="id", type="integer", format="int64")
+     * @OA\Property(property="name", type="string", example="Иван")
+     * @OA\Property(property="slug", type="string", description="url-friendly name", example="ivan")
+     * @OA\Property(property="description", type="string")
+     * @OA\Property(property="image", type="string")
+     * @OA\Property(property="created_at", type="string", format="date-time", example="2020-04-13 20:12:01")
+     * @OA\Property(property="updated_at", type="string", format="date-time", example="2020-05-20 12:45:39")
+     *
+     */
+
     use Notifiable;
 
     use Sluggable;

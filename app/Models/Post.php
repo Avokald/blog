@@ -9,8 +9,34 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+
+/**
+ * @OA\Schema(@OA\Xml(name="Post"), required={"id", "title", "slug", "status", "user_id", "category_id", "created_at", "updated_at"})
+ *
+ */
 class Post extends Model
 {
+    /**
+     * @OA\Property(property="id", type="integer", format="int64")
+     * @OA\Property(property="title", type="string", example="Заголовок")
+     * @OA\Property(property="slug", type="string", description="url-friendly title", example="zagolovok")
+     * @OA\Property(property="excerpt", type="string", description="Short introduction to the content")
+     * @OA\Property(property="content", type="string")
+     * @OA\Property(property="status", type="integer", enum={"STATUS_PUBLISHED = 1", "STATUS_DRAFT = 2"})
+     * @OA\Property(property="view_count", type="integer", format="int64")
+     * @OA\Property(property="bookmarks_count", type="integer", format="int64")
+     * @OA\Property(property="rating", type="integer", format="int64")
+     * @OA\Property(property="user_id", type="integer", format="int64")
+     * @OA\Property(property="author", ref="#/components/schemas/User")
+     * @OA\Property(property="category_id", type="integer", format="int64")
+     * @OA\Property(property="category", ref="#/components/schemas/Category")
+     * @OA\Property(property="tags", type="array", @OA\Items(type="string"))
+     * @OA\Property(property="comments", type="array", @OA\Items(ref="#/components/schemas/Comment"))
+     * @OA\Property(property="created_at", type="string", format="date-time", example="2020-04-13 20:12:01")
+     * @OA\Property(property="updated_at", type="string", format="date-time", example="2020-05-20 12:45:39")
+     *
+     */
+
     use Sluggable;
 
     use WithRelationScopes;
