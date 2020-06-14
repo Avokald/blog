@@ -135,6 +135,7 @@ class PostLikeTest extends TestCase
 
         $response = $this->actingAs($user)
             ->postJson(route(PostLikeController::DESTROY_PATH_NAME), [
+                '_method' => 'delete',
                 'post_id' => $post->id,
             ]);
 

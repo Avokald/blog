@@ -135,6 +135,7 @@ class PostDislikeTest extends TestCase
 
         $response = $this->actingAs($user)
             ->postJson(route(PostDislikeController::DESTROY_PATH_NAME), [
+                '_method' => 'delete',
                 'post_id' => $post->id,
             ]);
 
