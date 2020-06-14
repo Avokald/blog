@@ -16,13 +16,13 @@ Route::group(['prefix' => '/api/v1/'], function () {
 
     // User profile
     Route::group([], function () {
-        Route::get('/user/{sluggedId}', 'Web\UserController@show')
+        Route::get('/users/{sluggedId}', 'Web\UserController@show')
             ->name(\App\Http\Controllers\Web\UserController::SHOW_PATH_NAME);
 
-        Route::get('/user/{sluggedId}/top/{timeframe}', 'Web\UserController@top')
+        Route::get('/users/{sluggedId}/top/{timeframe}', 'Web\UserController@top')
             ->name(\App\Http\Controllers\Web\UserController::TOP_PATH_NAME);
 
-        Route::get('/user/{sluggedId}/comments', 'Web\UserController@comments')
+        Route::get('/users/{sluggedId}/comments', 'Web\UserController@comments')
             ->name(\App\Http\Controllers\Web\UserController::COMMENTS_PATH_NAME);
 
 
@@ -33,26 +33,26 @@ Route::group(['prefix' => '/api/v1/'], function () {
                 \App\Http\Middleware\UserProfileRestricted::class,
             ]
         ], function () {
-            Route::get('/user/{sluggedId}/drafts', 'Web\UserController@drafts')
+            Route::get('/users/{sluggedId}/drafts', 'Web\UserController@drafts')
                 ->name(\App\Http\Controllers\Web\UserController::DRAFTS_PATH_NAME);
 
-            Route::get('/user/{sluggedId}/bookmarks/posts', 'Web\BookmarkController@index')
+            Route::get('/users/{sluggedId}/bookmarks/posts', 'Web\BookmarkController@index')
                 ->name(\App\Http\Controllers\Web\BookmarkController::INDEX_PATH_NAME);
 
-            Route::get('/user/{sluggedId}/post_likes', 'Web\PostLikeController@index')
+            Route::get('/users/{sluggedId}/post_likes', 'Web\PostLikeController@index')
                 ->name(\App\Http\Controllers\Web\PostLikeController::INDEX_PATH_NAME);
 
-            Route::get('/user/{sluggedId}/post_dislikes', 'Web\PostDislikeController@index')
+            Route::get('/users/{sluggedId}/post_dislikes', 'Web\PostDislikeController@index')
                 ->name(\App\Http\Controllers\Web\PostDislikeController::INDEX_PATH_NAME);
         });
     });
 
 
     // Posts
-    Route::get('/post/{slugged_id}', 'Web\PostController@show')
+    Route::get('/posts/{slugged_id}', 'Web\PostController@show')
         ->name(\App\Http\Controllers\Web\PostController::SHOW_PATH_NAME);
 
-    Route::post('/post', 'Web\PostController@store')
+    Route::post('/posts', 'Web\PostController@store')
         ->name(\App\Http\Controllers\Web\PostController::STORE_PATH_NAME);
 
     Route::get('/page/new', 'Web\PostController@newArticles')
@@ -63,7 +63,7 @@ Route::group(['prefix' => '/api/v1/'], function () {
 
 
     // Comments
-    Route::post('/comments/{postId}/store', 'Web\CommentController@store')
+    Route::post('/comments/{postId}', 'Web\CommentController@store')
         ->name(\App\Http\Controllers\Web\CommentController::STORE_PATH_NAME);
 
     //Route::get('/comments/load_responses/{commentId}', 'Web\CommentController@loadResponses')
@@ -72,26 +72,26 @@ Route::group(['prefix' => '/api/v1/'], function () {
 
     // Bookmarks
     // FIXME correct rest path names and request types
-    Route::post('/bookmarks/store', 'Web\BookmarkController@store')
+    Route::post('/bookmarks', 'Web\BookmarkController@store')
         ->name(\App\Http\Controllers\Web\BookmarkController::STORE_PATH_NAME);
 
-    Route::post('/bookmarks/destroy/', 'Web\BookmarkController@destroy')
+    Route::delete('/bookmarks', 'Web\BookmarkController@destroy')
         ->name(\App\Http\Controllers\Web\BookmarkController::DESTROY_PATH_NAME);
 
 
     // Likes
-    Route::post('/post_likes/store', 'Web\PostLikeController@store')
+    Route::post('/post_likes', 'Web\PostLikeController@store')
         ->name(\App\Http\Controllers\Web\PostLikeController::STORE_PATH_NAME);
 
-    Route::post('/post_likes/destroy/', 'Web\PostLikeController@destroy')
+    Route::delete('/post_likes', 'Web\PostLikeController@destroy')
         ->name(\App\Http\Controllers\Web\PostLikeController::DESTROY_PATH_NAME);
 
 
     // Dislikes
-    Route::post('/post_dislikes/store', 'Web\PostDislikeController@store')
+    Route::post('/post_dislikes', 'Web\PostDislikeController@store')
         ->name(\App\Http\Controllers\Web\PostDislikeController::STORE_PATH_NAME);
 
-    Route::post('/post_dislikes/destroy/', 'Web\PostDislikeController@destroy')
+    Route::delete('/post_dislikes', 'Web\PostDislikeController@destroy')
         ->name(\App\Http\Controllers\Web\PostDislikeController::DESTROY_PATH_NAME);
 
 
@@ -109,7 +109,7 @@ Route::group(['prefix' => '/api/v1/'], function () {
 
 
     // Categories
-    Route::get('/category/{category}/{timeframe?}', 'Web\CategoryController@show')
+    Route::get('/categories/{category}/{timeframe?}', 'Web\CategoryController@show')
         ->name(\App\Http\Controllers\Web\CategoryController::SHOW_PATH_NAME);
 
     // TODO Refactor into separate controller
@@ -129,6 +129,10 @@ Route::group(['prefix' => '/api/v1/'], function () {
 
     Route::get('/misc/tags', function () {
         return \App\Models\Tag::all();
+    });
+
+    Route::get('/test', function () {
+        return view('home');
     });
 });
 
