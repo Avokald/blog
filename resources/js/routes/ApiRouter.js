@@ -5,16 +5,16 @@ const apiRouter = new Router({
 
     frontpage:  '/api/v1/page/frontpage/',
     pageNew: '/api/v1/page/new/',
-    post: '/api/v1/post/{postId}',
+    post: '/api/v1/posts/{postId}',
 
-    user: '/api/v1/user/{userId}/',
-    userComments: '/api/v1/user/{userId}/comments',
-    userDrafts: '/api/v1/user/{userId}/drafts',
-    userBookmarkPosts: '/api/v1/user/{userId}/bookmarks/posts',
+    user: '/api/v1/users/{userId}/',
+    userComments: '/api/v1/users/{userId}/comments',
+    userDrafts: '/api/v1/users/{userId}/drafts',
+    userBookmarkPosts: '/api/v1/users/{userId}/bookmarks/posts',
     users: '/api/v1/misc/users',
 
-    userBookmarkComments: '/api/v1/user/{userId}/bookmarks/comments',
-    category: '/api/v1/category/{categorySlug}',
+    userBookmarkComments: '/api/v1/users/{userId}/bookmarks/comments',
+    category: '/api/v1/categories/{categorySlug}',
     categories: '/api/v1/misc/categories',
 
     tag: '/api/v1/tags/{tag}',
