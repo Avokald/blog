@@ -1,7 +1,7 @@
 // https://github.com/Avokald/opendota-web/blob/master/src/actions/action.js
 import querystring from 'querystring';
 
-export default function action(type, link, params = {}) {
+export default function action(type, link, params = {}, data = {}) {
     return (dispatch) => {
         const url = `${link}?${typeof params === 'string' ? params.substring(1) : querystring.stringify(params)}`;
         const getDataStart = () => ({
@@ -15,7 +15,7 @@ export default function action(type, link, params = {}) {
             type: `ERROR/${type}`,
             error,
         });
-        const fetchDataWithRetry = delay => fetch(url)
+        const fetchDataWithRetry = delay => fetch(url, data)
             .then((response) => {
                 if (!response.ok || !response.status) {
                     const err = new Error();
