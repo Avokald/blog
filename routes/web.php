@@ -71,7 +71,6 @@ Route::group(['prefix' => '/api/v1/'], function () {
 
 
     // Bookmarks
-    // FIXME correct rest path names and request types
     Route::post('/bookmarks', 'Web\BookmarkController@store')
         ->name(\App\Http\Controllers\Web\BookmarkController::STORE_PATH_NAME);
 
@@ -112,12 +111,9 @@ Route::group(['prefix' => '/api/v1/'], function () {
     Route::get('/categories/{category}/{timeframe?}', 'Web\CategoryController@show')
         ->name(\App\Http\Controllers\Web\CategoryController::SHOW_PATH_NAME);
 
-    // TODO Refactor into separate controller
-    Route::get('/metadata', function () {
-        return [
-            'user' => request()->user(),
-        ];
-    });
+
+    Route::get('/metadata', 'Web\MetadataController@index')
+        ->name(\App\Http\Controllers\Web\MetadataController::INDEX_PATH_NAME);
 
     Route::get('/misc/users', function () {
         return \App\Models\User::all();
