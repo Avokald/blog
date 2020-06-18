@@ -14,6 +14,9 @@
                         </div>
                     @endif
 
+                    <p>
+                        @csrf
+                    </p>
                     You are logged in!
                 </div>
             </div>

@@ -19,7 +19,9 @@ const Header = (props) => (
     <StyledHeader>
         <Link to="/">Home</Link>
         <StyledRightHeader>
-            <form action="/logout" method="post" id="logout" hidden="hidden" />
+            <form action="/logout" method="post" id="logout" hidden="hidden" >
+                <input type="hidden" name="_token" value={document.querySelector('meta[name="csrf_token"]').content} />
+            </form>
             { (props.user && (
                 <p>{props.user.name} &nbsp;
                     <input type="submit" form="logout" className="btn btn-info" value="Logout" />
