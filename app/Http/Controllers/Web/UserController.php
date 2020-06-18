@@ -42,24 +42,27 @@ class UserController extends Controller
     }
 
     /**
-     *  @OA\Get(path="/u/{sluggedId}",
+     *  @OA\Get(path="/api/v1/users/{id}",
      *   tags={"user"},
-     *   summary="Get user by <id - slug>",
+     *   summary="Get user profile data by id",
      *   description="",
-     *   operationId="getUserBySluggedId",
+     *   operationId="getUserById",
      *   @OA\Parameter(
-     *     name="sluggedId",
+     *     name="id",
      *     in="path",
-     *     description="The name that needs to be fetched. Use 2-testuser for testing. ",
+     *     description="The id of user that needs to be fetched",
      *     required=true,
      *     @OA\Schema(
      *         type="string"
      *     )
      *   ),
-     *   @OA\Response(response=200, description="successful operation", @OA\Schema(ref="#/components/schemas/User")),
-     *   @OA\Response(response=307, description="incorrect slug but valid id"),
+     *   @OA\Response(response=200, description="successful operation", @OA\JsonContent(
+     *            type="array",
+     *            @OA\Items(ref="#/components/schemas/User")
+     *         )),
      *   @OA\Response(response=404, description="User not found")
      * )
+     *
      * Display the specified resource.
      *
      * @param  string $profile
