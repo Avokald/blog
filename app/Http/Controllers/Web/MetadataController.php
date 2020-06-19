@@ -25,13 +25,8 @@ class MetadataController extends Controller
                 [$user->id]);
             $dislikes = \Illuminate\Support\Facades\DB::select('SELECT post_id FROM post_dislikes WHERE user_id = ?',
                 [$user->id]);
-            $bookmarks = \Illuminate\Support\Facades\DB::select('SELECT post_id FROM bookmarks WHERE user_id = ?',
-                [$user->id]);
 
             // Map results into a simple array otherwise they are objects that contain one property - post_id
-            $bookmarks = array_map(function ($bookmark) {
-                return $bookmark->post_id;
-            }, $bookmarks);
 
             $likes = array_map(function ($like) {
                 return $like->post_id;
@@ -46,7 +41,7 @@ class MetadataController extends Controller
             'user' => $user,
             'liked_posts' => $likes,
             'disliked_posts' => $dislikes,
-            'bookmarked_posts' => $bookmarks,
+            'bookmarked_posts' => $user->getBookmarkedPostsId(),
         ];
     }
 

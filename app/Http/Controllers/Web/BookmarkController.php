@@ -56,7 +56,7 @@ class BookmarkController extends Controller
             ]);
         }
 
-        return Response::HTTP_OK;
+        return $user->getBookmarkedPostsId();
     }
 
     /**
@@ -81,6 +81,7 @@ class BookmarkController extends Controller
             $bookmark->delete();
         }
 
-        return Response::HTTP_OK;
+
+        return $user->getBookmarkedPostsId();
     }
 }

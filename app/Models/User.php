@@ -7,6 +7,7 @@ use App\Traits\WithRelationScopes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @OA\Schema(@OA\Xml(name="User"))
@@ -165,5 +166,15 @@ class User extends Authenticatable
             $link = $this->id;
         }
         return route(UserController::SHOW_PATH_NAME, $link);
+    }
+
+    public function getBookmarkedPostsId()
+    {
+        $bookmarks = DB::select('SELECT post_id FROM bookmarks WHERE user_id = ?', [$this->id]);
+        $bookmarks = array_map(function ($bookmark) {
+                return $bookmark->post_id;
+        }, $bookmarks);
+
+        return $bookmarks;
     }
 }
