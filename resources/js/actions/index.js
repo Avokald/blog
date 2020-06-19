@@ -1,18 +1,34 @@
 import action from './action';
-import ApiRequest from "../routes/ApiRouter";
+import ApiRouter from "../routes/ApiRouter";
 
-export const getMetadata = () => action('metadata', ApiRequest.route('metadata'));
+export const getMetadata = () => action('metadata', ApiRouter.route('metadata'));
 
-export const getUserProfile = (userId) => action('user', ApiRequest.route('user', [userId]));
+export const getUserProfile = (userId) => action('user', ApiRouter.route('user', [userId]));
 
-export const getUserComments = (userId) => action('userComments', ApiRequest.route('userComments', [userId]));
+export const getUserComments = (userId) => action('userComments', ApiRouter.route('userComments', [userId]));
 
-export const getUserDrafts = (userId) => action('userDrafts', ApiRequest.route('userDrafts', [userId]));
+export const getUserDrafts = (userId) => action('userDrafts', ApiRouter.route('userDrafts', [userId]));
 
-export const getUserBookmarkPosts = (userId) => action('userBookmarkPosts', ApiRequest.route('userBookmarkPosts', [userId]));
+export const getUserBookmarkPosts = (userId) => action('userBookmarkPosts', ApiRouter.route('userBookmarkPosts', [userId]));
 
-export const getCategories = () => action('categories', ApiRequest.route('categories'));
+export const getCategories = () => action('categories', ApiRouter.route('categories'));
 
-export const getPost = (postId) => action('post', ApiRequest.route('post', [postId]));
+export const getPost = (postId) => action('post', ApiRouter.route('post', [postId]));
 
-export const getCategory = (slug) => action('category', ApiRequest.route('category', [slug]));
+export const getCategory = (slug) => action('category', ApiRouter.route('category', [slug]));
+
+export const storeBookmark = (postId) => async (dispatch) => {
+    let result = await axios.post(ApiRouter.route('bookmarkStore'), {
+        post_id: postId,
+    });
+    dispatch({type: 'userBookmarkPostIds', payload: result.data});
+};
+
+export const deleteBookmark = (postId) => async (dispatch) => {
+    let result = await axios.post(ApiRouter.route('bookmarkDelete'), {
+        _method: 'delete',
+        post_id: postId,
+
+    });
+    dispatch({type: 'userBookmarkPostIds', payload: result.data});
+};

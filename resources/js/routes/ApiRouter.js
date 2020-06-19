@@ -19,6 +19,9 @@ const apiRouter = new Router({
 
     tag: '/api/v1/tags/{tag}',
     tags: '/api/v1/misc/tags',
+
+    bookmarkStore: '/api/v1/bookmarks',
+    bookmarkDelete: '/api/v1/bookmarks',
 }, true, process.env.MIX_APP_API_HOST);
 
 export default apiRouter;

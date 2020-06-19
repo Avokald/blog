@@ -68,6 +68,8 @@ const ButtonToTop = styled.div`
 
 store.dispatch(getMetadata());
 store.dispatch(getCategories());
+axios.defaults.params = {};
+axios.defaults.params['_token'] = document.querySelector('meta[name="csrf_token"]').content;
 
 const app = (
     <Provider store={store}>

@@ -3,6 +3,7 @@ import reducer from './reducer';
 import postsReducer from './posts';
 import tagsReducer from './tags';
 import usersReducer from './users';
+import metadata from './metadata';
 
 
 const categoriesInitialState = [
@@ -42,7 +43,7 @@ const categoriesInitialState = [
 ];
 
 const appReducer = combineReducers({
-    metadata: reducer('metadata'),
+    metadata: metadata,
 
     posts: postsReducer,
     categories: reducer('categories', categoriesInitialState),
