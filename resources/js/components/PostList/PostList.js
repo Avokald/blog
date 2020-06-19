@@ -51,10 +51,13 @@ class PostListElement extends React.Component {
 
         const handleBookmarkStore = () => this.props.handleBookmarkStore(post.id);
         const handleBookmarkDelete = () => this.props.handleBookmarkDelete(post.id);
+        const bookmarkIconNotActive = (<i className="far fa-bookmark"></i>);
+        const bookmarkIconActive = (<i className="fas fa-bookmark"></i>);
         const isPostBookmarked = this.props.bookmarkedPosts && this.props.bookmarkedPosts.includes(post.id);
 
         const currentBookmarkAction = isPostBookmarked ? handleBookmarkDelete : handleBookmarkStore;
         const currentBookmarkText = isPostBookmarked ? 'Unbookmark' : 'Bookmark';
+        const currentBookmarkIcon = isPostBookmarked ? bookmarkIconActive : bookmarkIconNotActive;
 
         return (
             <StyledPostListElement className="card">
@@ -81,7 +84,7 @@ class PostListElement extends React.Component {
                     <p>Rating: {post.rating || '-'}</p>
                     <p>Dislike &#128078;</p>
                     <button onClick={currentBookmarkAction}>{currentBookmarkText} &#128278;
-                        <i className="fa fa-bookmark"></i>
+                        {currentBookmarkIcon}
                     </button>
                     <p>Bookmarks count: {post.bookmarks_count}</p>
                     <p>Comments count: {post.comments_count}</p>

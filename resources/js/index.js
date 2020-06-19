@@ -7,6 +7,7 @@ import store from './store/index';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import 'normalize.css/normalize.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import styled from 'styled-components';
 import Sidebar from './components/Sidebar';
 import Header from "./components/Header";
