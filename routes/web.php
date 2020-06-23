@@ -130,6 +130,12 @@ Route::group(['prefix' => '/api/v1/'], function () {
     Route::get('/test', function () {
         return view('home');
     });
+
+    Route::post('/upload/file', 'Web\UploadController@file')
+        ->name(\App\Http\Controllers\Web\UploadController::FILE_PATH_NAME);
+
+    Route::post('/upload/image', 'Web\UploadController@image')
+        ->name(\App\Http\Controllers\Web\UploadController::IMAGE_PATH_NAME);
 });
 
 // TODO Later
