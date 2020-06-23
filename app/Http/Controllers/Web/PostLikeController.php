@@ -56,7 +56,7 @@ class PostLikeController extends Controller
             ]);
         }
 
-        return Response::HTTP_OK;
+        return $user->getLikedPostsId();
     }
 
     /**
@@ -81,6 +81,6 @@ class PostLikeController extends Controller
             $postLike->delete();
         }
 
-        return Response::HTTP_OK;
+        return $user->getLikedPostsId();
     }
 }

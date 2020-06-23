@@ -177,4 +177,25 @@ class User extends Authenticatable
 
         return $bookmarks;
     }
+
+    public function getLikedPostsId()
+    {
+        $likedPosts = DB::select('SELECT post_id FROM post_likes WHERE user_id = ?', [$this->id]);
+        $likedPosts = array_map(function ($post) {
+                return $post->post_id;
+        }, $likedPosts);
+
+        return $likedPosts;
+    }
+
+
+    public function getDislikedPostsId()
+    {
+        $dislikedPosts = DB::select('SELECT post_id FROM post_dislikes WHERE user_id = ?', [$this->id]);
+        $dislikedPosts = array_map(function ($post) {
+                return $post->post_id;
+        }, $dislikedPosts);
+
+        return $dislikedPosts;
+    }
 }

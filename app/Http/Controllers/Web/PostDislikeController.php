@@ -56,7 +56,7 @@ class PostDislikeController extends Controller
             ]);
         }
 
-        return Response::HTTP_OK;
+        return $user->getDislikedPostsId();
     }
 
     /**
@@ -81,6 +81,6 @@ class PostDislikeController extends Controller
             $postDislike->delete();
         }
 
-        return Response::HTTP_OK;
+        return $user->getDislikedPostsId();
     }
 }
