@@ -32,3 +32,34 @@ export const deleteBookmark = (postId) => async (dispatch) => {
     });
     dispatch({type: 'userBookmarkPostIds', payload: result.data});
 };
+
+export const storePostLike = (postId) => async (dispatch) => {
+    let result = await axios.post(ApiRouter.route('postLikeStore'), {
+        post_id: postId,
+    });
+    dispatch({type: 'userPostLikeIds', payload: result.data});
+};
+
+export const deletePostLike = (postId) => async (dispatch) => {
+    let result = await axios.post(ApiRouter.route('postLikeDelete'), {
+        _method: 'delete',
+        post_id: postId,
+    });
+    dispatch({type: 'userPostLikeIds', payload: result.data});
+};
+
+
+export const storePostDislike = (postId) => async (dispatch) => {
+    let result = await axios.post(ApiRouter.route('postDislikeStore'), {
+        post_id: postId,
+    });
+    dispatch({type: 'userPostDislikeIds', payload: result.data});
+};
+
+export const deletePostDislike = (postId) => async (dispatch) => {
+    let result = await axios.post(ApiRouter.route('postDislikeDelete'), {
+        _method: 'delete',
+        post_id: postId,
+    });
+    dispatch({type: 'userPostDislikeIds', payload: result.data});
+};

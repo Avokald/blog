@@ -3,7 +3,14 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
 import webRouter from "../../routes/WebRouter";
-import {deleteBookmark, storeBookmark} from "../../actions";
+import {
+    deleteBookmark,
+    deletePostDislike,
+    deletePostLike,
+    storeBookmark,
+    storePostDislike,
+    storePostLike
+} from "../../actions";
 
 class PostList extends Component {
 
@@ -12,6 +19,10 @@ class PostList extends Component {
 
         this.bookmarkStore = this.bookmarkStore.bind(this);
         this.bookmarkDelete = this.bookmarkDelete.bind(this);
+        this.postLikeStore = this.postLikeStore.bind(this);
+        this.postLikeDelete = this.postLikeDelete.bind(this);
+        this.postDislikeStore = this.postDislikeStore.bind(this);
+        this.postUnDislikeDelete = this.postUnDislikeDelete.bind(this);
     }
 
     bookmarkStore(postId) {
@@ -22,6 +33,22 @@ class PostList extends Component {
         this.props.deleteBookmark(postId);
     }
 
+    postLikeStore(postId) {
+        this.props.storePostLike(postId);
+    }
+
+    postLikeDelete(postId) {
+        this.props.deletePostLike(postId);
+    }
+
+    postDislikeStore(postId) {
+        this.props.storePostDislike(postId);
+    }
+
+    postUnDislikeDelete(postId) {
+        this.props.deletePostDislike(postId);
+    }
+
     render() {
         return (
             <div>
@@ -30,8 +57,14 @@ class PostList extends Component {
                             <PostListElement key={post.id}
                                              post={post}
                                              bookmarkedPosts={this.props.bookmarkedPosts}
+                                             likedPosts={this.props.likedPosts}
+                                             dislikedPosts={this.props.dislikedPosts}
                                              handleBookmarkStore={this.bookmarkStore}
                                              handleBookmarkDelete={this.bookmarkDelete}
+                                             handlePostLikeStore={this.postLikeStore}
+                                             handlePostLikeDelete={this.postLikeDelete}
+                                             handlePostDislikeStore={this.postDislikeStore}
+                                             handlePostDislikeDelete={this.postUnDislikeDelete}
                             />
                         )
                     })
@@ -55,9 +88,29 @@ class PostListElement extends React.Component {
         const bookmarkIconActive = (<i className="fas fa-bookmark"></i>);
         const isPostBookmarked = this.props.bookmarkedPosts && this.props.bookmarkedPosts.includes(post.id);
 
+        const handlePostLikeStore = () => this.props.handlePostLikeStore(post.id);
+        const handlePostLikeDelete = () => this.props.handlePostLikeDelete(post.id);
+        const postLikeIconActive = (<i className="fas fa-thumbs-up"></i>);
+        const postLikeIconNotActive = (<i className="far fa-thumbs-up"></i>);
+        const isPostLiked = this.props.likedPosts && this.props.likedPosts.includes(post.id);
+
+        const handlePostDislikeStore = () => this.props.handlePostDislikeStore(post.id);
+        const handlePostDislikeDelete = () => this.props.handlePostDislikeDelete(post.id);
+        const postDislikeIconActive = (<i className="fas fa-thumbs-down"></i>);
+        const postDislikeIconNotActive = (<i className="far fa-thumbs-down"></i>);
+        const isPostDisliked = this.props.dislikedPosts && this.props.dislikedPosts.includes(post.id);
+
         const currentBookmarkAction = isPostBookmarked ? handleBookmarkDelete : handleBookmarkStore;
         const currentBookmarkText = isPostBookmarked ? 'Unbookmark' : 'Bookmark';
         const currentBookmarkIcon = isPostBookmarked ? bookmarkIconActive : bookmarkIconNotActive;
+
+        const currentPostLikeAction = isPostLiked ? handlePostLikeDelete : handlePostLikeStore;
+        const currentPostLikeText = isPostLiked ? 'Unlike' : 'Like';
+        const currentPostLikeIcon = isPostLiked ? postLikeIconActive : postLikeIconNotActive;
+
+        const currentPostDislikeAction = isPostDisliked ? handlePostDislikeDelete : handlePostDislikeStore;
+        const currentPostDislikeText = isPostDisliked ? 'Undislike' : 'Dislike';
+        const currentPostDislikeIcon = isPostDisliked ? postDislikeIconActive : postDislikeIconNotActive;
 
         return (
             <StyledPostListElement className="card">
@@ -80,13 +133,20 @@ class PostListElement extends React.Component {
                 <div href={post.link} className="card-body">
                     <h2>Title: {post.title}</h2>
                     <p>Excerpt: {post.excerpt}</p>
-                    <p>Like &#x1f44d;</p>
+                    <button onClick={currentPostLikeAction}>{currentPostLikeText}
+                        {currentPostLikeIcon}
+                    </button>
+
                     <p>Rating: {post.rating || '-'}</p>
-                    <p>Dislike &#128078;</p>
-                    <button onClick={currentBookmarkAction}>{currentBookmarkText} &#128278;
+
+                     <button onClick={currentPostDislikeAction}>{currentPostDislikeText}
+                        {currentPostDislikeIcon}
+                    </button>
+
+                    <button onClick={currentBookmarkAction}>{currentBookmarkText}
                         {currentBookmarkIcon}
                     </button>
-                    <p>Bookmarks count: {post.bookmarks_count}</p>
+                   <p>Bookmarks count: {post.bookmarks_count}</p>
                     <p>Comments count: {post.comments_count}</p>
                     <p>TODO Options: hide | report | ignore author | ignore category</p>
                     <Link to={webRouter.route('post', [post.id + '-' + post.slug])}>Go</Link>
@@ -105,6 +165,8 @@ const mapStateToProps = (state, props) => {
     } else {
         return {
             bookmarkedPosts: state.metadata.data.bookmarked_posts,
+            likedPosts: state.metadata.data.liked_posts,
+            dislikedPosts: state.metadata.data.disliked_posts,
         };
     }
 };
@@ -112,6 +174,10 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => ({
     storeBookmark: (postId) => dispatch(storeBookmark(postId)),
     deleteBookmark: (postId) => dispatch(deleteBookmark(postId)),
+    storePostLike: (postId) => dispatch(storePostLike(postId)),
+    deletePostLike: (postId) => dispatch(deletePostLike(postId)),
+    storePostDislike: (postId) => dispatch(storePostDislike(postId)),
+    deletePostDislike: (postId) => dispatch(deletePostDislike(postId)),
 
 });
 

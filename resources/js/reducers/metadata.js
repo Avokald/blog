@@ -9,8 +9,26 @@ const action = (type, initialData) => (state = {
                 data: {
                     ...state.data,
                     bookmarked_posts: action.payload,
-                }
+                },
             };
+        case 'userPostLikeIds':
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    liked_posts: action.payload,
+                },
+            };
+
+        case 'userPostDislikeIds':
+            return {
+                ...state,
+                data: {
+                    ...state.data,
+                    disliked_posts: action.payload,
+                },
+            };
+
         case `REQUEST/${type}`:
             return {
                 ...state,

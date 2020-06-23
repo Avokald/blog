@@ -22,6 +22,12 @@ const apiRouter = new Router({
 
     bookmarkStore: '/api/v1/bookmarks',
     bookmarkDelete: '/api/v1/bookmarks',
+
+    postLikeStore: '/api/v1/post_likes',
+    postLikeDelete: '/api/v1/post_likes',
+
+    postDislikeStore: '/api/v1/post_dislikes',
+    postDislikeDelete: '/api/v1/post_dislikes',
 }, true, process.env.MIX_APP_API_HOST);
 
 export default apiRouter;
