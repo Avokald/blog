@@ -3,7 +3,6 @@
 namespace App\Helpers;
 
 
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Intervention\Image\Facades\Image;
@@ -21,23 +20,6 @@ class UploadHelper {
         }
         $this->fileName = substr($random, 4) . '.';
     }
-
-    public function uploadProductImage($image, $newWidth = null, $newHeight = null) {
-        $path = 'uploads/products/';
-
-        $filename = Storage::url($image);
-
-        $image_resize = File::copy($filename, $path.'2123.jpg');
-
-        if ($newWidth && $newHeight) {
-            $image_resize->fit($newWidth, $newHeight);
-        }
-
-        $image_resize->save(public_path($path .$filename));
-
-        return URL::to('/') . '/' . $path . $filename;
-    }
-
 
     public function uploadImage($image, $newWidth = null, $newHeight = null) {
         $filename = preg_replace('~\s~', '',  $this->fileName . mb_strtolower($image->getClientOriginalExtension()));
