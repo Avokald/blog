@@ -31,6 +31,18 @@ class UserController extends Controller
     }
 
     /**
+     * @OA\Post(path="/api/v1/users",
+     *   tags={"user"},
+     *   summary="Create new user",
+     *   description="",
+     *   operationId="createNewUser",
+     *
+     *   @OA\Response(response=200, description="successful operation", @OA\MediaType(
+     *     mediaType="application/json",
+     *     @OA\Schema(ref="#/components/schemas/User")
+     *   )),
+     * )
+     *
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -56,10 +68,10 @@ class UserController extends Controller
      *         type="string"
      *     )
      *   ),
-     *   @OA\Response(response=200, description="successful operation", @OA\JsonContent(
-     *            type="array",
-     *            @OA\Items(ref="#/components/schemas/User")
-     *         )),
+     *   @OA\Response(response=200, description="successful operation", @OA\MediaType(
+     *     mediaType="application/json",
+     *     @OA\Schema(ref="#/components/schemas/User")
+     *   )),
      *   @OA\Response(response=404, description="User not found")
      * )
      *
@@ -99,6 +111,35 @@ class UserController extends Controller
         return $userObserved->drafts;
     }
 
+    /**
+     * @OA\Get(path="/api/v1/users/{id}/comments",
+     *   tags={"user"},
+     *   summary="Get user comments",
+     *   description="",
+     *   operationId="getUserComments",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="The id of user",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="string"
+     *     )
+     *   ),
+     *   @OA\Response(response=200, description="successful operation", @OA\JsonContent(
+     *            type="array",
+     *            @OA\Items(ref="#/components/schemas/Comment")
+     *         )),
+     *   @OA\Response(response=404, description="User not found"),
+     * )
+     *
+     *
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
     const COMMENTS_PATH_NAME = 'user.profile.comments';
     public function comments(string $profile)
     {
@@ -135,6 +176,37 @@ class UserController extends Controller
     }
 
     /**
+     * @OA\Put(path="/api/v1/users/{id}",
+     *   tags={"user"},
+     *   summary="Update user profile data by id",
+     *   description="",
+     *   operationId="updateUserById",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="The id of user that needs to be updated",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="string"
+     *     )
+     *   ),
+     *   @OA\Response(response=200, description="successful operation", @OA\MediaType(
+     *     mediaType="application/json",
+     *     @OA\Schema(ref="#/components/schemas/User")
+     *   )),
+     *   @OA\Response(response=404, description="User not found"),
+     *
+     *   @OA\RequestBody(
+     *       required=true,
+     *       description="Updated user object",
+     *       @OA\MediaType(
+     *           mediaType="application/json",
+     *           @OA\Schema(ref="#/components/schemas/User")
+     *       )
+     *   ),
+     * )
+     *
+     *
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
@@ -147,6 +219,27 @@ class UserController extends Controller
     }
 
     /**
+     * @OA\Delete(path="/api/v1/users/{id}",
+     *   tags={"user"},
+     *   summary="Delete user by id",
+     *   description="",
+     *   operationId="deleteUserById",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="The id of user that needs to be deleted",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="string"
+     *     )
+     *   ),
+     *   @OA\Response(response=200, description="successful operation", @OA\MediaType(
+     *     mediaType="application/json",
+     *     @OA\Schema(ref="#/components/schemas/User")
+     *   )),
+     *   @OA\Response(response=404, description="User not found"),
+     * )
+     *
      * Remove the specified resource from storage.
      *
      * @param  int $id

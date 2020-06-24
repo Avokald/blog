@@ -11,6 +11,31 @@ use Symfony\Component\HttpFoundation\Response;
 class BookmarkController extends Controller
 {
     /**
+     *
+     *
+     * @OA\Get(path="/api/v1/users/{id}/bookmarks",
+     *   tags={"user"},
+     *   summary="Get user bookmarked posts",
+     *   description="",
+     *   operationId="getUserBookmarks",
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="The id of user",
+     *     required=true,
+     *     @OA\Schema(
+     *         type="string"
+     *     )
+     *   ),
+     *   @OA\Response(response=200, description="successful operation", @OA\JsonContent(
+     *            type="array",
+     *            @OA\Items(ref="#/components/schemas/Bookmark")
+     *         )),
+     *   @OA\Response(response=404, description="User not found"),
+     * )
+     *
+     *
+     *
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
