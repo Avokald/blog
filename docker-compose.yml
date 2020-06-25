@@ -82,17 +82,17 @@ services:
 
 
 
-#  redis1:
-#    image: redis:alpine
-#    container_name: redis1
-#    ports:
-#     - "6379:6379"
-#    volumes:
-#     - ./.docker/redis-data:/var/lib/redis
-#    networks:
-#      - app-network
-#    environment:
-#     - REDIS_REPLICATION_MODE=master
+  redis1:
+   image: redis:alpine
+   container_name: redis1
+   ports:
+    - "6379:6379"
+   volumes:
+    - ./.docker/redis-data:/var/lib/redis
+   networks:
+     - app-network
+   environment:
+    - REDIS_REPLICATION_MODE=master
 
 #  es01:
 #    image: elasticsearch:7.6.2
@@ -168,44 +168,44 @@ services:
 #    networks:
 #      - elastic
 
-#  prometheus1:
-#    image: prom/prometheus
-#    container_name: prometheus1
-#    ports:
-#      - 9090:9090
-#    volumes:
-#      - ./.docker/prometheus.yml:/etc/prometheus/prometheus.yml
-#      - prometheus_data:/prometheus
-#    networks:
-#      - app-network
+  prometheus1:
+   image: prom/prometheus
+   container_name: prometheus1
+   ports:
+     - 9090:9090
+   volumes:
+     - ./.docker/prometheus.yml:/etc/prometheus/prometheus.yml
+     - prometheus_data:/prometheus
+   networks:
+     - app-network
 
 
-#  grafana1:
-#    image: grafana/grafana
-#    container_name: grafana1
-#    env_file:
-#      - ./.docker/grafana/config.monitoring
-#    volumes:
-#      - grafana_data:/var/lib/grafana
-#      - ./.docker/grafana/prov/:/etc/grafana/provisioning/
-#    depends_on:
-#      - prometheus1
-#    ports:
-#      - 3020:3000
-#    networks:
-#      - app-network
+  grafana1:
+   image: grafana/grafana
+   container_name: grafana1
+   env_file:
+     - ./.docker/grafana/config.monitoring
+   volumes:
+     - grafana_data:/var/lib/grafana
+     - ./.docker/grafana/prov/:/etc/grafana/provisioning/
+   depends_on:
+     - prometheus1
+   ports:
+     - 3020:3000
+   networks:
+     - app-network
 
-#  node-exporter:
-#    container_name: node_exporter
-#    image: prom/node-exporter
-#    volumes:
-#      - /proc:/host/proc:ro
-#      - /sys:/host/sys:ro
-#      - /:/rootfs:ro
-#    ports:
-#      - 9100:9100
-#    networks:
-#      - app-network
+  node-exporter:
+   container_name: node_exporter
+   image: prom/node-exporter
+   volumes:
+     - /proc:/host/proc:ro
+     - /sys:/host/sys:ro
+     - /:/rootfs:ro
+   ports:
+     - 9100:9100
+   networks:
+     - app-network
 
 
 #Docker Networks

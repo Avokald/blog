@@ -27,11 +27,10 @@ class UploadTest extends TestCase
         $response->assertSee('url');
 
         $filepath = explode('uploads', json_decode($response->getContent())->url);
-        $this->print_r([$filepath, public_path('')]);
         $realPath = public_path('/uploads' . $filepath[1]);
+        
         if (is_file($realPath)) {
-            $this->print_r('Here');
-            $this->print_r(Storage::delete($realPath));
+            Storage::delete($realPath);
             unlink($realPath);
         }
     }
